@@ -89,6 +89,7 @@
     <Compile Include="ProfileService\BasicProfile.cs" />
     <Compile Include="ProfileService\AccountProfile.cs" />
     <Compile Include="ProfileService\ExtendedProfile.cs" />
+    <Compile Include="AuthorizationService\TokenModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

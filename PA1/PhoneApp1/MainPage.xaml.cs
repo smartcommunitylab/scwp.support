@@ -29,27 +29,27 @@ namespace PhoneApp1
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-      //string url = baseUrl + "aac/eauth/authorize?client_id=" + clientid + "&response_type=code&redirect_uri=" + redirectUrl;
-      //banana.Navigate(new Uri(url));
+      string url = baseUrl + "aac/eauth/authorize?client_id=" + clientid + "&response_type=code&redirect_uri=" + redirectUrl;
+      banana.Navigate(new Uri(url));
 
       //      GET /aac/basicprofile/me HTTPS/1.1
       //Host: vas-dev.smartcampuslab.it
       //Accept: application/json
       //Authorization: Bearer 025a90d4-d4dd-4d90-8354-779415c0c6d8
       
-      string url = baseUrl + "aac/basicprofile/me";
-      CookieAwareWebClient wc = new CookieAwareWebClient();
-      wc.DownloadStringCompleted += wc_DownloadStringCompleted;
-      wc.Headers["Accept"] = "application/json";
+    //  string url = baseUrl + "aac/basicprofile/me";
+    //  CookieAwareWebClient wc = new CookieAwareWebClient();
+    //  wc.DownloadStringCompleted += wc_DownloadStringCompleted;
+    //  wc.Headers["Accept"] = "application/json";
 	  
-	  // #########################
-	  // ##                     ##
-	  // ## IL TOKEN SCADE!!!!! ##
-	  // ##                     ##
-	  // #########################
+    //// #########################
+    //// ##                     ##
+    //// ## IL TOKEN SCADE!!!!! ##
+    //// ##                     ##
+    //// #########################
 	  
-      wc.Headers["Authorization"] = "Bearer bb435c41-2a40-4e1d-9aac-9812d5972dc6";
-      wc.DownloadStringAsync(new Uri(url));
+    //  wc.Headers["Authorization"] = "Bearer bb435c41-2a40-4e1d-9aac-9812d5972dc6";
+    //  wc.DownloadStringAsync(new Uri(url));
     }
 
     void wc_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
