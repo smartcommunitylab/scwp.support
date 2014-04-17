@@ -86,6 +86,7 @@
     <Compile Include="MobilityService\Stop.cs" />
     <Compile Include="MobilityService\Route.cs" />
     <Compile Include="MobilityService\StopTime.cs" />
+    <Compile Include="MobilityService\TripData.cs" />
     <Compile Include="ProfileService\BasicProfile.cs" />
     <Compile Include="ProfileService\AccountProfile.cs" />
     <Compile Include="ProfileService\ExtendedProfile.cs" />
