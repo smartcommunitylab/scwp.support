@@ -85,10 +85,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MobilityService\Stop.cs" />
-    <Compile Include="MobilityService\Route.cs" />
-    <Compile Include="MobilityService\StopTime.cs" />
-    <Compile Include="MobilityService\TripData.cs" />
+    <Compile Include="MobilityService\PublicTransport\Delay.cs" />
+    <Compile Include="MobilityService\PublicTransport\Parking.cs" />
+    <Compile Include="MobilityService\PublicTransport\Stop.cs" />
+    <Compile Include="MobilityService\PublicTransport\Route.cs" />
+    <Compile Include="MobilityService\PublicTransport\StopTime.cs" />
+    <Compile Include="MobilityService\PublicTransport\TimeTable.cs" />
+    <Compile Include="MobilityService\PublicTransport\TripData.cs" />
+    <Compile Include="MobilityService\RealTime\AlertRoad.cs" />
+    <Compile Include="MobilityService\RealTime\BaseAlert.cs" />
+    <Compile Include="MobilityService\RealTime\AlertDelay.cs" />
     <Compile Include="ProfileService\BasicProfile.cs" />
     <Compile Include="ProfileService\AccountProfile.cs" />
     <Compile Include="ProfileService\ExtendedProfile.cs" />
