@@ -14,6 +14,10 @@ using System.Windows.Shapes;
 
 namespace ProfileLibrary
 {
+  /// <summary>
+  /// Helper class for the profile library, contains static functions that 
+  /// generate already-formatted URIs for using within the profile library
+  /// </summary>
   public static class ProfileUriHelper
   {
     static string BaseUrl = "https://vas-dev.smartcampuslab.it/";
@@ -24,12 +28,20 @@ namespace ProfileLibrary
 
     #region Basic
 
+    /// <summary>
+    /// Creates a formatted URI to use for basic profile retrieval
+    /// </summary>
+    /// <returns>A ready to use URI to which a WebClient must be pointed in order to obtain basic profile informations</returns>
     public static Uri BuildUriForBasicProfile()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}",BaseUrl,BasicProfileUrl, CurrentProfileId));
       return ub.Uri;
     }
 
+    /// <summary>
+    /// Creates a formatted URI to use for basic account retrieval
+    /// </summary>
+    /// <returns>A ready to use URI to which a WebClient must be pointed in order to obtain basic account informations</returns>
     public static Uri BuildUriForBasicAccount()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}", BaseUrl, BasicAccountProfileUrl, CurrentProfileId));
@@ -40,6 +52,10 @@ namespace ProfileLibrary
 
     #region Extended
 
+    /// <summary>
+    /// Creates a formatted URI to use for extended profile retrieval
+    /// </summary>
+    /// <returns>A ready to use URI to which a WebClient must be pointed in order to obtain extended profile informations</returns>
     public static Uri BuildUriForExtendedProfiles()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}", BaseUrl, ExtendedProfilesUrl, CurrentProfileId));

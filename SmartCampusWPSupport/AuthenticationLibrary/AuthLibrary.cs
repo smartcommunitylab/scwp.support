@@ -8,6 +8,10 @@ using System.Net;
 
 namespace AuthenticationLibrary
 {
+
+  /// <summary>
+  /// Class that wraps the authentication and token management APIs in an easy to use way
+  /// </summary>
   public class AuthLibrary
   {
     WebClient WebCli;
@@ -17,7 +21,12 @@ namespace AuthenticationLibrary
     string AccessToken;
     string RefreshToken;
 
-
+    /// <summary>
+    /// Main constructor, to use only when an access token is nor already available
+    /// </summary>
+    /// <param name="clientId">The application client ID</param>
+    /// <param name="clientSecret">The application client secret</param>
+    /// <param name="redirectUrl">The address at which the user's browser will be redirected after the required permissions are accepted by the user</param>
     public AuthLibrary(string clientId, string clientSecret, string redirectUrl)
     {
       this.ClientId = clientId;
@@ -26,6 +35,14 @@ namespace AuthenticationLibrary
       WebCli = new WebClient();
     }
 
+    /// <summary>
+    /// Constructor for the AuthLibrary class, to use only after an access token is available
+    /// </summary>
+    /// <param name="clientId">The application client ID</param>
+    /// <param name="clientSecret">The application client secret</param>
+    /// <param name="redirectUrl">The address at which the user's browser will be redirected after the required permissions are accepted by the user</param>
+    /// <param name="accessToken">The SmartCampus-issued access token</param>
+    /// <param name="refreshToken">The SmartCampus-issued refresh token</param>
     public AuthLibrary(string clientId, string clientSecret, string redirectUrl, string accessToken, string refreshToken)
       : this(clientId, clientSecret, redirectUrl)
     {
@@ -33,6 +50,11 @@ namespace AuthenticationLibrary
       this.RefreshToken = refreshToken;
     }
 
+    /// <summary>
+    /// Asyncronous method that requests an access token to the SmartCampus server
+    /// </summary>
+    /// <param name="code">The one-time code provided by the SmartCampus server after obtaining user's permissions</param>
+    /// <returns>The instance of a Token object containing the actual access token and other token-related fields</returns>
     public async Task<TokenModel> GetAccessToken(string code)
     {
       Dictionary<string, string> StringPost = new Dictionary<string, string>();
@@ -49,7 +71,11 @@ namespace AuthenticationLibrary
       return Newtonsoft.Json.JsonConvert.DeserializeObject<TokenModel>(JSONResult);
     }
 
-    public async Task<TokenModel> RefreshAccessToken(string code)
+    /// <summary>
+    /// Asyncronous method that requests a new access token when the old one is expired
+    /// </summary>
+    /// <returns>The instance of a new Token object, containing the new access token and other token-related fields</returns>
+    public async Task<TokenModel> RefreshAccessToken()
     {
       Dictionary<string, string> StringPost = new Dictionary<string, string>();
 
@@ -64,6 +90,9 @@ namespace AuthenticationLibrary
       return Newtonsoft.Json.JsonConvert.DeserializeObject<TokenModel>(JSONResult);
     }
 
+    /// <summary>
+    /// Method that revokes an access token, forcing the user to re-authorize the application
+    /// </summary>
     public void RevokeAccessToken()
     {
       WebCli.DownloadStringAsync(AuthUriHelper.BuildUriForRevokeToken(AccessToken));

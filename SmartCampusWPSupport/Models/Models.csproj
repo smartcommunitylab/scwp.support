@@ -85,6 +85,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MobilityService\Journeys\BasicItinerary.cs" />
+    <Compile Include="MobilityService\Journeys\BasicRecurrentJourney.cs" />
     <Compile Include="MobilityService\Journeys\Itinerary.cs" />
     <Compile Include="MobilityService\Journeys\Leg.cs" />
     <Compile Include="MobilityService\Journeys\Position.cs" />
