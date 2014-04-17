@@ -28,7 +28,7 @@ namespace Models.MobilityService.Journeys
     public class StopId
     {
         [JsonProperty("id")]
-        public string StopId { get; set; }
+        public string Id { get; set; }
 
         [JsonProperty("agencyId")]
         public string Name { get; set; }
