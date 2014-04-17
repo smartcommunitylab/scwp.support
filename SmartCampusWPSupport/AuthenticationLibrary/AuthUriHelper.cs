@@ -14,7 +14,7 @@ using System.Windows.Shapes;
 
 namespace AuthenticationLibrary
 {
-  public static class UriHelper
+  public static class AuthUriHelper
   {
     static string BaseUrl = "https://vas-dev.smartcampuslab.it/";
     static string GetCodeUrl = "aac/eauth/authorize";

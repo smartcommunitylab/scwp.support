@@ -42,10 +42,11 @@ namespace AuthenticationLibrary
       StringPost["code"] = code;
       StringPost["redirect_uri"] = RedirectUrl;
       StringPost["grant_type"] = "authorization_code";
-      
-      string JSONResult = await WebCli.UploadStringTaskAsync(UriHelper.BuildUriForToken(), QueryHelper.DictionaryToPostData(StringPost));
 
-      return Newtonsoft.Json.JsonConvert.DeserializeObject<TokenModel>(JSONResult);      
+      WebCli.Headers["Content-Type"] = "application/x-www-form-urlencoded";
+      string JSONResult = await WebCli.UploadStringTaskAsync(AuthUriHelper.BuildUriForToken(), QueryHelper.DictionaryToPostData(StringPost));
+
+      return Newtonsoft.Json.JsonConvert.DeserializeObject<TokenModel>(JSONResult);
     }
 
     public async Task<TokenModel> RefreshAccessToken(string code)
@@ -57,14 +58,15 @@ namespace AuthenticationLibrary
       StringPost["refresh_token"] = RefreshToken;
       StringPost["grant_type"] = "refresh_token";
 
-      string JSONResult = await WebCli.UploadStringTaskAsync(UriHelper.BuildUriForToken(), QueryHelper.DictionaryToPostData(StringPost));
+      WebCli.Headers["Content-Type"] = "application/x-www-form-urlencoded";
+      string JSONResult = await WebCli.UploadStringTaskAsync(AuthUriHelper.BuildUriForToken(), QueryHelper.DictionaryToPostData(StringPost));
 
       return Newtonsoft.Json.JsonConvert.DeserializeObject<TokenModel>(JSONResult);
     }
 
     public void RevokeAccessToken()
     {
-      WebCli.DownloadStringAsync(UriHelper.BuildUriForRevokeToken(AccessToken));
+      WebCli.DownloadStringAsync(AuthUriHelper.BuildUriForRevokeToken(AccessToken));
     }
 
   }
