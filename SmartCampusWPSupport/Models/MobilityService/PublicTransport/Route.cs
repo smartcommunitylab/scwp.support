@@ -22,7 +22,7 @@ namespace Models.MobilityService.PublicTransport
     public class RouteId
     {
         [JsonProperty("agency")]
-        public string AgencyId { get; set; }
+        public AgencyType AgencyId { get; set; }
 
         [JsonProperty("id")]
         public string Id { get; set; }

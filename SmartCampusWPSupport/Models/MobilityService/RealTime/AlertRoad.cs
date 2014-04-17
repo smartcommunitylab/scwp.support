@@ -10,10 +10,10 @@ namespace Models.MobilityService.RealTime
     public class AlertRoad : BaseAlert
     {
         [JsonProperty("agencyId")]
-        public string AgencyId { get; set; }
+        public AgencyType AgencyId { get; set; }
 
         [JsonProperty("changeTypes")]
-        public string[] ChangeTypes { get; set; }
+        public ChangeType[] ChangeTypes { get; set; }
 
         [JsonProperty("road")]
         public Road RoadInfo { get; set; }

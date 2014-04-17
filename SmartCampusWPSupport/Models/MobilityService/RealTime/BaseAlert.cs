@@ -19,7 +19,7 @@ namespace Models.MobilityService.RealTime
         public string CreatorId { get; set; }
 
         [JsonProperty("creatorType")]
-        public string CreatorType { get; set; }
+        public CreatorType CreatorType { get; set; }
 
         [JsonProperty("from")]
         public int ValidFrom { get; set; }
@@ -31,7 +31,7 @@ namespace Models.MobilityService.RealTime
         public string Effect { get; set; }
 
         [JsonProperty("type")]
-        public string Type { get; set; }
+        public AlertType Type { get; set; }
 
         [JsonProperty("note")]
         public string Note { get; set; }

@@ -13,7 +13,7 @@ namespace Models.MobilityService.PublicTransport
         public int Time { get; set; }
 
         [JsonProperty("agencyId")]
-        public string AgencyId { get; set; }
+        public AgencyType AgencyId { get; set; }
         
         [JsonProperty("routeId")]
         public string RouteId { get; set; }

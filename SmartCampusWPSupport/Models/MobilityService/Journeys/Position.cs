@@ -13,7 +13,7 @@ namespace Models.MobilityService.Journeys
         public string Name { get; set; }
 
         [JsonProperty("stopId")]
-        public StopId StopIdInfo { get; set; }
+        public StopId Stop { get; set; }
 
         [JsonProperty("stopCode")]
         public string StopCode { get; set; }
@@ -31,6 +31,6 @@ namespace Models.MobilityService.Journeys
         public string Id { get; set; }
 
         [JsonProperty("agencyId")]
-        public string Name { get; set; }
+        public AgencyType Agency { get; set; }
     }
 }
