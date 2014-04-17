@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Models.MobilityService
 {
-    class StopTime
+    public class StopTime
     {
         [JsonProperty("time")]
         public int Time { get; set; }
@@ -17,7 +17,7 @@ namespace Models.MobilityService
 
     }
 
-    protected class Trip
+    public class Trip
     {
         [JsonProperty("agency")]
         public string AgencyId { get; set; }

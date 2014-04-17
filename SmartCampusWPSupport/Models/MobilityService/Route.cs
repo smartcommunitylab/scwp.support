@@ -19,7 +19,7 @@ namespace Models.MobilityService
         public string RouteShortName { get; set; }
     }
 
-    protected class RouteId
+    public class RouteId
     {
         [JsonProperty("agency")]
         public string AgencyId { get; set; }

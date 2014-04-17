@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Models.AuthorizationService;
 
 namespace AuthenticationLibrary
 {
@@ -32,6 +33,9 @@ namespace AuthenticationLibrary
       this.RefreshToken = refreshToken;      
     }
 
-    public async Task<string>
+    public async Task<TokenModel> GetToken()
+    {
+
+    }
   }
 }
