@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Models.MobilityService.RealTime
 {
-    public class Alertstrike : BaseAlert
+    public class AlertStrike : BaseAlert
     {
         [JsonProperty("stopId")]
         public string StopId { get; set; }

@@ -19,7 +19,7 @@ namespace Models.MobilityService.PublicTransport
         public int[] StopsId { get; set; }
 
         [JsonProperty("times")]
-        public List<List<List<DateTime>>> Times { get; set; }
+        public List<List<List<string>>> Times { get; set; }
 
         [JsonProperty("delays")]
         public List<List<Delay>> Delays { get; set; }
