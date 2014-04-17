@@ -88,6 +88,10 @@
     <Compile Include="PublicTransportUriHelper.cs" />
     <Compile Include="PublicTransportLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealTimeUpdateLibrary.cs" />
+    <Compile Include="RealTimeUpdateUriHelper.cs" />
+    <Compile Include="RoutePlanningLibrary.cs" />
+    <Compile Include="RoutePlanningUriHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
