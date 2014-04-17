@@ -31,7 +31,7 @@ namespace TesterApp
 
         private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            banana.Navigate(AuthUriHelper.BuildUriForCode(clientid, redirectUrl));
+            banana.Navigate(AuthUriHelper.GetCodeUri(clientid, redirectUrl));
         }
 
         private void banana_Navigating(object sender, NavigatingEventArgs e)

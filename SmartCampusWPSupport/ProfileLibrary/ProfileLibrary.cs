@@ -1,4 +1,5 @@
 ﻿using Models.ProfileService;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -40,9 +41,9 @@ namespace ProfileLibrary
     {
       WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
       WebCli.Headers["Accept"] = "application/json";
-      string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.BuildUriForBasicProfile());
+      string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.GetBasicProfileUri());
 
-      return Newtonsoft.Json.JsonConvert.DeserializeObject<BasicProfile>(JSONResult);
+      return JsonConvert.DeserializeObject<BasicProfile>(JSONResult);
     }
 
     /// <summary>
@@ -53,9 +54,9 @@ namespace ProfileLibrary
     {
       WebCli.Headers["Accept"] = "application/json";
       WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
-      string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.BuildUriForBasicAccount());
+      string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.GetBasicAccountUri());
 
-      return Newtonsoft.Json.JsonConvert.DeserializeObject<AccountProfile>(JSONResult);
+      return JsonConvert.DeserializeObject<AccountProfile>(JSONResult);
     }
 
     /// <summary>
@@ -66,9 +67,9 @@ namespace ProfileLibrary
     {
         WebCli.Headers["Accept"] = "application/json";
       WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
-      string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.BuildUriForExtendedProfiles());
+      string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.GetExtendedProfilesUri());
 
-      return Newtonsoft.Json.JsonConvert.DeserializeObject<List<ExtendedProfile>>(JSONResult);
+      return JsonConvert.DeserializeObject<List<ExtendedProfile>>(JSONResult);
     }
   }
 }

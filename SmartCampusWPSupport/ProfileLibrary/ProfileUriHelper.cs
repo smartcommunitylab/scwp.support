@@ -32,7 +32,7 @@ namespace ProfileLibrary
     /// Creates a formatted URI to use for basic profile retrieval
     /// </summary>
     /// <returns>A ready to use URI to which a WebClient must be pointed in order to obtain basic profile informations</returns>
-    public static Uri BuildUriForBasicProfile()
+    public static Uri GetBasicProfileUri()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}",BaseUrl,BasicProfileUrl, CurrentProfileId));
       return ub.Uri;
@@ -42,7 +42,7 @@ namespace ProfileLibrary
     /// Creates a formatted URI to use for basic account retrieval
     /// </summary>
     /// <returns>A ready to use URI to which a WebClient must be pointed in order to obtain basic account informations</returns>
-    public static Uri BuildUriForBasicAccount()
+    public static Uri GetBasicAccountUri()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}", BaseUrl, BasicAccountProfileUrl, CurrentProfileId));
       return ub.Uri;
@@ -56,7 +56,7 @@ namespace ProfileLibrary
     /// Creates a formatted URI to use for extended profile retrieval
     /// </summary>
     /// <returns>A ready to use URI to which a WebClient must be pointed in order to obtain extended profile informations</returns>
-    public static Uri BuildUriForExtendedProfiles()
+    public static Uri GetExtendedProfilesUri()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}", BaseUrl, ExtendedProfilesUrl, CurrentProfileId));
       return ub.Uri;
