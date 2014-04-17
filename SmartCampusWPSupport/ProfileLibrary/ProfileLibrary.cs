@@ -22,6 +22,7 @@ namespace ProfileLibrary
     public ProfileLibrary(string accessToken)
     {
       this.AccessToken = accessToken;
+      WebCli = new WebClient();
     }
 
     public async Task<BasicProfile> GetBasicProfile()
