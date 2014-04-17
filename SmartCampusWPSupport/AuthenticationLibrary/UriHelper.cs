@@ -34,34 +34,15 @@ namespace AuthenticationLibrary
       return ub.Uri;
     }
 
-    public static Uri BuildUriForToken(string code, string clientSecret, string clientId, string redirectUrl)
+    public static Uri BuildUriForToken()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}{1}", BaseUrl, GetTokenUrl));
-
-      Dictionary<string, string> StringQuery = new Dictionary<string, string>();
-      StringQuery["client_id"] = clientId;
-      StringQuery["client_secret"] = clientSecret;
-      StringQuery["code"] = code;
-      StringQuery["redirect_uri"] = redirectUrl;
-      StringQuery["grant_type"] = "authorization_code";
-
-      ub.Query = QueryHelper.DictionaryToQuery(StringQuery);
-
       return ub.Uri;
     }
 
     public static Uri BuildUriForRefreshToken(string refreshToken, string clientSecret, string clientId)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}{1}", BaseUrl, GetTokenUrl));
-
-      Dictionary<string, string> StringQuery = new Dictionary<string, string>();
-      StringQuery["client_id"] = clientId;
-      StringQuery["client_secret"] = clientSecret;
-      StringQuery["refresh_token"] = refreshToken;
-      StringQuery["grant_type"] = "refresh_token";
-
-      ub.Query = QueryHelper.DictionaryToQuery(StringQuery);
-
       return ub.Uri;
     }
 

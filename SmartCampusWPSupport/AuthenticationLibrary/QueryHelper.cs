@@ -8,6 +8,19 @@ namespace AuthenticationLibrary
 {
   public static class QueryHelper
   {
+    public static string DictionaryToPostData(Dictionary<string, string> dict)
+    {
+      StringBuilder QueryBuilder = new StringBuilder();
+
+      foreach (var Param in dict)
+      {
+        QueryBuilder.Append((string.Format("{0}={1}&", Param.Key, Param.Value)));
+      }
+
+      return Uri.EscapeDataString(QueryBuilder.ToString());
+    }
+
+
     public static string DictionaryToQuery(Dictionary<string, string> dict)
     {
       if (dict.Count == 0)
