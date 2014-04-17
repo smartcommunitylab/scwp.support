@@ -28,21 +28,24 @@ namespace ProfileLibrary
     public async Task<BasicProfile> GetBasicProfile()
     {
       WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
+      WebCli.Headers["Accept"] = "application/json";
       string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.BuildUriForBasicProfile());
 
       return Newtonsoft.Json.JsonConvert.DeserializeObject<BasicProfile>(JSONResult);
     }
 
-    public async Task<BasicProfile> GetBasicAccount()
+    public async Task<AccountProfile> GetBasicAccount()
     {
+      WebCli.Headers["Accept"] = "application/json";
       WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
       string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.BuildUriForBasicAccount());
 
-      return Newtonsoft.Json.JsonConvert.DeserializeObject<BasicProfile>(JSONResult);
+      return Newtonsoft.Json.JsonConvert.DeserializeObject<AccountProfile>(JSONResult);
     }
 
     public async Task<List<ExtendedProfile>> GetBasicProfile(string code)
     {
+        WebCli.Headers["Accept"] = "application/json";
       WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
       string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.BuildUriForBasicProfile());
 

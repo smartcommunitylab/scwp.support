@@ -17,7 +17,9 @@ namespace AuthenticationLibrary
         QueryBuilder.Append((string.Format("{0}={1}&", Param.Key, Param.Value)));
       }
 
-      return Uri.EscapeDataString(QueryBuilder.ToString());
+      return QueryBuilder.ToString();
+
+      
     }
 
 
@@ -26,14 +28,15 @@ namespace AuthenticationLibrary
       if (dict.Count == 0)
         return "";
 
-      StringBuilder QueryBuilder = new StringBuilder("?");
+      StringBuilder QueryBuilder = new StringBuilder();
 
       foreach (var Param in dict)
       {
         QueryBuilder.Append(Uri.EscapeUriString(string.Format("{0}={1}&", Param.Key, Param.Value)));
       }
 
-      return QueryBuilder.ToString();
+      return  QueryBuilder.ToString();
+
     }
 
     public static Dictionary<string, string> QueryToDictionary(string queryString)

@@ -27,7 +27,7 @@ namespace AuthenticationLibrary
       
       Dictionary<string, string> StringQuery = new Dictionary<string, string>();
       StringQuery["client_id"] = clientId;
-      StringQuery["response"] = "code";
+      StringQuery["response_type"] = "code";
       StringQuery["redirect_uri"] = redirectUrl;
       ub.Query = QueryHelper.DictionaryToQuery(StringQuery);
 
