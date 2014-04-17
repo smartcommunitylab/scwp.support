@@ -85,9 +85,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MobilityService\Journeys\Itinerary.cs" />
     <Compile Include="MobilityService\Journeys\Leg.cs" />
     <Compile Include="MobilityService\Journeys\Position.cs" />
     <Compile Include="MobilityService\Journeys\SingleJourney.cs" />
+    <Compile Include="MobilityService\MobilityEnumerators.cs" />
     <Compile Include="MobilityService\PublicTransport\Delay.cs" />
     <Compile Include="MobilityService\PublicTransport\Parking.cs" />
     <Compile Include="MobilityService\PublicTransport\Stop.cs" />

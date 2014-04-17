@@ -31,27 +31,5 @@ namespace Models.MobilityService.Journeys
 
     [JsonProperty("resultsNumber")]
     public int ResultsNumber { get; set; }
-
-    public enum RouteType
-    {
-      [EnumMember(Value = "fastest")]
-      Fastest,
-      [EnumMember(Value = "healthy")]
-      Healthy,
-      [EnumMember(Value = "leastWalking")]
-      LeastWalking,
-      [EnumMember(Value = "leastChanges")]
-      LeastChanges,
-      [EnumMember(Value = "greenest")]
-      Greenest,
-      [EnumMember(Value = "safest")]
-      Safest
-    };
-
-    public enum TransportType
-    {
-
-    }; 
-
   }
 }
