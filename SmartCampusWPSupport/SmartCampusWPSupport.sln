@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileLibrary", "ProfileLi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesterApp", "TesterApp\TesterApp.csproj", "{A68906D0-3EC1-4C20-B36C-73B2F64E9406}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilityServiceLibrary", "MobilityServiceLibrary\MobilityServiceLibrary.csproj", "{8EA98188-3825-4034-B3CC-FF6C37F3A677}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,18 @@ Global
 		{A68906D0-3EC1-4C20-B36C-73B2F64E9406}.Release|x86.ActiveCfg = Release|x86
 		{A68906D0-3EC1-4C20-B36C-73B2F64E9406}.Release|x86.Build.0 = Release|x86
 		{A68906D0-3EC1-4C20-B36C-73B2F64E9406}.Release|x86.Deploy.0 = Release|x86
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Debug|ARM.ActiveCfg = Debug|ARM
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Debug|ARM.Build.0 = Debug|ARM
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Debug|x86.ActiveCfg = Debug|x86
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Debug|x86.Build.0 = Debug|x86
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Release|ARM.ActiveCfg = Release|ARM
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Release|ARM.Build.0 = Release|ARM
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Release|x86.ActiveCfg = Release|x86
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
