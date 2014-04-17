@@ -14,12 +14,12 @@ using System.Threading.Tasks;
 
 namespace MobilityServiceLibrary
 {
-    public class MobilityLibrary
+    public class PublicTransportLibrary
     {
         WebClient WebCli;
     string AccessToken;
 
-    public MobilityLibrary(string accessToken)
+    public PublicTransportLibrary(string accessToken)
     {
       this.AccessToken = accessToken;
       WebCli = new WebClient();

@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+﻿using AuthenticationLibrary;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using AuthenticationLibrary;
-using ProfileLibrary;
 using Models.AuthorizationService;
+using System.Windows;
 
 namespace TesterApp
 {
@@ -28,7 +20,6 @@ namespace TesterApp
             InitializeComponent();
             authLib = new AuthLibrary(clientid, secret, redirectUrl);
         }
-
         private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             banana.Navigate(AuthUriHelper.GetCodeUri(clientid, redirectUrl));
