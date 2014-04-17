@@ -95,6 +95,11 @@
     <Compile Include="MobilityService\RealTime\AlertRoad.cs" />
     <Compile Include="MobilityService\RealTime\BaseAlert.cs" />
     <Compile Include="MobilityService\RealTime\AlertDelay.cs" />
+    <Compile Include="MobilityService\RealTime\AlertStrike.cs" />
+    <Compile Include="MobilityService\RealTime\AlertAccident.cs" />
+    <Compile Include="MobilityService\RealTime\AlertParking.cs" />
+    <Compile Include="MobilityService\RealTime\Position.cs" />
+    <Compile Include="MobilityService\RealTime\Transport.cs" />
     <Compile Include="ProfileService\BasicProfile.cs" />
     <Compile Include="ProfileService\AccountProfile.cs" />
     <Compile Include="ProfileService\ExtendedProfile.cs" />

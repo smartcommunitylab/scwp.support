@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Models.MobilityService.RealTime
 {
-    public class AlertDelay : BaseAlert
+    public class AlertAccident : BaseAlert
     {
         [JsonProperty("position")]
         public Position PositionInfo { get; set; }
