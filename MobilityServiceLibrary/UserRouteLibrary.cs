@@ -12,13 +12,13 @@ namespace MobilityServiceLibrary
 {
   public class UserRouteLibrary
   {
-    HttpClient webCli;
+    HttpClient httpCli;
     string accessToken;
 
     public UserRouteLibrary(string accessToken)
     {
       this.accessToken = accessToken;
-      webCli = new HttpClient();
+      httpCli = new HttpClient();
     }
 
     #region Single journey
@@ -28,50 +28,50 @@ namespace MobilityServiceLibrary
       string toPost = JsonConvert.SerializeObject(basIti);
 
       StringContent sc = new StringContent(toPost);
-      sc.Headers.Add("Accept", "application/json");
-      sc.Headers.Add("Authorization", string.Format("Bearer {0}", accessToken));
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
-      var res = await webCli.PostAsync(UserRouteUriHelper.GetSaveSingleJourneyUri(), sc);
+      var res = await httpCli.PostAsync(UserRouteUriHelper.GetSaveSingleJourneyUri(), sc);
 
       return JsonConvert.DeserializeObject<BasicItinerary>(await res.Content.ReadAsStringAsync());
     }
-    /*
+
     public async Task<BasicItinerary> ReadSingleJourney(int journeyId)
     {
-      webCli.Headers["Authorization"] = string.Format("Bearer {0}", accessToken);
-      webCli.Headers["Accept"] = "application/json";
-      var res = await webCli.DownloadStringTaskAsync(UserRouteUriHelper.GetReadSingleJourneyUri(journeyId));
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+      var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetReadSingleJourneyUri(journeyId));
 
       return JsonConvert.DeserializeObject<BasicItinerary>(res);
     }
 
     public async Task<List<BasicItinerary>> ReadAllSingleJourneys()
     {
-      webCli.Headers["Authorization"] = string.Format("Bearer {0}", accessToken);
-      webCli.Headers["Accept"] = "application/json";
-      var res = await webCli.DownloadStringTaskAsync(UserRouteUriHelper.GetReadAllSingleJourneysUri());
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+      var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetReadAllSingleJourneysUri());
 
       return JsonConvert.DeserializeObject<List<BasicItinerary>>(res);
     }
 
     public async Task<bool> SetMonitorSingleJourney(int journeyId, bool monitor)
     {
-      webCli.Headers["Authorization"] = string.Format("Bearer {0}", accessToken);
-      webCli.Headers["Accept"] = "application/json";
-      var res = await webCli.DownloadStringTaskAsync(UserRouteUriHelper.GetReadAllSingleJourneysUri());
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+      var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetReadAllSingleJourneysUri());
 
       return Convert.ToBoolean(res);
     }
-    */
-    //public async Task<bool> DeleteSingleJourney(int journeyId)
-    //{
-    //  webCli.Headers["Authorization"] = string.Format("Bearer {0}", accessToken);
-    //  webCli.Headers["Accept"] = "application/json";
-    //  var res = await webCli.UploadStringTaskAsync( DownloadStringTaskAsync(UserRouteUriHelper.GetReadAllSingleJourneysUri(), );
 
-    //  return Convert.ToBoolean(res);
-    //}
-       
+    public async Task<bool> DeleteSingleJourney(int journeyId)
+    {
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+      var res = await httpCli.DeleteAsync(UserRouteUriHelper.GetReadAllSingleJourneysUri());
+
+      return Convert.ToBoolean(await res.Content.ReadAsStringAsync());
+    }
+
 
     #endregion
   }
