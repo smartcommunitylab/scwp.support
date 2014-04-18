@@ -12,13 +12,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{0C2B6F
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileLibrary", "ProfileLibrary\ProfileLibrary.csproj", "{89BFE6AE-A301-4D15-AD10-AF6619C4DD71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileServiceLibrary", "ProfileLibrary\ProfileServiceLibrary.csproj", "{89BFE6AE-A301-4D15-AD10-AF6619C4DD71}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesterApp", "TesterApp\TesterApp.csproj", "{A68906D0-3EC1-4C20-B36C-73B2F64E9406}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobilityServiceLibrary", "MobilityServiceLibrary\MobilityServiceLibrary.csproj", "{8EA98188-3825-4034-B3CC-FF6C37F3A677}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonHelpers", "CommonHelpers\CommonHelpers.csproj", "{3CD575FD-C736-403F-AA88-502E8DB78A7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceLibraries", "ServiceLibraries", "{65598326-5DA0-4A30-B459-C9018E053466}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,5 +113,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F71F686C-909C-4EF8-BBA1-A7D7CB392E93} = {65598326-5DA0-4A30-B459-C9018E053466}
+		{8EA98188-3825-4034-B3CC-FF6C37F3A677} = {65598326-5DA0-4A30-B459-C9018E053466}
+		{89BFE6AE-A301-4D15-AD10-AF6619C4DD71} = {65598326-5DA0-4A30-B459-C9018E053466}
 	EndGlobalSection
 EndGlobal

@@ -12,7 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 
-namespace ProfileLibrary
+namespace ProfileServiceLibrary
 {
   /// <summary>
   /// Helper class for the profile library, contains static functions that 

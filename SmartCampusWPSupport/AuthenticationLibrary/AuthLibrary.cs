@@ -56,7 +56,7 @@ namespace AuthenticationLibrary
     /// </summary>
     /// <param name="code">The one-time code provided by the SmartCampus server after obtaining user's permissions</param>
     /// <returns>The instance of a Token object containing the actual access token and other token-related fields</returns>
-    public async Task<TokenModel> GetAccessToken(string code)
+    public async Task<Token> GetAccessToken(string code)
     {
       Dictionary<string, string> StringPost = new Dictionary<string, string>();
 
@@ -69,14 +69,14 @@ namespace AuthenticationLibrary
       WebCli.Headers["Content-Type"] = "application/x-www-form-urlencoded";
       string JSONResult = await WebCli.UploadStringTaskAsync(AuthUriHelper.GetTokenUri(), QueryHelper.DictionaryToPostData(StringPost));
 
-      return JsonConvert.DeserializeObject<TokenModel>(JSONResult);
+      return JsonConvert.DeserializeObject<Token>(JSONResult);
     }
 
     /// <summary>
     /// Asyncronous method that requests a new access token when the old one is expired
     /// </summary>
     /// <returns>The instance of a new Token object, containing the new access token and other token-related fields</returns>
-    public async Task<TokenModel> RefreshAccessToken()
+    public async Task<Token> RefreshAccessToken()
     {
       Dictionary<string, string> StringPost = new Dictionary<string, string>();
 
@@ -88,7 +88,7 @@ namespace AuthenticationLibrary
       WebCli.Headers["Content-Type"] = "application/x-www-form-urlencoded";
       string JSONResult = await WebCli.UploadStringTaskAsync(AuthUriHelper.GetTokenUri(), QueryHelper.DictionaryToPostData(StringPost));
 
-      return JsonConvert.DeserializeObject<TokenModel>(JSONResult);
+      return JsonConvert.DeserializeObject<Token>(JSONResult);
     }
 
     /// <summary>

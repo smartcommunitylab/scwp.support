@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace ProfileLibrary
+namespace ProfileServiceLibrary
 {
   /// <summary>
   ///  Class that wraps the the profile APIs in an easy to use way

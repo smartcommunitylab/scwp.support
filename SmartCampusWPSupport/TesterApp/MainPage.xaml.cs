@@ -12,8 +12,8 @@ namespace TesterApp
         string redirectUrl = "http://localhost";
         string code;
         AuthLibrary authLib;
-        ProfileLibrary.ProfileLibrary proLib;
-        TokenModel toMo;
+        ProfileServiceLibrary.ProfileLibrary proLib;
+        Token toMo;
 
         public MainPage()
         {
@@ -45,7 +45,7 @@ namespace TesterApp
         private async void btngetuser_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             //authLib = new AuthLibrary(clientid, secret, redirectUrl, toMo.AccessToken, toMo.RefreshToken);
-            proLib = new ProfileLibrary.ProfileLibrary(toMo.AccessToken);
+            proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken);
             Models.ProfileService.BasicProfile ap = await proLib.GetBasicProfile();
             coop2.Text = ap.Name;
         }
