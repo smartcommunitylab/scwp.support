@@ -23,7 +23,7 @@ namespace AuthenticationLibrary
     string RefreshToken;
 
     /// <summary>
-    /// Main constructor, to use only when an access token is nor already available
+    /// Main constructor, to use only when an access token is not already available
     /// </summary>
     /// <param name="clientId">The application client ID</param>
     /// <param name="clientSecret">The application client secret</param>
