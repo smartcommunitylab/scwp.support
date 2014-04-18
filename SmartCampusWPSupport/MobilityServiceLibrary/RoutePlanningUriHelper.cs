@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MobilityServiceLibrary
 {
-  public class RoutePlanningUriHelper
+  public static class RoutePlanningUriHelper
   {
     static string baseUrl = "https://vas-dev.smartcampuslab.it/core.mobility";
     static string singleJourneryUrl = "plansinglejourney";

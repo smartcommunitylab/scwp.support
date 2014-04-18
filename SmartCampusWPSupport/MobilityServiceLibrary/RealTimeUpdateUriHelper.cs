@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MobilityServiceLibrary
 {
-  public class RealTimeUpdateUriHelper
+  public static class RealTimeUpdateUriHelper
   {
     static string baseUrl = "https://vas-dev.smartcampuslab.it/core.mobility";
     static string userAlert = "alert/user";
