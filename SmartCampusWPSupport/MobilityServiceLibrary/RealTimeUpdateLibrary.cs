@@ -11,23 +11,23 @@ namespace MobilityServiceLibrary
 {
   public class RealTimeUpdateLibrary
   {
-    WebClient WebCli;
-    string AccessToken;
+    WebClient webCli;
+    string accessToken;
 
     public RealTimeUpdateLibrary(string accessToken)
     {
-      this.AccessToken = accessToken;
-      WebCli = new WebClient();
+      this.accessToken = accessToken;
+      webCli = new WebClient();
     }
 
     public void SignalAlert<GenAlertType>( GenAlertType baAlert)
     {
       string toPost = JsonConvert.SerializeObject(baAlert);
 
-      WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
-      WebCli.Headers["Accept"] = "application/json";
+      webCli.Headers["Authorization"] = string.Format("Bearer {0}", accessToken);
+      webCli.Headers["Accept"] = "application/json";
 
-      WebCli.UploadStringAsync(RealTimeUpdateUriHelper.GetSignalUri(), toPost);
+      webCli.UploadStringAsync(RealTimeUpdateUriHelper.GetSignalUri(), toPost);
     }
 
   }

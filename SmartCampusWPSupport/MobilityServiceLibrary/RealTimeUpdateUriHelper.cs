@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MobilityServiceLibrary
 {
-  public class RealTimeUpdateUriHelper
+  public static class RealTimeUpdateUriHelper
   {
-    static string BaseUrl = "https://vas-dev.smartcampuslab.it/core.mobility";
-    static string UserAlert = "alert/user";
+    static string baseUrl = "https://vas-dev.smartcampuslab.it/core.mobility";
+    static string userAlert = "alert/user";
     
     public static Uri GetSignalUri()
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", BaseUrl, UserAlert));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, userAlert));
       return ub.Uri;
     }
   }

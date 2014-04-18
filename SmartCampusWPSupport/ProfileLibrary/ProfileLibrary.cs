@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,8 +21,8 @@ namespace ProfileServiceLibrary
   /// </summary>
   public class ProfileLibrary
   {
-    WebClient WebCli;
-    string AccessToken;
+    HttpClient httpCli;
+    string accessToken;
 
     /// <summary>
     /// Main constructor, to use always
@@ -29,8 +30,8 @@ namespace ProfileServiceLibrary
     /// <param name="accessToken">The SmartCampus-issued access token</param>
     public ProfileLibrary(string accessToken)
     {
-      this.AccessToken = accessToken;
-      WebCli = new WebClient();
+      this.accessToken = accessToken;
+      httpCli = new HttpClient();
     }
 
     /// <summary>
@@ -39,11 +40,12 @@ namespace ProfileServiceLibrary
     /// <returns>An instance of a BasicProfile object, containing the current user profile</returns>
     public async Task<BasicProfile> GetBasicProfile()
     {
-      WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
-      WebCli.Headers["Accept"] = "application/json";
-      string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.GetBasicProfileUri());
+      StringContent sc = new StringContent("");
+      sc.Headers.Add("Accept", "application/json");
+      sc.Headers.Add("Authorization", string.Format("Bearer {0}", accessToken));
+      var JSONResult = await httpCli.GetAsync(ProfileUriHelper.GetBasicProfileUri());
 
-      return JsonConvert.DeserializeObject<BasicProfile>(JSONResult);
+      return JsonConvert.DeserializeObject<BasicProfile>(await JSONResult.Content.ReadAsStringAsync());
     }
 
     /// <summary>
@@ -52,11 +54,11 @@ namespace ProfileServiceLibrary
     /// <returns>An instance of an AccountProfile object, containing the current user account</returns>
     public async Task<AccountProfile> GetBasicAccount()
     {
-      WebCli.Headers["Accept"] = "application/json";
-      WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
-      string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.GetBasicAccountUri());
-
-      return JsonConvert.DeserializeObject<AccountProfile>(JSONResult);
+      StringContent sc = new StringContent("");
+      sc.Headers.Add("Accept", "application/json");
+      sc.Headers.Add("Authorization", string.Format("Bearer {0}", accessToken));
+      var JSONResult = await httpCli.GetAsync(ProfileUriHelper.GetBasicAccountUri());
+      return JsonConvert.DeserializeObject<AccountProfile>(await JSONResult.Content.ReadAsStringAsync());
     }
 
     /// <summary>
@@ -65,11 +67,12 @@ namespace ProfileServiceLibrary
     /// <returns>A list of ExtendedProfile objects containing all the extended profiles for the current user</returns>
     public async Task<List<ExtendedProfile>> GetExtendedProfiles()
     {
-        WebCli.Headers["Accept"] = "application/json";
-      WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
-      string JSONResult = await WebCli.DownloadStringTaskAsync(ProfileUriHelper.GetExtendedProfilesUri());
+      StringContent sc = new StringContent("");
+      sc.Headers.Add("Accept", "application/json");
+      sc.Headers.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
-      return JsonConvert.DeserializeObject<List<ExtendedProfile>>(JSONResult);
+      var JSONResult = await httpCli.GetAsync(ProfileUriHelper.GetExtendedProfilesUri());
+      return JsonConvert.DeserializeObject<List<ExtendedProfile>>(await JSONResult.Content.ReadAsStringAsync());
     }
   }
 }

@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace MobilityServiceLibrary
 {
-  public class RoutePlanningUriHelper
+  public static class RoutePlanningUriHelper
   {
-    static string BaseUrl = "https://vas-dev.smartcampuslab.it/core.mobility";
-    static string SingleJourneryUrl = "plansinglejourney";
-    static string RecurrentJourneyUrl = "planrecurrent";
+    static string baseUrl = "https://vas-dev.smartcampuslab.it/core.mobility";
+    static string singleJourneryUrl = "plansinglejourney";
+    static string recurrentJourneyUrl = "planrecurrent";
 
     public static Uri GetSingleJourneyUri()
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", BaseUrl, SingleJourneryUrl));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, singleJourneryUrl));
       return ub.Uri;
     }
 
     public static Uri GetRecurrentJourneyUri()
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", BaseUrl, RecurrentJourneyUrl));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, recurrentJourneyUrl));
       return ub.Uri;
     }
   }

@@ -20,10 +20,10 @@ namespace AuthenticationLibrary
   /// </summary>
   public static class AuthUriHelper
   {
-    static string BaseUrl = "https://vas-dev.smartcampuslab.it/";
-    static string GetCodeUrl = "aac/eauth/authorize";
-    static string GetTokenUrl = "aac/oauth/token";
-    static string RevokeTokenUrl = "aac/eauth/revoke";
+    static string baseUrl = "https://vas-dev.smartcampuslab.it/";
+    static string getCodeUrl = "aac/eauth/authorize";
+    static string getTokenUrl = "aac/oauth/token";
+    static string revokeTokenUrl = "aac/eauth/revoke";
 
     /// <summary>
     /// Creates a formatted URI to use in the application authentication process
@@ -33,13 +33,13 @@ namespace AuthenticationLibrary
     /// <returns>A ready to use URI to which the user's browser must navigate in order to begin OAuth authentication</returns>
     public static Uri GetCodeUri(string clientId, string redirectUrl)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}{1}",BaseUrl,GetCodeUrl));
+      UriBuilder ub = new UriBuilder(string.Format("{0}{1}",baseUrl,getCodeUrl));
       
-      Dictionary<string, string> StringQuery = new Dictionary<string, string>();
-      StringQuery["client_id"] = clientId;
-      StringQuery["response_type"] = "code";
-      StringQuery["redirect_uri"] = redirectUrl;
-      ub.Query = QueryHelper.DictionaryToQuery(StringQuery);
+      Dictionary<string, string> stringQuery = new Dictionary<string, string>();
+      stringQuery["client_id"] = clientId;
+      stringQuery["response_type"] = "code";
+      stringQuery["redirect_uri"] = redirectUrl;
+      ub.Query = QueryHelper.DictionaryToQuery(stringQuery);
 
       return ub.Uri;
     }
@@ -50,7 +50,7 @@ namespace AuthenticationLibrary
     /// <returns>A ready to use URI to which a WebClient must be pointed in order to obtain the access token</returns>
     public static Uri GetTokenUri()
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}{1}", BaseUrl, GetTokenUrl));
+      UriBuilder ub = new UriBuilder(string.Format("{0}{1}", baseUrl, getTokenUrl));
       return ub.Uri;
     }
 
@@ -63,7 +63,7 @@ namespace AuthenticationLibrary
     /// <returns>A ready to use URI to which a WebClient must be pointed to in order to refresh the access token</returns>
     public static Uri GetRefreshTokenUri(string refreshToken, string clientSecret, string clientId)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}{1}", BaseUrl, GetTokenUrl));
+      UriBuilder ub = new UriBuilder(string.Format("{0}{1}", baseUrl, getTokenUrl));
       return ub.Uri;
     }
 
@@ -74,7 +74,7 @@ namespace AuthenticationLibrary
     /// <returns>A ready to use URI to which a WebClient must be pointed to in order to revoke the access token</returns>
     public static Uri GetRevokeTokenUri(string accessToken)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}", BaseUrl, RevokeTokenUrl, accessToken));
+      UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}", baseUrl, revokeTokenUrl, accessToken));
       return ub.Uri;
     }
   }
