@@ -11,22 +11,22 @@ namespace MobilityServiceLibrary
 {
   public class RoutePlanningLibrary
   {
-    WebClient WebCli;
-    string AccessToken;
+    WebClient webCli;
+    string accessToken;
 
     public RoutePlanningLibrary(string accessToken)
     {
-      this.AccessToken = accessToken;
-      WebCli = new WebClient();
+      this.accessToken = accessToken;
+      webCli = new WebClient();
     }
 
     public async Task<List<Itinerary>> PlanSingleJourney(SingleJourney sj)
     {
       string toPost = JsonConvert.SerializeObject(sj);
 
-      WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
-      WebCli.Headers["Accept"] = "application/json";
-      var res = await WebCli.UploadStringTaskAsync(RoutePlanningUriHelper.GetSingleJourneyUri(), toPost);
+      webCli.Headers["Authorization"] = string.Format("Bearer {0}", accessToken);
+      webCli.Headers["Accept"] = "application/json";
+      var res = await webCli.UploadStringTaskAsync(RoutePlanningUriHelper.GetSingleJourneyUri(), toPost);
 
       return JsonConvert.DeserializeObject <List<Itinerary>>(res);
     }
@@ -35,9 +35,9 @@ namespace MobilityServiceLibrary
     {
       string toPost = JsonConvert.SerializeObject(rjp);
       
-      WebCli.Headers["Authorization"] = string.Format("Bearer {0}", AccessToken);
-      WebCli.Headers["Accept"] = "application/json";
-      var res = await WebCli.UploadStringTaskAsync(RoutePlanningUriHelper.GetRecurrentJourneyUri(), toPost);
+      webCli.Headers["Authorization"] = string.Format("Bearer {0}", accessToken);
+      webCli.Headers["Accept"] = "application/json";
+      var res = await webCli.UploadStringTaskAsync(RoutePlanningUriHelper.GetRecurrentJourneyUri(), toPost);
 
       return JsonConvert.DeserializeObject<RecurrentJourney>(res);
     }

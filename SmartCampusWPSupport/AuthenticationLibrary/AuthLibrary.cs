@@ -15,12 +15,12 @@ namespace AuthenticationLibrary
   /// </summary>
   public class AuthLibrary
   {
-    WebClient WebCli;
-    string ClientId;
-    string ClientSecret;
-    string RedirectUrl;
-    string AccessToken;
-    string RefreshToken;
+    WebClient webCli;
+    string clientId;
+    string clientSecret;
+    string redirectUrl;
+    string accessToken;
+    string refreshToken;
 
     /// <summary>
     /// Main constructor, to use only when an access token is nor already available
@@ -30,10 +30,10 @@ namespace AuthenticationLibrary
     /// <param name="redirectUrl">The address at which the user's browser will be redirected after the required permissions are accepted by the user</param>
     public AuthLibrary(string clientId, string clientSecret, string redirectUrl)
     {
-      this.ClientId = clientId;
-      this.ClientSecret = clientSecret;
-      this.RedirectUrl = redirectUrl;
-      WebCli = new WebClient();
+      this.clientId = clientId;
+      this.clientSecret = clientSecret;
+      this.redirectUrl = redirectUrl;
+      webCli = new WebClient();
     }
 
     /// <summary>
@@ -47,8 +47,8 @@ namespace AuthenticationLibrary
     public AuthLibrary(string clientId, string clientSecret, string redirectUrl, string accessToken, string refreshToken)
       : this(clientId, clientSecret, redirectUrl)
     {
-      this.AccessToken = accessToken;
-      this.RefreshToken = refreshToken;
+      this.accessToken = accessToken;
+      this.refreshToken = refreshToken;
     }
 
     /// <summary>
@@ -60,14 +60,14 @@ namespace AuthenticationLibrary
     {
       Dictionary<string, string> StringPost = new Dictionary<string, string>();
 
-      StringPost["client_id"] = ClientId;
-      StringPost["client_secret"] = ClientSecret;
+      StringPost["client_id"] = clientId;
+      StringPost["client_secret"] = clientSecret;
       StringPost["code"] = code;
-      StringPost["redirect_uri"] = RedirectUrl;
+      StringPost["redirect_uri"] = redirectUrl;
       StringPost["grant_type"] = "authorization_code";
 
-      WebCli.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-      string JSONResult = await WebCli.UploadStringTaskAsync(AuthUriHelper.GetTokenUri(), QueryHelper.DictionaryToPostData(StringPost));
+      webCli.Headers["Content-Type"] = "application/x-www-form-urlencoded";
+      string JSONResult = await webCli.UploadStringTaskAsync(AuthUriHelper.GetTokenUri(), QueryHelper.DictionaryToPostData(StringPost));
 
       return JsonConvert.DeserializeObject<Token>(JSONResult);
     }
@@ -80,13 +80,13 @@ namespace AuthenticationLibrary
     {
       Dictionary<string, string> StringPost = new Dictionary<string, string>();
 
-      StringPost["client_id"] = ClientId;
-      StringPost["client_secret"] = ClientSecret;
-      StringPost["refresh_token"] = RefreshToken;
+      StringPost["client_id"] = clientId;
+      StringPost["client_secret"] = clientSecret;
+      StringPost["refresh_token"] = refreshToken;
       StringPost["grant_type"] = "refresh_token";
 
-      WebCli.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-      string JSONResult = await WebCli.UploadStringTaskAsync(AuthUriHelper.GetTokenUri(), QueryHelper.DictionaryToPostData(StringPost));
+      webCli.Headers["Content-Type"] = "application/x-www-form-urlencoded";
+      string JSONResult = await webCli.UploadStringTaskAsync(AuthUriHelper.GetTokenUri(), QueryHelper.DictionaryToPostData(StringPost));
 
       return JsonConvert.DeserializeObject<Token>(JSONResult);
     }
@@ -96,7 +96,7 @@ namespace AuthenticationLibrary
     /// </summary>
     public void RevokeAccessToken()
     {
-      WebCli.DownloadStringAsync(AuthUriHelper.GetRevokeTokenUri(AccessToken));
+      webCli.DownloadStringAsync(AuthUriHelper.GetRevokeTokenUri(accessToken));
     }
 
   }

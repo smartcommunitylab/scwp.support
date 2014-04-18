@@ -18,14 +18,14 @@ namespace AuthenticationLibrary
     /// <returns>A string to be used as data in a POST operation</returns>
     public static string DictionaryToPostData(Dictionary<string, string> dict)
     {
-      StringBuilder QueryBuilder = new StringBuilder();
+      StringBuilder queryBuilder = new StringBuilder();
 
       foreach (var Param in dict)
       {
-        QueryBuilder.Append((string.Format("{0}={1}&", Param.Key, Param.Value)));
+        queryBuilder.Append((string.Format("{0}={1}&", Param.Key, Param.Value)));
       }
 
-      return QueryBuilder.ToString();      
+      return queryBuilder.ToString();      
     }
 
     /// <summary>
@@ -38,14 +38,14 @@ namespace AuthenticationLibrary
       if (dict.Count == 0)
         return "";
 
-      StringBuilder QueryBuilder = new StringBuilder();
+      StringBuilder queryBuilder = new StringBuilder();
 
       foreach (var Param in dict)
       {
-        QueryBuilder.Append(Uri.EscapeUriString(string.Format("{0}={1}&", Param.Key, Param.Value)));
+        queryBuilder.Append(Uri.EscapeUriString(string.Format("{0}={1}&", Param.Key, Param.Value)));
       }
 
-      return  QueryBuilder.ToString();
+      return  queryBuilder.ToString();
     }
 
     /// <summary>
@@ -60,14 +60,14 @@ namespace AuthenticationLibrary
 
       queryString = queryString.StartsWith("?") ? queryString.Remove(0, 1) : queryString;
 
-      Dictionary<string, string> QueryDict = new Dictionary<string, string>();
-      string[] QueryTmpArray = queryString.Split('&');
-      foreach (string Param in QueryTmpArray)
+      Dictionary<string, string> queryDict = new Dictionary<string, string>();
+      string[] queryTmpArray = queryString.Split('&');
+      foreach (string Param in queryTmpArray)
       {
         string[] KeyValStr = Param.Split('=');
         KeyValuePair<string, string> ParamForDict = new KeyValuePair<string, string>(KeyValStr[0], KeyValStr[1]);
       }
-      return QueryDict;
+      return queryDict;
     }
   }
 }
