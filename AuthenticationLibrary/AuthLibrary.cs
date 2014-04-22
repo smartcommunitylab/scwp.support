@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Models.AuthorizationService;
 using Newtonsoft.Json;
 using System.Net;
+using System.Net.Http;
 
 namespace AuthenticationLibrary
 {
@@ -15,7 +16,7 @@ namespace AuthenticationLibrary
   /// </summary>
   public class AuthLibrary
   {
-    WebClient webCli;
+    HttpClient httpCli;
     string clientId;
     string clientSecret;
     string redirectUrl;
@@ -33,7 +34,7 @@ namespace AuthenticationLibrary
       this.clientId = clientId;
       this.clientSecret = clientSecret;
       this.redirectUrl = redirectUrl;
-      webCli = new WebClient();
+      httpCli = new HttpClient();
     }
 
     /// <summary>
@@ -66,10 +67,13 @@ namespace AuthenticationLibrary
       StringPost["redirect_uri"] = redirectUrl;
       StringPost["grant_type"] = "authorization_code";
 
-      webCli.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-      string JSONResult = await webCli.UploadStringTaskAsync(AuthUriHelper.GetTokenUri(), QueryHelper.DictionaryToPostData(StringPost));
+      StringContent sc = new StringContent(QueryHelper.DictionaryToPostData(StringPost));
 
-      return JsonConvert.DeserializeObject<Token>(JSONResult);
+
+      httpCli.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
+      var JSONResult = await httpCli.PostAsync(AuthUriHelper.GetTokenUri(), sc);
+
+      return JsonConvert.DeserializeObject<Token>(await JSONResult.Content.ReadAsStringAsync());
     }
 
     /// <summary>
@@ -84,11 +88,14 @@ namespace AuthenticationLibrary
       StringPost["client_secret"] = clientSecret;
       StringPost["refresh_token"] = refreshToken;
       StringPost["grant_type"] = "refresh_token";
+      StringContent sc = new StringContent(QueryHelper.DictionaryToPostData(StringPost));
 
-      webCli.Headers["Content-Type"] = "application/x-www-form-urlencoded";
-      string JSONResult = await webCli.UploadStringTaskAsync(AuthUriHelper.GetTokenUri(), QueryHelper.DictionaryToPostData(StringPost));
 
-      return JsonConvert.DeserializeObject<Token>(JSONResult);
+      httpCli.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
+      var JSONResult = await httpCli.PostAsync(AuthUriHelper.GetTokenUri(), sc);
+
+      return JsonConvert.DeserializeObject<Token>(await JSONResult.Content.ReadAsStringAsync());
+
     }
 
     /// <summary>
@@ -96,7 +103,7 @@ namespace AuthenticationLibrary
     /// </summary>
     public void RevokeAccessToken()
     {
-      webCli.DownloadStringAsync(AuthUriHelper.GetRevokeTokenUri(accessToken));
+      httpCli.GetAsync(AuthUriHelper.GetRevokeTokenUri(accessToken));
     }
 
   }
