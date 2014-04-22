@@ -115,6 +115,7 @@
     <Compile Include="ProfileService\ExtendedProfile.cs" />
     <Compile Include="AuthorizationService\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TerritoryInformationService\BaseTerritoryInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
