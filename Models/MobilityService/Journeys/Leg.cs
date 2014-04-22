@@ -12,13 +12,13 @@ namespace Models.MobilityService.Journeys
   public class Leg
   {
     [JsonProperty("legId")]
-    public int LegId { get; set; }
+    public string LegId { get; set; }
 
     [JsonProperty("startTime")]
-    public int StartTime { get; set; }
+    public long StartTime { get; set; }
 
     [JsonProperty("endTime")]
-    public int EndTime { get; set; }
+    public long EndTime { get; set; }
 
     [JsonProperty("duration")]
     public int Duration { get; set; }
