@@ -21,6 +21,7 @@ namespace TerritoryInformationServiceLibrary
     static string rateUrl = "rate";
     static string objectUrl = "objects";
 
+    
     #region Reading URIs
 
     public static Uri GetReadEventsUri(string filterData = "")
