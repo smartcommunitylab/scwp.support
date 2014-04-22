@@ -67,10 +67,8 @@ namespace AuthenticationLibrary
       StringPost["redirect_uri"] = redirectUrl;
       StringPost["grant_type"] = "authorization_code";
 
-      StringContent sc = new StringContent(QueryHelper.DictionaryToPostData(StringPost));
+      StringContent sc = new StringContent(QueryHelper.DictionaryToPostData(StringPost), System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
 
-
-      httpCli.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
       var JSONResult = await httpCli.PostAsync(AuthUriHelper.GetTokenUri(), sc);
 
       return JsonConvert.DeserializeObject<Token>(await JSONResult.Content.ReadAsStringAsync());
@@ -88,10 +86,8 @@ namespace AuthenticationLibrary
       StringPost["client_secret"] = clientSecret;
       StringPost["refresh_token"] = refreshToken;
       StringPost["grant_type"] = "refresh_token";
-      StringContent sc = new StringContent(QueryHelper.DictionaryToPostData(StringPost));
+      StringContent sc = new StringContent(QueryHelper.DictionaryToPostData(StringPost), System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
 
-
-      httpCli.DefaultRequestHeaders.Add("Content-Type", "application/x-www-form-urlencoded");
       var JSONResult = await httpCli.PostAsync(AuthUriHelper.GetTokenUri(), sc);
 
       return JsonConvert.DeserializeObject<Token>(await JSONResult.Content.ReadAsStringAsync());

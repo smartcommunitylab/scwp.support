@@ -1,7 +1,9 @@
 ﻿using AuthenticationLibrary;
 using Microsoft.Phone.Controls;
+using MobilityServiceLibrary;
 using Models.AuthorizationService;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace TesterApp
 {
@@ -12,6 +14,7 @@ namespace TesterApp
         string redirectUrl = "http://localhost";
         string code;
         AuthLibrary authLib;
+        PublicTransportLibrary ptl;
         ProfileServiceLibrary.ProfileLibrary proLib;
         Token toMo;
 
@@ -19,6 +22,7 @@ namespace TesterApp
         {
             InitializeComponent();
             authLib = new AuthLibrary(clientid, secret, redirectUrl);
+            
         }
         private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
@@ -40,6 +44,14 @@ namespace TesterApp
             toMo = await authLib.GetAccessToken(code);
             coop.Text = toMo.Scope;
             MessageBox.Show("Ho un token: " + toMo.AccessToken);
+        }
+
+        private async void btnGetRoutes_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            ptl = new PublicTransportLibrary(toMo.AccessToken);
+
+            var resp = await ptl.GetRoutes(Models.MobilityService.AgencyType.TrentoCityBus);
+            MessageBox.Show(resp.ToString());
         }
 
         private async void btngetuser_Tap(object sender, System.Windows.Input.GestureEventArgs e)

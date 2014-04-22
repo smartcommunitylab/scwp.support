@@ -39,10 +39,11 @@
             </phone:PivotItem>
 
 
-            <phone:PivotItem Header="getcode">
+            <phone:PivotItem Header="APIs">
                 <Grid>
                     <StackPanel>
                         <Button Content="go" x:Name="btngetuser" Tap="btngetuser_Tap"></Button>
+                        <Button Content="getroutes" x:Name="btnGetRoutes" Tap="btnGetRoutes_Tap"></Button>
                         <TextBlock x:Name="coop2"></TextBlock>
                     </StackPanel>
                 </Grid>
