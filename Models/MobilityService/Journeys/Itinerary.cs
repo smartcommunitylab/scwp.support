@@ -31,5 +31,15 @@ namespace Models.MobilityService.Journeys
 
     [JsonProperty("leg")]
     public List<Leg> Legs { get; set; }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(Itinerary).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
+    }
   }
 }

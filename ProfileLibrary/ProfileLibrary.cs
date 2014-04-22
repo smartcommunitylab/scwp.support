@@ -40,6 +40,7 @@ namespace ProfileServiceLibrary
     /// <returns>An instance of a BasicProfile object, containing the current user profile</returns>
     public async Task<BasicProfile> GetBasicProfile()
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var JSONResult = await httpCli.GetStringAsync(ProfileUriHelper.GetBasicProfileUri());
@@ -53,6 +54,7 @@ namespace ProfileServiceLibrary
     /// <returns>An instance of an AccountProfile object, containing the current user account</returns>
     public async Task<AccountProfile> GetBasicAccount()
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var JSONResult = await httpCli.GetStringAsync(ProfileUriHelper.GetBasicAccountUri());
@@ -65,6 +67,7 @@ namespace ProfileServiceLibrary
     /// <returns>A list of ExtendedProfile objects containing all the extended profiles for the current user</returns>
     public async Task<List<ExtendedProfile>> GetExtendedProfiles()
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var JSONResult = await httpCli.GetStringAsync(ProfileUriHelper.GetExtendedProfilesUri());

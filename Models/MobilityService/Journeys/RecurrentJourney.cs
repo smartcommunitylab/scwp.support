@@ -11,11 +11,21 @@ namespace Models.MobilityService.Journeys
   {
     [JsonProperty("parameters")]
     public RecurrentJourneyParameters Parameters { get; set; }
-    
+
     [JsonProperty("legs")]
     public List<SimpleLeg> Legs { get; set; }
 
     [JsonProperty("monitorLegs")]
     public Dictionary<int, bool> MonitorLegs { get; set; }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(RecurrentJourney).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
+    }
   }
 }

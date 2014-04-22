@@ -7,16 +7,26 @@ using System.Threading.Tasks;
 
 namespace Models.MobilityService.RealTime
 {
-    public class AlertParking : BaseAlert
+  public class AlertParking : BaseAlert
+  {
+    [JsonProperty("stopId")]
+    public string StopId { get; set; }
+
+    [JsonProperty("placesAvailable")]
+    public string PlacesAvailable { get; set; }
+
+    [JsonProperty("noOfveichle")]
+    public string NoOfVeichle { get; set; }
+
+    public override string ToString()
     {
-        [JsonProperty("stopId")]
-        public string StopId { get; set; }
-
-        [JsonProperty("placesAvailable")]
-        public string PlacesAvailable { get; set; }
-
-        [JsonProperty("noOfveichle")]
-        public string NoOfVeichle { get; set; }
-
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(AlertParking).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
     }
+
+  }
 }

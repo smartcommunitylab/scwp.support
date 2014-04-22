@@ -31,5 +31,15 @@ namespace Models.MobilityService.Journeys
 
     [JsonProperty("resultsNumber")]
     public int ResultsNumber { get; set; }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(SingleJourney).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
+    }
   }
 }

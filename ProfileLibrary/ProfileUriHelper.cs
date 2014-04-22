@@ -20,10 +20,10 @@ namespace ProfileServiceLibrary
   /// </summary>
   public static class ProfileUriHelper
   {
-    static string baseUrl = "https://vas-dev.smartcampuslab.it/";
+    static string baseUrl = "https://vas-dev.smartcampuslab.it";
     static string basicProfileUrl = "aac/basicprofile";
-    static string basicAccountProfileUrl = "/aac/accountprofile";
-    static string extendedProfilesUrl = "/core.profile/extprofile";
+    static string basicAccountProfileUrl = "aac/accountprofile";
+    static string extendedProfilesUrl = "core.profile/extprofile";
     static string currentProfileId = "me";
 
     #region Basic
@@ -34,7 +34,7 @@ namespace ProfileServiceLibrary
     /// <returns>A ready to use URI to which a WebClient must be pointed in order to obtain basic profile informations</returns>
     public static Uri GetBasicProfileUri()
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}",baseUrl,basicProfileUrl, currentProfileId));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}",baseUrl,basicProfileUrl, currentProfileId));
       return ub.Uri;
     }
 
@@ -44,7 +44,7 @@ namespace ProfileServiceLibrary
     /// <returns>A ready to use URI to which a WebClient must be pointed in order to obtain basic account informations</returns>
     public static Uri GetBasicAccountUri()
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}", baseUrl, basicAccountProfileUrl, currentProfileId));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, basicAccountProfileUrl, currentProfileId));
       return ub.Uri;
     }
 
@@ -58,7 +58,7 @@ namespace ProfileServiceLibrary
     /// <returns>A ready to use URI to which a WebClient must be pointed in order to obtain extended profile informations</returns>
     public static Uri GetExtendedProfilesUri()
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}{1}/{2}", baseUrl, extendedProfilesUrl, currentProfileId));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, extendedProfilesUrl, currentProfileId));
       return ub.Uri;
     }
 

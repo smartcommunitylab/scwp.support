@@ -7,28 +7,38 @@ using System.Threading.Tasks;
 
 namespace Models.MobilityService.PublicTransport
 {
-    public class TripData
+  public class TripData
+  {
+    [JsonProperty("time")]
+    public int Time { get; set; }
+
+    [JsonProperty("agencyId")]
+    public AgencyType AgencyId { get; set; }
+
+    [JsonProperty("routeId")]
+    public string RouteId { get; set; }
+
+    [JsonProperty("tripId")]
+    public string TripId { get; set; }
+
+    [JsonProperty("routeName")]
+    public string RouteName { get; set; }
+
+    [JsonProperty("routeShortName")]
+    public string RouteShortName { get; set; }
+
+    [JsonProperty("delay")]
+    public Delay DelayInfo { get; set; }
+
+    public override string ToString()
     {
-        [JsonProperty("time")]
-        public int Time { get; set; }
-
-        [JsonProperty("agencyId")]
-        public AgencyType AgencyId { get; set; }
-        
-        [JsonProperty("routeId")]
-        public string RouteId { get; set; }
-
-        [JsonProperty("tripId")]
-        public string TripId { get; set; }
-
-        [JsonProperty("routeName")]
-        public string RouteName { get; set; }
-
-        [JsonProperty("routeShortName")]
-        public string RouteShortName { get; set; }
-
-        [JsonProperty("delay")]
-        public Delay DelayInfo { get; set; }
-
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(TripData).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
     }
+
+  }
 }

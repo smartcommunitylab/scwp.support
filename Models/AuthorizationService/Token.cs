@@ -23,5 +23,15 @@ namespace Models.AuthorizationService
 
     [JsonProperty("scope")]
     public string Scope { get; set; }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(Token).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name ,proper.GetValue(this));
+      }
+      return sb.ToString();
+    }
   }
 }

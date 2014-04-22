@@ -59,6 +59,8 @@ namespace AuthenticationLibrary
     /// <returns>The instance of a Token object containing the actual access token and other token-related fields</returns>
     public async Task<Token> GetAccessToken(string code)
     {
+      httpCli.DefaultRequestHeaders.Clear();
+
       Dictionary<string, string> StringPost = new Dictionary<string, string>();
 
       StringPost["client_id"] = clientId;
@@ -80,12 +82,15 @@ namespace AuthenticationLibrary
     /// <returns>The instance of a new Token object, containing the new access token and other token-related fields</returns>
     public async Task<Token> RefreshAccessToken()
     {
+      httpCli.DefaultRequestHeaders.Clear();
+
       Dictionary<string, string> StringPost = new Dictionary<string, string>();
 
       StringPost["client_id"] = clientId;
       StringPost["client_secret"] = clientSecret;
       StringPost["refresh_token"] = refreshToken;
       StringPost["grant_type"] = "refresh_token";
+
       StringContent sc = new StringContent(QueryHelper.DictionaryToPostData(StringPost), System.Text.Encoding.UTF8, "application/x-www-form-urlencoded");
 
       var JSONResult = await httpCli.PostAsync(AuthUriHelper.GetTokenUri(), sc);
@@ -99,6 +104,7 @@ namespace AuthenticationLibrary
     /// </summary>
     public void RevokeAccessToken()
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.GetAsync(AuthUriHelper.GetRevokeTokenUri(accessToken));
     }
 

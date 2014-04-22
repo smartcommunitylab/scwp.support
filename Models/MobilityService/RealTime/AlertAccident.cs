@@ -7,13 +7,23 @@ using System.Threading.Tasks;
 
 namespace Models.MobilityService.RealTime
 {
-    public class AlertAccident : BaseAlert
+  public class AlertAccident : BaseAlert
+  {
+    [JsonProperty("position")]
+    public Position PositionInfo { get; set; }
+
+    [JsonProperty("severity")]
+    public string Severity { get; set; }
+
+    public override string ToString()
     {
-        [JsonProperty("position")]
-        public Position PositionInfo { get; set; }
-
-        [JsonProperty("severity")]
-        public string Severity { get; set; }
-
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(AlertAccident).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
     }
+
+  }
 }

@@ -11,44 +11,64 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
+  Loaded="PhoneApplicationPage_Loaded"
     shell:SystemTray.IsVisible="True">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <!--Pivot Control-->
-        <phone:Pivot Title="MY APPLICATION">
-            <!--Pivot item one-->
-            <phone:PivotItem Header="login">
-                <Grid>
-                    <StackPanel>
-                        <Button Content="login" Tap="Button_Tap"></Button>
-                        <phone:WebBrowser x:Name="banana" Navigating="banana_Navigating" Height="453"></phone:WebBrowser>
-                    </StackPanel>
-                </Grid>
-            </phone:PivotItem>
-
-            
-            <!--Pivot item two-->
-            <phone:PivotItem Header="gettoken">
-                <Grid>
-                    <StackPanel>
-                        <Button Content="go" x:Name="btnGetToken" Tap="btnGetToken_Tap"></Button>
-                        <TextBlock x:Name="coop"></TextBlock>
-                    </StackPanel>
-                </Grid>
-            </phone:PivotItem>
+  <!--LayoutRoot is the root grid where all page content is placed-->
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <!--Pivot Control-->
+    <phone:Pivot Title="MY APPLICATION" x:Name="pivotGrande">
+      <!--Pivot item one-->
+      <phone:PivotItem Header="login" x:Name="loginPivo">
+        <Grid>
+          <StackPanel>
+            <Button Content="login" Tap="Button_Tap"></Button>
+            <phone:WebBrowser x:Name="banana" IsScriptEnabled="True" Navigating="banana_Navigating" Height="453"></phone:WebBrowser>
+          </StackPanel>
+        </Grid>
+      </phone:PivotItem>
 
 
-            <phone:PivotItem Header="APIs">
-                <Grid>
-                    <StackPanel>
-                        <Button Content="go" x:Name="btngetuser" Tap="btngetuser_Tap"></Button>
-                        <Button Content="getroutes" x:Name="btnGetRoutes" Tap="btnGetRoutes_Tap"></Button>
-                        <TextBlock x:Name="coop2"></TextBlock>
-                    </StackPanel>
-                </Grid>
-            </phone:PivotItem>
-        </phone:Pivot>
-    </Grid>
+      <!--Pivot item two-->
+      <phone:PivotItem Header="gettoken" x:Name="tokenPivo">
+        <Grid>
+          <StackPanel>
+            <Button Content="go" x:Name="btnGetToken" Tap="btnGetToken_Tap"></Button>
+          </StackPanel>
+        </Grid>
+      </phone:PivotItem>
+
+
+      <phone:PivotItem Header="ProfileService APIs">
+        <Grid>
+          <StackPanel>
+            <Button Content="GetBasicProfile" x:Name="btnGetBasicProfile" Tap="GetBasicProfile_Tap"></Button>
+            <Button Content="GetBasicAccount" x:Name="btnGetBasicAccount" Tap="GetBasicAccount_Tap"></Button>
+            <Button Content="GetExtendedProfile" x:Name="btnGetExtendedProfile" Tap="GetExtendedProfile_Tap"></Button>
+          </StackPanel>
+        </Grid>
+      </phone:PivotItem>
     
+    <phone:PivotItem Header="MobilityService APIs">
+      <Grid>
+        <StackPanel>
+            <Button Content="getRoutesUrl" x:Name="bteGetRoutesUrl" Tap="bteGetRoutesUrl_Tap"></Button>
+            <Button Content="getStopsUrl" x:Name="btnGetStopsUrl" Tap="btnGetStopsUrl_Tap"></Button>
+            <Button Content="getTimetableUrl" x:Name="btnGetTimetableUrl" Tap="btnGetTimetableUrl_Tap"></Button>
+            <Button Content="getLimitedTimetableUrl" x:Name="btnGetLimitedTimetableUrl" Tap="btnGetLimitedTimetableUrl_Tap"></Button>
+            <Button Content="getTransitTimesUrl" x:Name="btnGetTransitTimesUrl" Tap="btnGetTransitTimesUrl_Tap"></Button>
+            <Button Content="getTransitDelaysUrl" x:Name="btnGetTransitDelaysUrl" Tap="btnGetTransitDelaysUrl_Tap"></Button>
+            <Button Content="getParkingsByAgencyUrl" x:Name="btnGetParkingsByAgencyUrl" Tap="btnGetParkingsByAgencyUrl_Tap"></Button>
+            <Button Content="getRoadInfoByAgencyUrl" x:Name="btnGetRoadInfoByAgencyUrl" Tap="btnGetRoadInfoByAgencyUrl_Tap"></Button>
+          </StackPanel>
+      </Grid>
+    </phone:PivotItem> 
+    
+    
+    
+    
+    
+    </phone:Pivot>
+  </Grid>
+
 </phone:PhoneApplicationPage>
