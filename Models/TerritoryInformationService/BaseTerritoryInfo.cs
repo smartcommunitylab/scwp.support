@@ -63,6 +63,15 @@ namespace Models.TerritoryInformationService
     [JsonProperty("domainId")]
     public string DomainId { get; set; }
 
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(BaseTerritoryInfo).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
+    }
   }
 
   public class CommunityData
@@ -84,6 +93,16 @@ namespace Models.TerritoryInformationService
 
     [JsonProperty("followsCount")]
     public string FollowsCount { get; set; }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(CommunityData).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
+    }
 
   }
 }
