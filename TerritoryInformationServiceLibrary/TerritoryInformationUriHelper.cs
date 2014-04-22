@@ -11,6 +11,10 @@ using System.Windows.Shapes;
 
 namespace TerritoryInformationServiceLibrary
 {
+  /// <summary>
+  /// Helper class for the territory information library, contains static functions that 
+  /// generate already-formatted URIs for using within the territory information library
+  /// </summary>
   public static class TerritoryInformationUriHelper
   {
     static string baseUrl = "https://vas-dev.smartcampuslab.it/core.territory";
@@ -21,7 +25,10 @@ namespace TerritoryInformationServiceLibrary
     static string rateUrl = "rate";
     static string objectUrl = "objects";
 
-    
+    /* 
+     * Methods that provide URIs for reading all objects from a specific category
+     * (i.e. Events, Places)
+     */
     #region Reading URIs
 
     public static Uri GetReadEventsUri(string filterData = "")
@@ -76,6 +83,10 @@ namespace TerritoryInformationServiceLibrary
 
     #endregion
 
+    /* 
+     * Methods that provide URIs to start or stop following objects
+     * or adding them to the list of personal objects
+     */
     #region Following objects
 
     public static Uri GetAddToMyObjectsUri(string objectId)
@@ -104,6 +115,11 @@ namespace TerritoryInformationServiceLibrary
 
     #endregion
 
+
+    /* 
+     * Methods that provide URIs to create, edit and delete
+     * user-created events
+     */
     #region User defined event
 
     public static Uri GetCreateUserDefinedEventUri()
@@ -125,6 +141,11 @@ namespace TerritoryInformationServiceLibrary
 
     #endregion
 
+
+    /* 
+     * Methods that provide URIs to create, edit and delete
+     * user-created Points Of Interest
+     */
     #region User defined POI
 
     public static Uri GetCreateUserDefinedPOIUri()
@@ -146,6 +167,11 @@ namespace TerritoryInformationServiceLibrary
 
     #endregion
 
+
+    /* 
+     * Methods that provide URIs to create, edit and delete
+     * user-created stories
+     */
     #region User defined story
 
     public static Uri GetCreateUserDefinedStoryUri()
@@ -167,6 +193,7 @@ namespace TerritoryInformationServiceLibrary
 
     #endregion
 
+    
     #region Others
 
     public static Uri GetSyncUri(int since = 0)
