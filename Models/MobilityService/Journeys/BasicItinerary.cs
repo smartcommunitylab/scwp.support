@@ -10,7 +10,7 @@ namespace Models.MobilityService.Journeys
   public class BasicItinerary
   {
     [JsonProperty("clientId")]
-    public int ClientId { get; set; }
+    public string ClientId { get; set; }
 
     [JsonProperty("data")]
     public Itinerary Data { get; set; }

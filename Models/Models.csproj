@@ -118,6 +118,9 @@
     <Compile Include="AuthorizationService\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TerritoryInformationService\BaseTerritoryInfo.cs" />
+    <Compile Include="TerritoryInformationService\EventObject.cs" />
+    <Compile Include="TerritoryInformationService\POIObject.cs" />
+    <Compile Include="TerritoryInformationService\StoryObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">

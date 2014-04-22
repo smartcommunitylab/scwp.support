@@ -10,7 +10,7 @@ namespace Models.MobilityService.Journeys
   public class BasicRecurrentJourney
   {
     [JsonProperty("clientId")]
-    public int ClientId { get; set; }
+    public string ClientId { get; set; }
 
     [JsonProperty("data")]
     public RecurrentJourney Data { get; set; }

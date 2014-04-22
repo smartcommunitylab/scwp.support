@@ -53,7 +53,7 @@ namespace MobilityServiceLibrary
     /// </summary>
     /// <param name="journeyId">The unique identifier for the desired journey</param>
     /// <returns>An instance of the desired stored journey</returns>
-    public async Task<BasicItinerary> ReadSingleJourney(int journeyId)
+    public async Task<BasicItinerary> ReadSingleJourney(string journeyId)
     {
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
@@ -81,7 +81,7 @@ namespace MobilityServiceLibrary
     /// <param name="journeyId">The unique identifier for the desired journey</param>
     /// <param name="monitor">The status to which monitoring will be set</param>
     /// <returns>The updated monitoring status</returns>
-    public async Task<bool> SetMonitorSingleJourney(int journeyId, bool monitor)
+    public async Task<bool> SetMonitorSingleJourney(string journeyId, bool monitor)
     {
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
@@ -95,7 +95,7 @@ namespace MobilityServiceLibrary
     /// </summary>
     /// <param name="journeyId">The unique identifier for the desired journey</param>
     /// <returns>The result of the deleting operation</returns>
-    public async Task<bool> DeleteSingleJourney(int journeyId)
+    public async Task<bool> DeleteSingleJourney(string journeyId)
     {
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
@@ -132,7 +132,7 @@ namespace MobilityServiceLibrary
     /// </summary>
     /// <param name="journeyId">The unique identifier for the desired journey</param>
     /// <returns>An instance of the desired stored recurrent journey</returns>
-    public async Task<BasicRecurrentJourney> ReadRecurrentJourney(int journeyId)
+    public async Task<BasicRecurrentJourney> ReadRecurrentJourney(string journeyId)
     {
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
@@ -160,7 +160,7 @@ namespace MobilityServiceLibrary
     /// <param name="journeyId">The unique identifier for the desired recurrent journey</param>
     /// <param name="monitor">The status to which monitoring will be set</param>
     /// <returns>The updated monitoring status</returns>
-    public async Task<bool> SetMonitorRecurrentJourney(int journeyId, bool monitor)
+    public async Task<bool> SetMonitorRecurrentJourney(string journeyId, bool monitor)
     {
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
@@ -175,7 +175,7 @@ namespace MobilityServiceLibrary
     /// <param name="journeyId">The unique identifier for the desired recurrent journey</param>
     /// <param name="basIti">The instance the updated journey to store</param>
     /// <returns>The result of the update operation</returns>
-    public async Task<bool> UpdateRecurrentJourney(int journeyId, BasicRecurrentJourney basIti)
+    public async Task<bool> UpdateRecurrentJourney(string journeyId, BasicRecurrentJourney basIti)
     {
       string toPost = JsonConvert.SerializeObject(basIti);
       StringContent sc = new StringContent(toPost);
@@ -191,7 +191,7 @@ namespace MobilityServiceLibrary
     /// </summary>
     /// <param name="journeyId">The unique identifier for the desired journey</param>
     /// <returns>The result of the deleting operation</returns>
-    public async Task<bool> DeleteRecurrentJourney(int journeyId)
+    public async Task<bool> DeleteRecurrentJourney(string journeyId)
     {
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));

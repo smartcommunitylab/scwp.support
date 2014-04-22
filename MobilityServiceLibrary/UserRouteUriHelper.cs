@@ -33,7 +33,7 @@ namespace MobilityServiceLibrary
     /// </summary>
     /// <param name="journeyId">The unique identifier for the desired journey</param>
     /// <returns>A ready to use URI for retrieving a specific journey from the server</returns>
-    public static Uri GetReadSingleJourneyUri(int journeyId)
+    public static Uri GetReadSingleJourneyUri(string journeyId)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, itineraryUrl, journeyId));
       return ub.Uri;
@@ -54,7 +54,7 @@ namespace MobilityServiceLibrary
     /// <param name="journeyId">The unique identifier for the desired journey</param>
     /// <param name="monitor">The value indicating whether to start or stop monitoring the journey</param>
     /// <returns>A ready to use URI for setting the monitoring status on a specific journey</returns>
-    public static Uri GetMonitorSingleJourneyUri(int journeyId, bool monitor)
+    public static Uri GetMonitorSingleJourneyUri(string journeyId, bool monitor)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/monitor/{3}", baseUrl, itineraryUrl, journeyId, monitor));
       return ub.Uri;
@@ -65,7 +65,7 @@ namespace MobilityServiceLibrary
     /// </summary>
     /// <param name="journeyId">The unique identifier for the desired journey</param>
     /// <returns>A ready to use URI for deleting a specific journey</returns>
-    public static Uri GetDeleteSingleJourneyUri(int journeyId)
+    public static Uri GetDeleteSingleJourneyUri(string journeyId)
     {
       return GetReadSingleJourneyUri(journeyId);
     }
@@ -89,7 +89,7 @@ namespace MobilityServiceLibrary
     /// </summary>
     /// <param name="journeyId">The unique identifier for the desired recurrent journey</param>
     /// <returns>A ready to use URI for retrieving a specific recurrent journey from the server</returns>
-    public static Uri GetReadRecurrentJourneyUri(int journeyId)
+    public static Uri GetReadRecurrentJourneyUri(string journeyId)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, recurrentUrl, journeyId));
       return ub.Uri;
@@ -110,7 +110,7 @@ namespace MobilityServiceLibrary
     /// <param name="journeyId">The unique identifier for the desired recurrent journey</param>
     /// <param name="monitor">The value indicating whether to start or stop monitoring the recurrent journey</param>
     /// <returns>A ready to use URI for setting the monitoring status on a specific recurrent journey</returns>
-    public static Uri GetMonitorReccurrentJourneyUri(int journeyId, bool monitor)
+    public static Uri GetMonitorReccurrentJourneyUri(string journeyId, bool monitor)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/monitor/{3}", baseUrl, recurrentUrl, journeyId, monitor));
       return ub.Uri;
@@ -121,7 +121,7 @@ namespace MobilityServiceLibrary
     /// </summary>
     /// <param name="journeyId">The unique identifier for the desired journey</param>
     /// <returns>A ready to use URI for updating a specific recurrent journey</returns>
-    public static Uri GetUpdateRecurrentJourneyUri(int journeyId)
+    public static Uri GetUpdateRecurrentJourneyUri(string journeyId)
     {
       return GetReadRecurrentJourneyUri(journeyId);
     }
@@ -131,7 +131,7 @@ namespace MobilityServiceLibrary
     /// </summary>
     /// <param name="journeyId">The unique identifier for the desired recurrent journey</param>
     /// <returns>A ready to use URI for deleting a specific recurrent journey</returns>
-    public static Uri GetDeleteRecurrentJourneyUri(int journeyId)
+    public static Uri GetDeleteRecurrentJourneyUri(string journeyId)
     {
       return GetReadRecurrentJourneyUri(journeyId);
     }
