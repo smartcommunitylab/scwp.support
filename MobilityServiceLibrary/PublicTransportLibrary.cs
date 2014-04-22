@@ -44,6 +44,7 @@ namespace MobilityServiceLibrary
     /// <returns>List of Routes</returns>
     public async Task<List<Route>> GetRoutes(AgencyType agency)
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -60,6 +61,7 @@ namespace MobilityServiceLibrary
     /// /// <returns></returns>
     public async Task<List<Stop>> GetStops(AgencyType agency, string routeId)
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -77,6 +79,7 @@ namespace MobilityServiceLibrary
     /// <returns></returns>
     public async Task<List<StopTime>> GetTimetable(AgencyType agency, string routeId, string stopId)
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -95,12 +98,34 @@ namespace MobilityServiceLibrary
     /// <returns></returns>
     public async Task<List<TripData>> GetLimitedTimetable(AgencyType agency, string stopId, int numberOfResult)
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
       string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetLimitedTimetableUri(agency, stopId, numberOfResult));
 
-      return Newtonsoft.Json.JsonConvert.DeserializeObject<List<TripData>>(JSONResult);
+      Dictionary<string, LimitedTimeTable> limitedTTs = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, LimitedTimeTable>>(JSONResult);
+      List<TripData> tripsData = new List<TripData>();
+      TripData td;
+      foreach (var limitedTT in limitedTTs)
+      {
+        foreach (var time in limitedTT.Value.Times)
+        {
+          td = new TripData();
+          td.AgencyId = time.TripInfo.AgencyId;
+          td.RouteId = limitedTT.Key;
+          td.RouteName = limitedTT.Value.RouteName;
+          td.RouteShortName = limitedTT.Value.RouteShortName;
+          td.Time = time.TimeInfo;
+          td.TripId = time.TripInfo.Id;
+          if (limitedTT.Value.Delays.ContainsKey(td.TripId))
+          {
+            td.DelayInfo = limitedTT.Value.Delays[td.TripId];
+          }
+          tripsData.Add(td);
+        }
+      }
+      return tripsData;
     }
 
     /// <summary>
@@ -110,8 +135,9 @@ namespace MobilityServiceLibrary
     /// <param name="timeFrom">The timestamp corresponding to the start time</param>
     /// <param name="timeTo">The timestamp corresponding to the end time</param>
     /// <returns></returns>
-    public async Task<TimeTable> GetTransitTimes(string routeId, int timeFrom, int timeTo)
+    public async Task<TimeTable> GetTransitTimes(string routeId, long timeFrom, long timeTo)
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -127,8 +153,9 @@ namespace MobilityServiceLibrary
     /// <param name="timeFrom">The timestamp corresponding to the start time</param>
     /// <param name="timeTo">The timestamp corresponding to the end time</param>
     /// <returns></returns>
-    public async Task<TimeTable> GetTransitDelays(string routeId, int timeFrom, int timeTo)
+    public async Task<TimeTable> GetTransitDelays(string routeId, long timeFrom, long timeTo)
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -144,6 +171,7 @@ namespace MobilityServiceLibrary
     /// <returns></returns>
     public async Task<List<Parking>> GetParkingsByAgency(AgencyType agency)
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -159,13 +187,16 @@ namespace MobilityServiceLibrary
     /// <param name="timeFrom">The timestamp corresponding to the start time</param>
     /// <param name="timeTo">The timestamp corresponding to the end time</param>
     /// <returns></returns>
-    public async Task<List<AlertRoad>> GetRoadInfoByAgency(AgencyType agency, int timeFrom, int timeTo)
+    public async Task<List<AlertRoad>> GetRoadInfoByAgency(AgencyType agency, long timeFrom, long timeTo)
     {
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
-      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetRoadInfoByAgencyUri(agency, timeFrom, timeTo));
+      //string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetRoadInfoByAgencyUri(agency, timeFrom, timeTo));
+      string JSONResult = "[{\"agencyId\":\"COMUNE_DI_ROVERETO\",\"road\":{\"note\":\"\",\"lat\":\"45.894037\",\"lon\":\"11.043587\",\"streetCode\":\"290\",\"street\":\"CORSOBETTINIA.\",\"fromNumber\":\"\",\"toNumber\":\"\",\"fromIntersection\":\"\",\"toIntersection\":\"\"},\"changeTypes\":[\"PARKING_BLOCK\",\"ROAD_BLOCK\"],\"id\":\"612005_290\",\"type\":null,\"entity\":null,\"description\":\"UFFICIOATTIVITA\'PRODUTTIVE:DIVIETODITRANSITOEDISOSTACONRIMOZIONECOATTAINCORSOBETTINI,INVIALETRENTOENELLESTRADELIMITROFEAROVERETOPERLOSVOLGIMENTODELMERCATOSETTIMANALEDELMARTEDI\'.\",\"from\":1372543200000,\"to\":1378764000000,\"creatorId\":\"default\",\"creatorType\":\"SERVICE\",\"effect\":\"Temporanea\",\"note\":null},]";
 
+      //TODO: FIX THIS BY ADDING A LOOP FOR CHANGETYPE
       return Newtonsoft.Json.JsonConvert.DeserializeObject<List<AlertRoad>>(JSONResult);
     }
   }

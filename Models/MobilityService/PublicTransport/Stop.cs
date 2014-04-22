@@ -10,7 +10,7 @@ namespace Models.MobilityService.PublicTransport
 {
   public class Stop
   {
-    [JsonProperty("stopId")]
+    [JsonProperty("id")]
     public string StopId { get; set; }
 
     [JsonProperty("name")]

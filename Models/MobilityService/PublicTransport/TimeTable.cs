@@ -10,16 +10,16 @@ namespace Models.MobilityService.PublicTransport
   public class TimeTable
   {
     [JsonProperty("tripIds")]
-    public int[] TripsId { get; set; }
+    public List<List<string>> TripsId { get; set; }
 
     [JsonProperty("stops")]
-    public string[] Stops { get; set; }
+    public List<string> Stops { get; set; }
 
     [JsonProperty("stopsId")]
-    public int[] StopsId { get; set; }
-
+    public List<string> StopsId { get; set; }
+   
     [JsonProperty("times")]
-    public List<List<List<string>>> Times { get; set; }
+    public List<List<string>> Times { get; set; }
 
     [JsonProperty("delays")]
     public List<List<Delay>> Delays { get; set; }

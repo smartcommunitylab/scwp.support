@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,18 +20,20 @@ namespace Models.MobilityService.RealTime
         public string CreatorId { get; set; }
 
         [JsonProperty("creatorType")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public CreatorType CreatorType { get; set; }
 
         [JsonProperty("from")]
-        public int ValidFrom { get; set; }
+        public long ValidFrom { get; set; }
 
         [JsonProperty("to")]
-        public int ValidUntil { get; set; }
+        public long ValidUntil { get; set; }
 
         [JsonProperty("effect")]
         public string Effect { get; set; }
 
         [JsonProperty("type")]
+        [JsonConverter(typeof(StringEnumConverter))]
         public AlertType Type { get; set; }
 
         [JsonProperty("note")]

@@ -10,13 +10,13 @@ namespace Models.MobilityService.PublicTransport
   public class Parking
   {
     [JsonProperty("name")]
-    public RouteId Name { get; set; }
+    public string Name { get; set; }
 
     [JsonProperty("description")]
     public string Description { get; set; }
 
     [JsonProperty("position")]
-    public int[] Position { get; set; }
+    public double[] Position { get; set; }
 
     [JsonProperty("monitored")]
     public bool Monitored { get; set; }

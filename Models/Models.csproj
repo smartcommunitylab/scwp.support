@@ -95,12 +95,14 @@
     <Compile Include="MobilityService\Journeys\SimpleLeg.cs" />
     <Compile Include="MobilityService\Journeys\SingleJourney.cs" />
     <Compile Include="MobilityService\MobilityEnumerators.cs" />
+    <Compile Include="MobilityService\PublicTransport\LimitedTimeTable.cs" />
     <Compile Include="MobilityService\PublicTransport\Delay.cs" />
     <Compile Include="MobilityService\PublicTransport\Parking.cs" />
     <Compile Include="MobilityService\PublicTransport\Stop.cs" />
     <Compile Include="MobilityService\PublicTransport\Route.cs" />
     <Compile Include="MobilityService\PublicTransport\StopTime.cs" />
     <Compile Include="MobilityService\PublicTransport\TimeTable.cs" />
+    <Compile Include="MobilityService\PublicTransport\Trip.cs" />
     <Compile Include="MobilityService\PublicTransport\TripData.cs" />
     <Compile Include="MobilityService\RealTime\AlertRoad.cs" />
     <Compile Include="MobilityService\RealTime\BaseAlert.cs" />

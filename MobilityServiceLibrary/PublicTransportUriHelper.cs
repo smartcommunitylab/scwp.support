@@ -90,7 +90,7 @@ namespace MobilityServiceLibrary
         /// <param name="timeFrom">The timestamp corresponding to the start time</param>
         /// <param name="timeTo">The timestamp corresponding to the end time</param>
         /// <returns>A ready to use URI for retrieving available transit times for the given route ID between a starting time and ending time</returns>
-        public static Uri GetTransitTimesUri(string routeId, int timeFrom, int timeTo)
+        public static Uri GetTransitTimesUri(string routeId, long timeFrom, long timeTo)
         {
             UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", BaseUrl, getTransitTimesUrl, routeId, timeFrom, timeTo));
             return ub.Uri;
@@ -103,7 +103,7 @@ namespace MobilityServiceLibrary
         /// <param name="timeFrom">The timestamp corresponding to the start time</param>
         /// <param name="timeTo">The timestamp corresponding to the end time</param>
         /// <returns>A ready to use URI for retrieving available transit delays for the given route ID between a starting time and ending time</returns>
-        public static Uri GetTransitDelaysUri(string routeId, int timeFrom, int timeTo)
+        public static Uri GetTransitDelaysUri(string routeId, long timeFrom, long timeTo)
         {
             UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", BaseUrl, getTransitDelaysUrl, routeId, timeFrom, timeTo));
             return ub.Uri;
@@ -127,7 +127,7 @@ namespace MobilityServiceLibrary
         /// <param name="timeFrom">The timestamp corresponding to the start time</param>
         /// <param name="timeTo">The timestamp corresponding to the end time</param>
         /// <returns>A ready to use URI for retrieving available road info for the given route ID between a starting time and ending time</returns>
-        public static Uri GetRoadInfoByAgencyUri(AgencyType agencyId, int timeFrom, int timeTo)
+        public static Uri GetRoadInfoByAgencyUri(AgencyType agencyId, long timeFrom, long timeTo)
         {
             UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", BaseUrl, getRoadInfoByAgencyUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), timeFrom, timeTo));
             return ub.Uri;

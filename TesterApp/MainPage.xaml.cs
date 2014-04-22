@@ -1,6 +1,8 @@
-﻿using Microsoft.Phone.Controls;
+﻿using System;
 using System.Windows;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
+using Microsoft.Phone.Controls;
 
 using Models.ProfileService;
 using Models.MobilityService;
@@ -9,8 +11,8 @@ using Models.AuthorizationService;
 using ProfileServiceLibrary;
 using AuthenticationLibrary;
 using MobilityServiceLibrary;
-using System.IO.IsolatedStorage;
-using System;
+using System.Collections;
+
 
 
 namespace TesterApp
@@ -40,6 +42,7 @@ namespace TesterApp
       if (iss.Contains("token"))
       {
         toMo = iss["token"] as Token;
+        pivotGrande.Items.RemoveAt(0);
         pivotGrande.Items.RemoveAt(0);
         pivotGrande.Items.RemoveAt(0);
         proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken);
@@ -93,55 +96,56 @@ namespace TesterApp
     #endregion
 
     #region MobilityService
-
-
     private async void bteGetRoutesUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       var resp = await ptl.GetRoutes(AgencyType.TrentoCityBus);
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : resp.ToString());
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
     }
 
     private async void btnGetStopsUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       var resp = await ptl.GetStops(AgencyType.TrentoCityBus, "05A");
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : resp.ToString());
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
     }
 
     private async void btnGetTimetableUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       var resp = await ptl.GetTimetable(AgencyType.TrentoCityBus, "05A", "247_12");
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : resp.ToString());
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
     }
+
     private async void btnGetLimitedTimetableUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       var resp = await ptl.GetLimitedTimetable(AgencyType.TrentoCityBus, "247_12", 10);
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : resp.ToString());
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
     }
+
     private async void btnGetTransitTimesUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      TimeSpan ts = new TimeSpan(0, 1, 0, 0, 0);
-      var resp = await ptl.GetTransitTimes("05A", Int32.Parse(DateTime.Now.ToString("yyyyMMddHHmmssffff")), Int32.Parse((DateTime.Now + ts).ToString("yyyyMMddHHmmssffff")));
+      TimeSpan ts = new TimeSpan(1, 0, 0, 0);
+      var resp = await ptl.GetTransitTimes("05A", Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmssffff")), Int64.Parse((DateTime.Now + ts).ToString("yyyyMMddHHmmssffff")));
       MessageBox.Show(resp.ToString());
     }
 
     private async void btnGetTransitDelaysUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      TimeSpan ts = new TimeSpan(0, 1, 0, 0, 0);
-      var resp = await ptl.GetTransitDelays("05A", Int32.Parse(DateTime.Now.ToString("yyyyMMddHHmmssffff")), Int32.Parse((DateTime.Now + ts).ToString("yyyyMMddHHmmssffff")));
+      TimeSpan ts = new TimeSpan(1, 0, 0, 0);
+      var resp = await ptl.GetTransitDelays("05A", Int64.Parse(DateTime.Now.ToString("yyyyMMddHHmmssffff")), Int64.Parse((DateTime.Now + ts).ToString("yyyyMMddHHmmssffff")));
       MessageBox.Show(resp.ToString());
     }
 
     private async void btnGetParkingsByAgencyUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      var resp = await ptl.GetParkingsByAgency(AgencyType.TrentoCityBus);
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : resp.ToString());
+      var resp = await ptl.GetParkingsByAgency(AgencyType.ComuneDiTrento);
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
     }
 
     private async void btnGetRoadInfoByAgencyUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      TimeSpan ts = new TimeSpan(0, 1, 0, 0, 0);
-      var resp = await ptl.GetRoadInfoByAgency(AgencyType.TrentoCityBus, Int32.Parse(DateTime.Now.ToString("yyyyMMddHHmmssffff")), Int32.Parse((DateTime.Now + ts).ToString("yyyyMMddHHmmssffff")));
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : resp.ToString());
+      TimeSpan ts = new TimeSpan(1, 0, 0, 0);
+      
+      var resp = await ptl.GetRoadInfoByAgency(AgencyType.TrentinoIntercityBus, Int64.Parse(DateTime.Now.ToString("yyyyMMddHHmmssffff")), Int64.Parse((DateTime.Now + ts).ToString("yyyyMMddHHmmssffff")));
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
 
     }
     #endregion

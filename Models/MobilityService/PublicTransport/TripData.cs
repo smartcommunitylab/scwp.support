@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,10 @@ namespace Models.MobilityService.PublicTransport
   public class TripData
   {
     [JsonProperty("time")]
-    public int Time { get; set; }
+    public long Time { get; set; }
 
     [JsonProperty("agencyId")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public AgencyType AgencyId { get; set; }
 
     [JsonProperty("routeId")]
@@ -39,6 +41,5 @@ namespace Models.MobilityService.PublicTransport
       }
       return sb.ToString();
     }
-
   }
 }

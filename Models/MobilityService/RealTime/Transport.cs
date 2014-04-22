@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Models.MobilityService.RealTime
     public string Type { get; set; }
 
     [JsonProperty("agencyId")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public AgencyType AgencyId { get; set; }
 
     [JsonProperty("routeId")]

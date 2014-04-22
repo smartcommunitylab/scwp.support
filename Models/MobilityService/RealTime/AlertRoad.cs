@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace Models.MobilityService.RealTime
 {
+
   public class AlertRoad : BaseAlert
   {
     [JsonProperty("agencyId")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public AgencyType AgencyId { get; set; }
 
     [JsonProperty("changeTypes")]
-    public ChangeType[] ChangeTypes { get; set; }
+    public object[] ChangeTypes { get; set; }
 
     [JsonProperty("road")]
     public Road RoadInfo { get; set; }
@@ -32,10 +36,10 @@ namespace Models.MobilityService.RealTime
   public class Road
   {
     [JsonProperty("lat")]
-    public double Latitude { get; set; }
+    public string Latitude { get; set; }
 
     [JsonProperty("lon")]
-    public double Longitude { get; set; }
+    public string Longitude { get; set; }
 
     [JsonProperty("streetCode")]
     public string StreetCode { get; set; }
