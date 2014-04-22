@@ -19,6 +19,7 @@ namespace TerritoryInformationServiceLibrary
     static string storyUrl = "stories";
     static string syncUrl = "sync";
     static string rateUrl = "rate";
+    static string objectUrl = "objects";
 
     #region Reading URIs
 
@@ -73,7 +74,100 @@ namespace TerritoryInformationServiceLibrary
     }
 
     #endregion
-    
+
+    #region Following objects
+
+    public static Uri GetAddToMyObjectsUri(string objectId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/attend", baseUrl, objectUrl, objectId ));
+      return ub.Uri;
+    }
+
+    public static Uri GetRemoveFromMyObjectsUri(string objectId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/notAttend", baseUrl, objectUrl, objectId));
+      return ub.Uri;
+    }
+
+    public static Uri GetFollowObjectUri(string objectId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/follow", baseUrl, objectUrl, objectId));
+      return ub.Uri;
+    }
+
+    public static Uri GetUnFollowObjectUri(string objectId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/unFollow", baseUrl, objectUrl, objectId));
+      return ub.Uri;
+    }
+
+    #endregion
+
+    #region User defined event
+
+    public static Uri GetCreateUserDefinedEventUri()
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, eventUrl));
+      return ub.Uri;
+    }
+
+    public static Uri GetUpdateUserDefinedEventUri(string eventId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, eventUrl, eventId));
+      return ub.Uri;
+    }
+
+    public static Uri GetDeleteUserDefinedEventUri(string eventId)
+    {
+      return GetUpdateUserDefinedEventUri(eventId);
+    }
+
+    #endregion
+
+    #region User defined POI
+
+    public static Uri GetCreateUserDefinedPOIUri()
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, placeUrl));
+      return ub.Uri;
+    }
+
+    public static Uri GetUpdateUserDefinedPOIUri(string placeId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, placeUrl, placeId));
+      return ub.Uri;
+    }
+
+    public static Uri DeleteUserDefinedPOIUri(string palceId)
+    {
+      return GetUpdateUserDefinedPOIUri(placeUrl);
+    }
+
+    #endregion
+
+    #region User defined story
+
+    public static Uri GetCreateUserDefinedStoryUri()
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, storyUrl));
+      return ub.Uri;
+    }
+
+    public static Uri GetUpdateUserDefinedStoryUri(string storyId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, storyUrl, storyId));
+      return ub.Uri;
+    }
+
+    public static Uri DeleteUserDefinedStoryUri(string storyId)
+    {
+      return GetUpdateUserDefinedPOIUri(placeUrl);
+    }
+
+    #endregion
+
+    #region Others
+
     public static Uri GetSyncUri(int since = 0)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, eventUrl, since));
@@ -89,6 +183,7 @@ namespace TerritoryInformationServiceLibrary
       return ub.Uri;
     }
 
-    public static Uri GetAddToMyObjects()
+    #endregion
+
   }
 }
