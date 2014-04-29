@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using Models.MobilityService.RealTime;
 using System.Net.Http;
 
-
 namespace MobilityServiceLibrary
 {
   /// <summary>
@@ -193,10 +192,9 @@ namespace MobilityServiceLibrary
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
-      //string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetRoadInfoByAgencyUri(agency, timeFrom, timeTo));
-      string JSONResult = "[{\"agencyId\":\"COMUNE_DI_ROVERETO\",\"road\":{\"note\":\"\",\"lat\":\"45.894037\",\"lon\":\"11.043587\",\"streetCode\":\"290\",\"street\":\"CORSOBETTINIA.\",\"fromNumber\":\"\",\"toNumber\":\"\",\"fromIntersection\":\"\",\"toIntersection\":\"\"},\"changeTypes\":[\"PARKING_BLOCK\",\"ROAD_BLOCK\"],\"id\":\"612005_290\",\"type\":null,\"entity\":null,\"description\":\"UFFICIOATTIVITA\'PRODUTTIVE:DIVIETODITRANSITOEDISOSTACONRIMOZIONECOATTAINCORSOBETTINI,INVIALETRENTOENELLESTRADELIMITROFEAROVERETOPERLOSVOLGIMENTODELMERCATOSETTIMANALEDELMARTEDI\'.\",\"from\":1372543200000,\"to\":1378764000000,\"creatorId\":\"default\",\"creatorType\":\"SERVICE\",\"effect\":\"Temporanea\",\"note\":null},]";
+      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetRoadInfoByAgencyUri(agency, timeFrom, timeTo));
+      //string JSONResult = "[{\"agencyId\":\"COMUNE_DI_ROVERETO\",\"road\":{\"note\":\"\",\"lat\":\"45.894037\",\"lon\":\"11.043587\",\"streetCode\":\"290\",\"street\":\"CORSOBETTINIA.\",\"fromNumber\":\"\",\"toNumber\":\"\",\"fromIntersection\":\"\",\"toIntersection\":\"\"},\"changeTypes\":[\"PARKING_BLOCK\",\"ROAD_BLOCK\"],\"id\":\"612005_290\",\"type\":null,\"entity\":null,\"description\":\"UFFICIOATTIVITA\'PRODUTTIVE:DIVIETODITRANSITOEDISOSTACONRIMOZIONECOATTAINCORSOBETTINI,INVIALETRENTOENELLESTRADELIMITROFEAROVERETOPERLOSVOLGIMENTODELMERCATOSETTIMANALEDELMARTEDI\'.\",\"from\":1372543200000,\"to\":1378764000000,\"creatorId\":\"default\",\"creatorType\":\"SERVICE\",\"effect\":\"Temporanea\",\"note\":null},]";
 
-      //TODO: FIX THIS BY ADDING A LOOP FOR CHANGETYPE
       return Newtonsoft.Json.JsonConvert.DeserializeObject<List<AlertRoad>>(JSONResult);
     }
   }

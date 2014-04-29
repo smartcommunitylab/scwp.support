@@ -12,6 +12,7 @@ using ProfileServiceLibrary;
 using AuthenticationLibrary;
 using MobilityServiceLibrary;
 using System.Collections;
+using Models.MobilityService.RealTime;
 
 
 
@@ -35,6 +36,34 @@ namespace TesterApp
       iss = IsolatedStorageSettings.ApplicationSettings;
       authLib = new AuthLibrary(clientid, secret, redirectUrl);
 
+      /*Road r = new Road();
+      r.FromIntersection = "a";
+      r.ToIntersection = "b";
+      r.Latitude = "123";
+      r.Longitude = "123";
+      r.Note = "note";
+      r.Street = "via abc";
+      r.StreetCode = "1";
+      r.ToNumber = "12";
+      r.FromNumber = "23";
+
+      AlertRoad ar = new AlertRoad();
+      ar.AgencyId = AgencyType.BikeSharingRovereto;
+      ar.ChangeTypes = new List<ChangeType> { ChangeType.DriveChange, ChangeType.ParkingBlock };
+      ar.CreatorId = "andrea";
+      ar.CreatorType = CreatorType.User;
+      ar.Description = "description";
+      ar.Effect = "effect";
+      ar.Entity = "entity";
+      ar.Id = "";
+      ar.Note = "note";
+      ar.Type = AlertType.Custom;
+      ar.ValidFrom = 1;
+      ar.ValidUntil = 3;
+      ar.RoadInfo = r;
+
+      string a = Newtonsoft.Json.JsonConvert.SerializeObject(ar);*/
+      
     }
 
     private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)

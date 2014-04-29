@@ -9,15 +9,14 @@ using System.Threading.Tasks;
 
 namespace Models.MobilityService.RealTime
 {
-
   public class AlertRoad : BaseAlert
   {
     [JsonProperty("agencyId")]
     [JsonConverter(typeof(StringEnumConverter))]
     public AgencyType AgencyId { get; set; }
 
-    [JsonProperty("changeTypes")]
-    public object[] ChangeTypes { get; set; }
+    [JsonProperty("changeTypes", ItemConverterType = typeof(StringEnumConverter))]
+    public List<ChangeType> ChangeTypes { get; set; }
 
     [JsonProperty("road")]
     public Road RoadInfo { get; set; }

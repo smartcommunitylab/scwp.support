@@ -198,7 +198,7 @@ namespace TerritoryInformationServiceLibrary
 
     public static Uri GetSyncUri(int since = 0)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, eventUrl, since));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, syncUrl, since));
       return ub.Uri;
     }
 
@@ -207,7 +207,7 @@ namespace TerritoryInformationServiceLibrary
       if (rating > 5 || rating < 0)
         throw new FormatException("rating must be between 0 and 5");
 
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, eventUrl, rating));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, rateUrl, rating));
       return ub.Uri;
     }
 

@@ -55,7 +55,7 @@ namespace TerritoryInformationServiceLibrary
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
-      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadSinglePlaceUri(storyId));
+      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadSinglePlaceUri(placeId));
 
       return JsonConvert.DeserializeObject<POIObject>(JSONResult);
     }
@@ -70,7 +70,7 @@ namespace TerritoryInformationServiceLibrary
       return JsonConvert.DeserializeObject<List<StoryObject>>(JSONResult);
     }
 
-    public async Task<StoryObject> ReadSinglePlace(string storyId)
+    public async Task<StoryObject> ReadSingleStory(string storyId)
     {
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
