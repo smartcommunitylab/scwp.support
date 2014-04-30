@@ -418,16 +418,30 @@ namespace TerritoryInformationServiceLibrary
 
     #region User defined POI
 
+    /// <summary>
+    /// Asyncronous method that creates an user defined place
+    /// </summary>
+    /// <param name="eo">The instance of the place to create</param>
+    /// <returns>an instance of the created place</returns>
     public async Task<POIObject> CreateUserDefinedPlace(POIObject poiO)
     {
       return await CreateUserDefinedObject<POIObject>(poiO, TerritoryInformationUriHelper.GetCreateUserDefinedPlaceUri());
     }
 
+    /// <summary>
+    /// Asyncronous method that updates an user defined place
+    /// </summary>
+    /// <param name="eo">The instance of the place to update</param>
+    /// <returns>an instance of the updated place</returns>
     public async Task<POIObject> UpdateUserDefinedPlace(POIObject poiO)
     {
       return await UpdateUserDefinedObject<POIObject>(poiO, TerritoryInformationUriHelper.GetUpdateUserDefinedPlaceUri(poiO.Id));
     }
 
+    /// <summary>
+    /// Asyncronous method that deletes an user defined place
+    /// </summary>
+    /// <param name="eventId">The unique identidier for the place to remove</param>
     public void DeleteUserDefinedPlace(string placeId)
     {
       DeleteUserDefinedObject(TerritoryInformationUriHelper.GetDeleteUserDefinedPlaceUri(placeId));
@@ -437,16 +451,30 @@ namespace TerritoryInformationServiceLibrary
 
     #region User defined story
 
+    /// <summary>
+    /// Asyncronous method that creates an user defined story
+    /// </summary>
+    /// <param name="eo">The instance of the story to create</param>
+    /// <returns>an instance of the created place</returns>
     public async Task<StoryObject> CreateUserDefinedStory(StoryObject so)
     {
       return await CreateUserDefinedObject<StoryObject>(so, TerritoryInformationUriHelper.GetCreateUserDefinedStoryUri());
     }
 
+    /// <summary>
+    /// Asyncronous method that updates an user defined story
+    /// </summary>
+    /// <param name="eo">The instance of the story to update</param>
+    /// <returns>an instance of the updated story</returns>
     public async Task<StoryObject> UpdateUserDefinedStory(StoryObject so)
     {
       return await UpdateUserDefinedObject<StoryObject>(so, TerritoryInformationUriHelper.GetUpdateUserDefinedStoryUri(so.Id));
     }
 
+    /// <summary>
+    /// Asyncronous method that deletes an user defined story
+    /// </summary>
+    /// <param name="eventId">The unique identidier for the story to remove</param>
     public void DeleteUserDefinedStory(string storyId)
     {
       DeleteUserDefinedObject(TerritoryInformationUriHelper.GetDeleteUserDefinedStoryUri(storyId));
@@ -458,6 +486,14 @@ namespace TerritoryInformationServiceLibrary
 
     #region Other
 
+    /// <summary>
+    /// Asyncronous method that obtaines all changes in the various objects since the given timestamp
+    /// </summary>
+    /// <param name="include">The contents to include in the updates list</param>
+    /// <param name="exclude">The contents to exclude from the updates list</param>
+    /// <param name="version">The required timestamp version of the update (usually left blank)</param>
+    /// <param name="since">The timestamp from the last update. Leave blank (0) for a full update</param>
+    /// <returns></returns>
     public async Task<SyncObject> Sync(Dictionary<string, string> include = null, Dictionary<string, string> exclude = null, long version = 0, long since = 0)
     {
       PostSyncObject pso = new PostSyncObject() { Exclude = exclude, Include = include, Version = version };
@@ -474,6 +510,12 @@ namespace TerritoryInformationServiceLibrary
       return JsonConvert.DeserializeObject<SyncObject>(await JSONResult.Content.ReadAsStringAsync());
     }
 
+    /// <summary>
+    /// Asyncronous method that allows to rate a specific resource
+    /// </summary>
+    /// <param name="objectId">the unique identifier for the requested resource</param>
+    /// <param name="rating">the rating the user wants to give to the resource</param>
+    /// <returns>a floating point number, indicating the average rating for the resource</returns>
     public async Task<double> RateObject(string objectId, int rating)
     {
       httpCli.DefaultRequestHeaders.Clear();
