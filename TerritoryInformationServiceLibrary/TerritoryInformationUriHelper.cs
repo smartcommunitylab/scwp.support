@@ -148,21 +148,21 @@ namespace TerritoryInformationServiceLibrary
      */
     #region User defined POI
 
-    public static Uri GetCreateUserDefinedPOIUri()
+    public static Uri GetCreateUserDefinedPlaceUri()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, placeUrl));
       return ub.Uri;
     }
 
-    public static Uri GetUpdateUserDefinedPOIUri(string placeId)
+    public static Uri GetUpdateUserDefinedPlaceUri(string placeId)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, placeUrl, placeId));
       return ub.Uri;
     }
 
-    public static Uri DeleteUserDefinedPOIUri(string palceId)
+    public static Uri GetDeleteUserDefinedPOIUri(string palceId)
     {
-      return GetUpdateUserDefinedPOIUri(placeUrl);
+      return GetUpdateUserDefinedPlaceUri(placeUrl);
     }
 
     #endregion
@@ -186,9 +186,9 @@ namespace TerritoryInformationServiceLibrary
       return ub.Uri;
     }
 
-    public static Uri DeleteUserDefinedStoryUri(string storyId)
+    public static Uri GetDeleteUserDefinedStoryUri(string storyId)
     {
-      return GetUpdateUserDefinedPOIUri(placeUrl);
+      return GetUpdateUserDefinedPlaceUri(placeUrl);
     }
 
     #endregion
