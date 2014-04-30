@@ -48,10 +48,10 @@
           </StackPanel>
         </Grid>
       </phone:PivotItem>
-    
-    <phone:PivotItem Header="MobilityService APIs">
-      <Grid>
-        <StackPanel>
+
+      <phone:PivotItem Header="MobilityService APIs">
+        <Grid>
+          <StackPanel>
             <Button Content="getRoutesUrl" x:Name="bteGetRoutesUrl" Tap="bteGetRoutesUrl_Tap"></Button>
             <Button Content="getStopsUrl" x:Name="btnGetStopsUrl" Tap="btnGetStopsUrl_Tap"></Button>
             <Button Content="getTimetableUrl" x:Name="btnGetTimetableUrl" Tap="btnGetTimetableUrl_Tap"></Button>
@@ -61,13 +61,24 @@
             <Button Content="getParkingsByAgencyUrl" x:Name="btnGetParkingsByAgencyUrl" Tap="btnGetParkingsByAgencyUrl_Tap"></Button>
             <Button Content="getRoadInfoByAgencyUrl" x:Name="btnGetRoadInfoByAgencyUrl" Tap="btnGetRoadInfoByAgencyUrl_Tap"></Button>
           </StackPanel>
-      </Grid>
-    </phone:PivotItem> 
-    
-    
-    
-    
-    
+        </Grid>
+      </phone:PivotItem>
+
+      <phone:PivotItem Header="TerritoryInfo APIs">
+        <Grid>
+          <StackPanel>
+            <Button Content="readEvents" x:Name="btnReadEvents" Tap="btnReadEvents_Tap"></Button>
+            <Button Content="readSingleEvent" x:Name="btnReadSingleEvent" Tap="btnReadSingleEvent_Tap" IsEnabled="False"></Button>
+            <Button Content="readPlaces" x:Name="btnReadPlaces" Tap="btnReadPlaces_Tap"></Button>
+            <Button Content="readSinglePlace" x:Name="btnReadSinglePlace" Tap="btnReadSinglePlace_Tap" IsEnabled="False"></Button>
+            <Button Content="readStories" x:Name="btnReadStories" Tap="btnReadStories_Tap"></Button>
+            <Button Content="readSingleStories" x:Name="btnReadSingleStories" Tap="btnReadSingleStories_Tap" IsEnabled="False"></Button>
+          </StackPanel>
+        </Grid>
+      </phone:PivotItem>
+
+
+
     </phone:Pivot>
   </Grid>
 

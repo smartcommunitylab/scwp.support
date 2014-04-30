@@ -35,7 +35,7 @@ namespace TerritoryInformationServiceLibrary
     {
       UriBuilder ub;
       if (filterData == "")
-        ub = new UriBuilder(string.Format("{0}/{1}", eventUrl, storyUrl));
+        ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, eventUrl));
       else
         ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, eventUrl, filterData));
       return ub.Uri;
@@ -43,11 +43,11 @@ namespace TerritoryInformationServiceLibrary
 
     public static Uri GetReadSingleEventUri(string eventId)
     {
-      
+
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, eventUrl, eventId));
       return ub.Uri;
     }
-    
+
     public static Uri GetReadPlacesUri(string filterData = "")
     {
       UriBuilder ub;
@@ -68,7 +68,7 @@ namespace TerritoryInformationServiceLibrary
     public static Uri GetReadStoriesUri(string filterData = "")
     {
       UriBuilder ub;
-      if(filterData=="")
+      if (filterData == "")
         ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, storyUrl));
       else
         ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, storyUrl, filterData));
@@ -91,7 +91,7 @@ namespace TerritoryInformationServiceLibrary
 
     public static Uri GetAddToMyObjectsUri(string objectId)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/attend", baseUrl, objectUrl, objectId ));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/attend", baseUrl, objectUrl, objectId));
       return ub.Uri;
     }
 
@@ -193,7 +193,7 @@ namespace TerritoryInformationServiceLibrary
 
     #endregion
 
-    
+
     #region Others
 
     public static Uri GetSyncUri(int since = 0)

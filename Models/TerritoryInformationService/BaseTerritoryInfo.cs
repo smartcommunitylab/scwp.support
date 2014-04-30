@@ -31,10 +31,10 @@ namespace Models.TerritoryInformationService
     public double[] Location { get; set; }
 
     [JsonProperty("fromTime")]
-    public int Fromtime { get; set; }
+    public long? Fromtime { get; set; }
 
     [JsonProperty("toTime")]
-    public int Totime { get; set; }
+    public long? Totime { get; set; }
 
     [JsonProperty("timing")]
     public string Timing { get; set; }
@@ -52,7 +52,7 @@ namespace Models.TerritoryInformationService
     public string CreatorName { get; set; }
 
     [JsonProperty("updateTime")]
-    public int Updatetime { get; set; }
+    public long Updatetime { get; set; }
 
     [JsonProperty("version")]
     public int Version { get; set; }
@@ -77,16 +77,16 @@ namespace Models.TerritoryInformationService
   public class CommunityData
   {
     [JsonProperty("tags")]
-    public string Tags { get; set; }
+    public List<Tag> Tags { get; set; }
 
     [JsonProperty("averageRating")]
     public double AverageRating { get; set; }
 
     [JsonProperty("rating")]
-    public string RatingMap { get; set; }
+    public object RatingMap { get; set; }
 
     [JsonProperty("following")]
-    public string Following { get; set; }
+    public object Following { get; set; }
 
     [JsonProperty("ratingsCount")]
     public int RatingsCount { get; set; }

@@ -163,6 +163,10 @@
       <Project>{89BFE6AE-A301-4D15-AD10-AF6619C4DD71}</Project>
       <Name>ProfileServiceLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TerritoryInformationServiceLibrary\TerritoryInformationServiceLibrary.csproj">
+      <Project>{1DFC238A-D4DA-4F02-87C5-AB3EBBCF03E8}</Project>
+      <Name>TerritoryInformationServiceLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="MainPage.xaml">

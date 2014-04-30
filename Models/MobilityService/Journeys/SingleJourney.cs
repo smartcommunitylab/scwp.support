@@ -1,5 +1,6 @@
 ﻿using Models.MobilityService.Journeys;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +24,10 @@ namespace Models.MobilityService.Journeys
     [JsonProperty("departureTime")]
     public string DepartureTime { get; set; }
 
-    [JsonProperty("transportTypes")]
+    [JsonProperty("transportTypes", ItemConverterType = typeof(StringEnumConverter))]
     public TransportType[] TransportTypes { get; set; }
 
-    [JsonProperty("routeType")]
+    [JsonProperty("routeType", ItemConverterType = typeof(StringEnumConverter))]
     public RouteType[] RouteTypes { get; set; }
 
     [JsonProperty("resultsNumber")]

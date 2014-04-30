@@ -21,7 +21,7 @@ namespace MobilityServiceLibrary
       httpCli = new HttpClient();
     }
 
-    public void SignalAlert<GenAlertType>( GenAlertType baAlert)
+    public void SignalAlert<GenAlertType>(GenAlertType baAlert)
     {
       string toPost = JsonConvert.SerializeObject(baAlert);
       

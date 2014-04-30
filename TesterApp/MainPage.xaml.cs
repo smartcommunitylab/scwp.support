@@ -7,12 +7,13 @@ using Microsoft.Phone.Controls;
 using Models.ProfileService;
 using Models.MobilityService;
 using Models.AuthorizationService;
+using Models.TerritoryInformationService;
 
 using ProfileServiceLibrary;
 using AuthenticationLibrary;
 using MobilityServiceLibrary;
+using TerritoryInformationServiceLibrary;
 using System.Collections;
-using Models.MobilityService.RealTime;
 
 
 
@@ -28,42 +29,17 @@ namespace TesterApp
     AuthLibrary authLib;
     PublicTransportLibrary ptl;
     ProfileLibrary proLib;
+    TerritoryInformationLibrary til;
     Token toMo;
+    EventObject eventObj;
+    POIObject poiObj;
+    StoryObject storyObj;
 
     public MainPage()
     {
       InitializeComponent();
       iss = IsolatedStorageSettings.ApplicationSettings;
       authLib = new AuthLibrary(clientid, secret, redirectUrl);
-
-      /*Road r = new Road();
-      r.FromIntersection = "a";
-      r.ToIntersection = "b";
-      r.Latitude = "123";
-      r.Longitude = "123";
-      r.Note = "note";
-      r.Street = "via abc";
-      r.StreetCode = "1";
-      r.ToNumber = "12";
-      r.FromNumber = "23";
-
-      AlertRoad ar = new AlertRoad();
-      ar.AgencyId = AgencyType.BikeSharingRovereto;
-      ar.ChangeTypes = new List<ChangeType> { ChangeType.DriveChange, ChangeType.ParkingBlock };
-      ar.CreatorId = "andrea";
-      ar.CreatorType = CreatorType.User;
-      ar.Description = "description";
-      ar.Effect = "effect";
-      ar.Entity = "entity";
-      ar.Id = "";
-      ar.Note = "note";
-      ar.Type = AlertType.Custom;
-      ar.ValidFrom = 1;
-      ar.ValidUntil = 3;
-      ar.RoadInfo = r;
-
-      string a = Newtonsoft.Json.JsonConvert.SerializeObject(ar);*/
-      
     }
 
     private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
@@ -74,8 +50,10 @@ namespace TesterApp
         pivotGrande.Items.RemoveAt(0);
         pivotGrande.Items.RemoveAt(0);
         pivotGrande.Items.RemoveAt(0);
+        pivotGrande.Items.RemoveAt(0);
         proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken);
         ptl = new PublicTransportLibrary(toMo.AccessToken);
+        til = new TerritoryInformationLibrary(toMo.AccessToken);
       }
     }
 
@@ -98,6 +76,7 @@ namespace TesterApp
     {
       toMo = await authLib.GetAccessToken(code);
       proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken);
+      til = new TerritoryInformationLibrary(toMo.AccessToken);
       iss["token"] = toMo;
       iss.Save();
       MessageBox.Show("Ho un token: " + toMo.AccessToken);
@@ -124,7 +103,7 @@ namespace TesterApp
 
     #endregion
 
-    #region MobilityService
+    #region MobilityService.PublicTransport
     private async void bteGetRoutesUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       var resp = await ptl.GetRoutes(AgencyType.TrentoCityBus);
@@ -172,14 +151,65 @@ namespace TesterApp
     private async void btnGetRoadInfoByAgencyUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       TimeSpan ts = new TimeSpan(1, 0, 0, 0);
-      
+
       var resp = await ptl.GetRoadInfoByAgency(AgencyType.TrentinoIntercityBus, Int64.Parse(DateTime.Now.ToString("yyyyMMddHHmmssffff")), Int64.Parse((DateTime.Now + ts).ToString("yyyyMMddHHmmssffff")));
       MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
 
     }
     #endregion
 
+    #region TerritoryInformationService
+    private async void btnReadEvents_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.ReadEvents();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+      if (resp.Count > 0)
+      {
+        eventObj = resp.Count > 1 ? resp[1] : resp[0];
+        btnReadSingleEvent.IsEnabled = true;
+      }
+    }
 
+    private async void btnReadSingleEvent_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.ReadSingleEvent(eventObj.Id);
+      MessageBox.Show(resp.ToString());
+    }
+
+    private async void btnReadPlaces_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.ReadPlaces();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+      if (resp.Count > 0)
+      {
+        poiObj = resp.Count > 1 ? resp[1] : resp[0];
+        btnReadSinglePlace.IsEnabled = true;
+      }
+    }
+
+    private async void btnReadSinglePlace_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.ReadSinglePlace(poiObj.Id);
+      MessageBox.Show(resp.ToString());
+    }
+
+    private async void btnReadStories_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.ReadStories();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+      if (resp.Count > 0)
+      {
+        storyObj = resp.Count > 1 ? resp[1] : resp[0];
+        btnReadSingleStories.IsEnabled = true;
+      }
+    }
+
+    private async void btnReadSingleStories_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.ReadSingleStory(storyObj.Id);
+      MessageBox.Show(resp.ToString());
+    }
+    #endregion
 
   }
 }
