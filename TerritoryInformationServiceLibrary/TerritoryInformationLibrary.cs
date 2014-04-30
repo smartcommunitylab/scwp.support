@@ -12,7 +12,7 @@ namespace TerritoryInformationServiceLibrary
   /// <summary>
   /// Class that wraps the Territory Information API in an easy to use way
   /// </summary>
-  public class TerritoryInformationLibrary 
+  public class TerritoryInformationLibrary
   {
     HttpClient httpCli;
     string accessToken;
@@ -33,7 +33,7 @@ namespace TerritoryInformationServiceLibrary
      */
     #region Reading functions
 
-    
+
     /// <summary>
     ///  Asyncronous method that retrieves a list of all available events
     /// </summary>
@@ -528,17 +528,5 @@ namespace TerritoryInformationServiceLibrary
     }
 
     #endregion
-  }
-
-  public class PostSyncObject
-  {
-    [JsonProperty("exclude")]
-    public Dictionary<string, string> Exclude { get; set; }
-
-    [JsonProperty("include")]
-    public Dictionary<string, string> Include { get; set; }
-
-    [JsonProperty("version")]
-    public long Version { get; set; }
   }
 }

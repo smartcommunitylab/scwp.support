@@ -121,6 +121,7 @@
     <Compile Include="TerritoryInformationService\EventObject.cs" />
     <Compile Include="TerritoryInformationService\FilterObject.cs" />
     <Compile Include="TerritoryInformationService\POIObject.cs" />
+    <Compile Include="TerritoryInformationService\PostSyncObject.cs" />
     <Compile Include="TerritoryInformationService\StoryObject.cs" />
     <Compile Include="TerritoryInformationService\Tag.cs" />
     <Compile Include="TerritoryInformationService\SyncObject.cs" />
