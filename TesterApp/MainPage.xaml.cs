@@ -232,18 +232,32 @@ namespace TesterApp
     private async void btnAddToMyStories_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       var resp = await til.AddToMyStories(storyObj.Id);
-      var resp2 = await til.ReadStories("{\"myObjects\": true");
       MessageBox.Show(resp.ToString());
-
+      btnRemoveFromMyStories.IsEnabled = true;
     }
 
     private async void btnAddToMyEvents_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       var resp = await til.AddToMyEvents(eventObj.Id);
-      var resp2 = await til.ReadEvents("{\"myObjects\": true");
       MessageBox.Show(resp.ToString());
+      btnRemoveFromMyEvents.IsEnabled = true;
+    }
+
+    private async void btnRemoveFromMyStories_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.RemoveFromMyStories(storyObj.Id);
+      MessageBox.Show(resp.ToString());
+      btnRemoveFromMyEvents.IsEnabled = false;
+    }
+
+    private async void btnRemoveFromMyEvents_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.RemoveFromMyEvents(eventObj.Id);
+      MessageBox.Show(resp.ToString());
+      btnRemoveFromMyEvents.IsEnabled = false;
     }
    #endregion
+
 
   }
 }

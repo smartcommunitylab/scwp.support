@@ -17,6 +17,16 @@ namespace Models.TerritoryInformationService
 
     [JsonProperty("deleted")]
     public DeletedObjects Deleted { get; set; }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(SyncObject).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
+    }
   }
   public class UpdatedObjects
   {
@@ -28,6 +38,16 @@ namespace Models.TerritoryInformationService
 
     [JsonProperty("eu.trentorise.smartcampus.dt.model.StoryObject")]
     public List<StoryObject> StoryUpdates { get; set; }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(UpdatedObjects).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
+    }
   }
   public class DeletedObjects
   {
@@ -39,5 +59,15 @@ namespace Models.TerritoryInformationService
 
     [JsonProperty("eu.trentorise.smartcampus.dt.model.StoryObject")]
     public List<string> StoryDeleted { get; set; }
+
+    public override string ToString()
+    {
+      StringBuilder sb = new StringBuilder();
+      foreach (var proper in typeof(DeletedObjects).GetProperties())
+      {
+        sb.AppendFormat("{0}: {1}\n", proper.Name, proper.GetValue(this));
+      }
+      return sb.ToString();
+    }
   }
 }

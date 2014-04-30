@@ -79,6 +79,9 @@
               <Button Content="rateObject" x:Name="btnRateObject" Tap="btnRateObject_Tap" IsEnabled="False"></Button>
               <Button Content="addToMyStories" x:Name="btnAddToMyStories" Tap="btnAddToMyStories_Tap" IsEnabled="False"></Button>
               <Button Content="addToMyEvents" x:Name="btnAddToMyEvents" Tap="btnAddToMyEvents_Tap" IsEnabled="False"></Button>
+              <Button Content="removeFromMyStories" x:Name="btnRemoveFromMyStories" Tap="btnRemoveFromMyStories_Tap" IsEnabled="False"></Button>
+              <Button Content="removeFromMyEvents" x:Name="btnRemoveFromMyEvents" Tap="btnRemoveFromMyEvents_Tap" IsEnabled="False"></Button>
+
             </StackPanel>
           </ScrollViewer>
 

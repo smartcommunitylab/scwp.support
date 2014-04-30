@@ -57,7 +57,7 @@ namespace Models.TerritoryInformationService
     public string Country { get; set; }
 
     [JsonProperty("tags")]
-    public List<Tag> Tags { get; set; }
+    public List<string> Tags { get; set; }
 
     public override string ToString()
     {

@@ -31,10 +31,10 @@ namespace TerritoryInformationServiceLibrary
      */
     #region Reading URIs
 
-    public static Uri GetReadEventsUri(string filterData = "")
+    public static Uri GetReadEventsUri(string filterData)
     {
       UriBuilder ub;
-      if (filterData == "")
+      if (filterData == "null")
         ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, eventUrl));
       else
         ub = new UriBuilder(string.Format("{0}/{1}?filter={2}", baseUrl, eventUrl, filterData));
@@ -48,10 +48,10 @@ namespace TerritoryInformationServiceLibrary
       return ub.Uri;
     }
 
-    public static Uri GetReadPlacesUri(string filterData = "")
+    public static Uri GetReadPlacesUri(string filterData)
     {
       UriBuilder ub;
-      if (filterData == "")
+      if (filterData == "null")
         ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, placeUrl));
       else
         ub = new UriBuilder(string.Format("{0}/{1}?filter={2}", baseUrl, placeUrl, filterData));
@@ -65,10 +65,10 @@ namespace TerritoryInformationServiceLibrary
       return ub.Uri;
     }
 
-    public static Uri GetReadStoriesUri(string filterData = "")
+    public static Uri GetReadStoriesUri(string filterData)
     {
       UriBuilder ub;
-      if (filterData == "")
+      if (filterData == "null")
         ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, storyUrl));
       else
         ub = new UriBuilder(string.Format("{0}/{1}?filter={2}", baseUrl, storyUrl, filterData));
@@ -148,21 +148,21 @@ namespace TerritoryInformationServiceLibrary
      */
     #region User defined POI
 
-    public static Uri GetCreateUserDefinedPOIUri()
+    public static Uri GetCreateUserDefinedPlaceUri()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, placeUrl));
       return ub.Uri;
     }
 
-    public static Uri GetUpdateUserDefinedPOIUri(string placeId)
+    public static Uri GetUpdateUserDefinedPlaceUri(string placeId)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, placeUrl, placeId));
       return ub.Uri;
     }
 
-    public static Uri DeleteUserDefinedPOIUri(string palceId)
+    public static Uri GetDeleteUserDefinedPlaceUri(string palceId)
     {
-      return GetUpdateUserDefinedPOIUri(placeUrl);
+      return GetUpdateUserDefinedPlaceUri(placeUrl);
     }
 
     #endregion
@@ -186,9 +186,9 @@ namespace TerritoryInformationServiceLibrary
       return ub.Uri;
     }
 
-    public static Uri DeleteUserDefinedStoryUri(string storyId)
+    public static Uri GetDeleteUserDefinedStoryUri(string storyId)
     {
-      return GetUpdateUserDefinedPOIUri(placeUrl);
+      return GetUpdateUserDefinedPlaceUri(placeUrl);
     }
 
     #endregion
