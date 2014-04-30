@@ -56,8 +56,6 @@ namespace TesterApp
         ptl = new PublicTransportLibrary(toMo.AccessToken);
         til = new TerritoryInformationLibrary(toMo.AccessToken);
       }
-      btnUpdateEvent.IsEnabled = true;
-      btnDeleteEvent.IsEnabled = true;
     }
 
     private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -202,7 +200,7 @@ namespace TesterApp
 
     private async void btnReadSinglePlace_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      var resp = await til.ReadSinglePlace(poiObj.Id);
+      var resp = await til.ReadSinglePlace(poiObj.Id);     
       MessageBox.Show(resp.ToString());
     }
 
@@ -308,7 +306,6 @@ namespace TesterApp
     #region TerritoryInformationService.UserDefinedObjects
     private async void btnCreateEvent_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-
       var respPlaces = await til.ReadPlaces();
       poiObj = respPlaces.Count > 0 ? respPlaces[0] : null;
 

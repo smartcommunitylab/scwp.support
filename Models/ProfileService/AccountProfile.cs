@@ -15,10 +15,8 @@ namespace Models.ProfileService
     private string DictionaryToString(Dictionary<string, string> dict)
     {
       StringBuilder sb = new StringBuilder();
-
       foreach (var item in dict)
         sb.AppendFormat("{0}: {1}\n", item.Key, item.Value);
-
       return sb.ToString();
 
     }

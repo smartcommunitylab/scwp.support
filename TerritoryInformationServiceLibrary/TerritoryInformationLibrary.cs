@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Models.TerritoryInformationService;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace TerritoryInformationServiceLibrary
 {
@@ -59,9 +60,21 @@ namespace TerritoryInformationServiceLibrary
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
-      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadSingleEventUri(eventId));
 
-      return JsonConvert.DeserializeObject<EventObject>(JSONResult);
+      HttpResponseMessage JSONResult = await httpCli.GetAsync(TerritoryInformationUriHelper.GetReadSingleEventUri(eventId));
+
+      /*
+       * If no event with the specified id exists, an http 420 status code is returned.
+       * If status code is 420 and throw a WebException, if status code isn't 200 throw the corresponding
+       * exception, otherwise return the parsed results
+      */
+      if ((int)JSONResult.StatusCode == 420)
+        throw new WebException("Object not found");
+      else
+        JSONResult.EnsureSuccessStatusCode();
+
+      return JsonConvert.DeserializeObject<EventObject>(await JSONResult.Content.ReadAsStringAsync());
+
     }
 
     /// <summary>
@@ -89,9 +102,20 @@ namespace TerritoryInformationServiceLibrary
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
-      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadSinglePlaceUri(placeId));
 
-      return JsonConvert.DeserializeObject<POIObject>(JSONResult);
+      HttpResponseMessage JSONResult = await httpCli.GetAsync(TerritoryInformationUriHelper.GetReadSinglePlaceUri(placeId));
+
+      /*
+       * If no event with the specified id exists, an http 420 status code is returned.
+       * If status code is 420 and throw a WebException, if status code isn't 200 throw the corresponding
+       * exception, otherwise return the parsed results
+      */
+      if ((int)JSONResult.StatusCode == 420)
+        throw new WebException("Object not found");
+      else
+        JSONResult.EnsureSuccessStatusCode();
+
+      return JsonConvert.DeserializeObject<POIObject>(await JSONResult.Content.ReadAsStringAsync());
     }
 
     /// <summary>
@@ -119,9 +143,20 @@ namespace TerritoryInformationServiceLibrary
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
-      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadSingleStoryUri(storyId));
 
-      return JsonConvert.DeserializeObject<StoryObject>(JSONResult);
+      HttpResponseMessage JSONResult = await httpCli.GetAsync(TerritoryInformationUriHelper.GetReadSingleStoryUri(storyId));
+
+      /*
+       * If no event with the specified id exists, an http 420 status code is returned.
+       * If status code is 420 and throw a WebException, if status code isn't 200 throw the corresponding
+       * exception, otherwise return the parsed results
+      */
+      if ((int)JSONResult.StatusCode == 420)
+        throw new WebException("Object not found");
+      else
+        JSONResult.EnsureSuccessStatusCode();
+
+      return JsonConvert.DeserializeObject<StoryObject>(await JSONResult.Content.ReadAsStringAsync());
     }
 
     #endregion
