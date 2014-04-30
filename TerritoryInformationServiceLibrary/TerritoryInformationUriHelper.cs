@@ -160,7 +160,7 @@ namespace TerritoryInformationServiceLibrary
       return ub.Uri;
     }
 
-    public static Uri GetDeleteUserDefinedPOIUri(string palceId)
+    public static Uri GetDeleteUserDefinedPlaceUri(string palceId)
     {
       return GetUpdateUserDefinedPlaceUri(placeUrl);
     }

@@ -188,7 +188,7 @@ namespace TerritoryInformationServiceLibrary
 
     #region User defined objects
     
-    #region generic function
+    #region generic functions
     
     private async Task<GenObject> CreateUserDefinedObject<GenObject>(GenObject go, Uri url)
     {
@@ -248,20 +248,38 @@ namespace TerritoryInformationServiceLibrary
 
     #region User defined POI
 
-    public async Task<EventObject> CreateUserDefinedPlace(EventObject eo)
+    public async Task<POIObject> CreateUserDefinedPlace(POIObject poiO)
     {
-      return await CreateUserDefinedObject<EventObject>(eo, TerritoryInformationUriHelper.GetCreateUserDefinedEventUri());
+      return await CreateUserDefinedObject<POIObject>(poiO, TerritoryInformationUriHelper.GetCreateUserDefinedPlaceUri ());
     }
 
-    public async Task<EventObject> UpdateUserDefinedPlace(EventObject eo)
+    public async Task<POIObject> UpdateUserDefinedPlace(POIObject poiO)
     {
-      return await UpdateUserDefinedObject<EventObject>(eo, TerritoryInformationUriHelper.GetUpdateUserDefinedEventUri(eo.Id));
+      return await UpdateUserDefinedObject<POIObject>(poiO, TerritoryInformationUriHelper.GetUpdateUserDefinedPlaceUri(poiO.Id));
     }
 
     public void DeleteUserDefinedPlace(string placeId)
     {
-      
-      DeleteUserDefinedObject(TerritoryInformationUriHelper.get
+      DeleteUserDefinedObject(TerritoryInformationUriHelper.GetDeleteUserDefinedPlaceUri(placeId));
+    }
+
+    #endregion
+
+    #region User defined story
+
+    public async Task<StoryObject> CreateUserDefinedStory(StoryObject so)
+    {
+      return await CreateUserDefinedObject<StoryObject>(so, TerritoryInformationUriHelper.GetCreateUserDefinedStoryUri());
+    }
+
+    public async Task<StoryObject> UpdateUserDefinedStory(StoryObject so)
+    {
+      return await UpdateUserDefinedObject<StoryObject>(so, TerritoryInformationUriHelper.GetUpdateUserDefinedStoryUri(so.Id));
+    }
+
+    public void DeleteUserDefinedStory(string storyId)
+    {
+      DeleteUserDefinedObject(TerritoryInformationUriHelper.GetDeleteUserDefinedStoryUri(storyId));
     }
 
     #endregion
