@@ -40,7 +40,7 @@ namespace Models.TerritoryInformationService
     public string Timing { get; set; }
 
     [JsonProperty("customData")]
-    public Dictionary<string, string> CustomData { get; set; }
+    public Dictionary<string, object> CustomData { get; set; }
 
     [JsonProperty("communityData")]
     public CommunityData CommunityDataInfo { get; set; }

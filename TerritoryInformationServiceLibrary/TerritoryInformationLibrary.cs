@@ -86,7 +86,6 @@ namespace TerritoryInformationServiceLibrary
       string toPost = JsonConvert.SerializeObject(pso, new JsonSerializerSettings()
       {
         NullValueHandling = NullValueHandling.Ignore,
-        DefaultValueHandling = DefaultValueHandling.Ignore
       });
       StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -132,12 +131,12 @@ namespace TerritoryInformationServiceLibrary
     //public async 
   }
 
-  private class PostSyncObject
+  public class PostSyncObject
   {
-    [JsonProperty("excluded")]
+    [JsonProperty("exclude")]
     public Dictionary<string, string> Exclude { get; set; }
 
-    [JsonProperty("included")]
+    [JsonProperty("include")]
     public Dictionary<string, string> Include { get; set; }
 
     [JsonProperty("version")]

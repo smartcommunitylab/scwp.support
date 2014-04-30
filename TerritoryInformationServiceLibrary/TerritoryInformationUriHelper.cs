@@ -37,7 +37,7 @@ namespace TerritoryInformationServiceLibrary
       if (filterData == "")
         ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, eventUrl));
       else
-        ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, eventUrl, filterData));
+        ub = new UriBuilder(string.Format("{0}/{1}?filter={2}", baseUrl, eventUrl, filterData));
       return ub.Uri;
     }
 
@@ -54,7 +54,7 @@ namespace TerritoryInformationServiceLibrary
       if (filterData == "")
         ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, placeUrl));
       else
-        ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, placeUrl, filterData));
+        ub = new UriBuilder(string.Format("{0}/{1}?filter={2}", baseUrl, placeUrl, filterData));
       return ub.Uri;
     }
 
@@ -71,7 +71,7 @@ namespace TerritoryInformationServiceLibrary
       if (filterData == "")
         ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, storyUrl));
       else
-        ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, storyUrl, filterData));
+        ub = new UriBuilder(string.Format("{0}/{1}?filter={2}", baseUrl, storyUrl, filterData));
       return ub.Uri;
     }
 
@@ -198,7 +198,7 @@ namespace TerritoryInformationServiceLibrary
 
     public static Uri GetSyncUri(long since = 0)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, syncUrl, since));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}?since={2}", baseUrl, syncUrl, since));
       return ub.Uri;
     }
 
@@ -207,7 +207,7 @@ namespace TerritoryInformationServiceLibrary
       if (rating > 5 || rating < 0)
         throw new FormatException("rating must be between 0 and 5");
 
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, rateUrl, rating));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}?rating={4}", baseUrl, objectUrl, objectId, rateUrl, rating));
       return ub.Uri;
     }
 

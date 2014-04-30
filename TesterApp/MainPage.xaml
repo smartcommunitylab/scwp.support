@@ -66,14 +66,22 @@
 
       <phone:PivotItem Header="TerritoryInfo APIs">
         <Grid>
-          <StackPanel>
-            <Button Content="readEvents" x:Name="btnReadEvents" Tap="btnReadEvents_Tap"></Button>
-            <Button Content="readSingleEvent" x:Name="btnReadSingleEvent" Tap="btnReadSingleEvent_Tap" IsEnabled="False"></Button>
-            <Button Content="readPlaces" x:Name="btnReadPlaces" Tap="btnReadPlaces_Tap"></Button>
-            <Button Content="readSinglePlace" x:Name="btnReadSinglePlace" Tap="btnReadSinglePlace_Tap" IsEnabled="False"></Button>
-            <Button Content="readStories" x:Name="btnReadStories" Tap="btnReadStories_Tap"></Button>
-            <Button Content="readSingleStories" x:Name="btnReadSingleStories" Tap="btnReadSingleStories_Tap" IsEnabled="False"></Button>
-          </StackPanel>
+          <ScrollViewer>
+
+            <StackPanel>
+              <Button Content="readEvents" x:Name="btnReadEvents" Tap="btnReadEvents_Tap"></Button>
+              <Button Content="readSingleEvent" x:Name="btnReadSingleEvent" Tap="btnReadSingleEvent_Tap" IsEnabled="False"></Button>
+              <Button Content="readPlaces" x:Name="btnReadPlaces" Tap="btnReadPlaces_Tap"></Button>
+              <Button Content="readSinglePlace" x:Name="btnReadSinglePlace" Tap="btnReadSinglePlace_Tap" IsEnabled="False"></Button>
+              <Button Content="readStories" x:Name="btnReadStories" Tap="btnReadStories_Tap"></Button>
+              <Button Content="readSingleStories" x:Name="btnReadSingleStories" Tap="btnReadSingleStories_Tap" IsEnabled="False"></Button>
+              <Button Content="sync" x:Name="btnSync" Tap="btnSync_Tap"></Button>
+              <Button Content="rateObject" x:Name="btnRateObject" Tap="btnRateObject_Tap" IsEnabled="False"></Button>
+              <Button Content="addToMyStories" x:Name="btnAddToMyStories" Tap="btnAddToMyStories_Tap" IsEnabled="False"></Button>
+              <Button Content="addToMyEvents" x:Name="btnAddToMyEvents" Tap="btnAddToMyEvents_Tap" IsEnabled="False"></Button>
+            </StackPanel>
+          </ScrollViewer>
+
         </Grid>
       </phone:PivotItem>
 

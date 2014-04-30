@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Collections.Generic;
 using System.IO.IsolatedStorage;
@@ -162,11 +163,14 @@ namespace TesterApp
     private async void btnReadEvents_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       var resp = await til.ReadEvents();
+      
       MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
       if (resp.Count > 0)
       {
-        eventObj = resp.Count > 1 ? resp[1] : resp[0];
+        eventObj = resp.Count > 1 ? resp.Find(x => x.Id == "134808885118048636529365400384921579313930057380949600640755079184396898141722430144645782472404440250412733094054572552042642823880677429621015167729836101489995968707132452629768876840219577255621559343517892101654577696837951680920349582117477636054071779878341980208") : resp[0];
         btnReadSingleEvent.IsEnabled = true;
+        btnRateObject.IsEnabled = true;
+        btnAddToMyEvents.IsEnabled = true;
       }
     }
 
@@ -201,6 +205,7 @@ namespace TesterApp
       {
         storyObj = resp.Count > 1 ? resp[1] : resp[0];
         btnReadSingleStories.IsEnabled = true;
+        btnAddToMyStories.IsEnabled = true;
       }
     }
 
@@ -209,7 +214,36 @@ namespace TesterApp
       var resp = await til.ReadSingleStory(storyObj.Id);
       MessageBox.Show(resp.ToString());
     }
-    #endregion
+
+    private async void btnSync_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      Dictionary<string, string> include = new Dictionary<string, string>();
+      include.Add("type", "Museums");
+      var resp = await til.Sync(include);
+      MessageBox.Show(resp.ToString());
+    }
+
+    private async void btnRateObject_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.RateObject(eventObj.Id, 2);
+      MessageBox.Show("prima: " + eventObj.CommunityDataInfo.AverageRating + " dopo: " + resp.ToString());
+    }
+
+    private async void btnAddToMyStories_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.AddToMyStories(storyObj.Id);
+      var resp2 = await til.ReadStories("{\"myObjects\": true");
+      MessageBox.Show(resp.ToString());
+
+    }
+
+    private async void btnAddToMyEvents_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.AddToMyEvents(eventObj.Id);
+      var resp2 = await til.ReadEvents("{\"myObjects\": true");
+      MessageBox.Show(resp.ToString());
+    }
+   #endregion
 
   }
 }
