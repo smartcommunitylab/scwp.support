@@ -31,10 +31,10 @@ namespace Models.TerritoryInformationService
     public double[] Location { get; set; }
 
     [JsonProperty("fromTime")]
-    public long? Fromtime { get; set; }
+    public long? FromTime { get; set; }
 
     [JsonProperty("toTime")]
-    public long? Totime { get; set; }
+    public long? ToTime { get; set; }
 
     [JsonProperty("timing")]
     public string Timing { get; set; }

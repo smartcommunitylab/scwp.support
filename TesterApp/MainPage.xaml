@@ -68,23 +68,49 @@
         <Grid>
           <ScrollViewer>
 
-            <StackPanel>
-              <Button Content="readEvents" x:Name="btnReadEvents" Tap="btnReadEvents_Tap"></Button>
-              <Button Content="readSingleEvent" x:Name="btnReadSingleEvent" Tap="btnReadSingleEvent_Tap" IsEnabled="False"></Button>
-              <Button Content="readPlaces" x:Name="btnReadPlaces" Tap="btnReadPlaces_Tap"></Button>
-              <Button Content="readSinglePlace" x:Name="btnReadSinglePlace" Tap="btnReadSinglePlace_Tap" IsEnabled="False"></Button>
-              <Button Content="readStories" x:Name="btnReadStories" Tap="btnReadStories_Tap"></Button>
-              <Button Content="readSingleStories" x:Name="btnReadSingleStories" Tap="btnReadSingleStories_Tap" IsEnabled="False"></Button>
-              <Button Content="sync" x:Name="btnSync" Tap="btnSync_Tap"></Button>
-              <Button Content="rateObject" x:Name="btnRateObject" Tap="btnRateObject_Tap" IsEnabled="False"></Button>
-              <Button Content="addToMyStories" x:Name="btnAddToMyStories" Tap="btnAddToMyStories_Tap" IsEnabled="False"></Button>
-              <Button Content="addToMyEvents" x:Name="btnAddToMyEvents" Tap="btnAddToMyEvents_Tap" IsEnabled="False"></Button>
-              <Button Content="removeFromMyStories" x:Name="btnRemoveFromMyStories" Tap="btnRemoveFromMyStories_Tap" IsEnabled="False"></Button>
-              <Button Content="removeFromMyEvents" x:Name="btnRemoveFromMyEvents" Tap="btnRemoveFromMyEvents_Tap" IsEnabled="False"></Button>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
 
-            </StackPanel>
+              <StackPanel Grid.Column="0">
+                <Button Content="readEvents" x:Name="btnReadEvents" Tap="btnReadEvents_Tap"></Button>
+                <Button Content="readSingleEvent" x:Name="btnReadSingleEvent" Tap="btnReadSingleEvent_Tap" IsEnabled="False"></Button>
+                <Button Content="addToMyEvents" x:Name="btnAddToMyEvents" Tap="btnAddToMyEvents_Tap" IsEnabled="False"></Button>
+                <Button Content="delFromMyEvents" x:Name="btnRemoveFromMyEvents" Tap="btnRemoveFromMyEvents_Tap" IsEnabled="False"></Button>
+                <Button Content="followEvent" x:Name="btnFollowEvent" Tap="btnFollowEvent_Tap" IsEnabled="False"></Button>
+                <Button Content="unfollowEvent" x:Name="btnUnfollowEvent" Tap="btnUnfollowEvent_Tap" IsEnabled="False"></Button>
+                <Button Content="sync" x:Name="btnSync" Tap="btnSync_Tap"></Button>
+                <Button Content="rateObject" x:Name="btnRateObject" Tap="btnRateObject_Tap" IsEnabled="False"></Button>
+
+              </StackPanel>
+              <StackPanel Grid.Column="1">
+                <Button Content="readStories" x:Name="btnReadStories" Tap="btnReadStories_Tap"></Button>
+                <Button Content="readSingleStories" x:Name="btnReadSingleStories" Tap="btnReadSingleStories_Tap" IsEnabled="False"></Button>
+                <Button Content="addToMyStories" x:Name="btnAddToMyStories" Tap="btnAddToMyStories_Tap" IsEnabled="False"></Button>
+                <Button Content="delFromMyStories" x:Name="btnRemoveFromMyStories" Tap="btnRemoveFromMyStories_Tap" IsEnabled="False"></Button>
+                <Button Content="followStory" x:Name="btnFollowStory" Tap="btnFollowStory_Tap" IsEnabled="False"></Button>
+                <Button Content="unfollowStory" x:Name="btnUnfollowStory" Tap="btnUnfollowEvent_Tap" IsEnabled="False"></Button>
+                <Button Content="readPlaces" x:Name="btnReadPlaces" Tap="btnReadPlaces_Tap"></Button>
+                <Button Content="readSinglePlace" x:Name="btnReadSinglePlace" Tap="btnReadSinglePlace_Tap" IsEnabled="False"></Button>
+                <Button Content="followPlace" x:Name="btnFollowPlace" Tap="btnFollowPlace_Tap" IsEnabled="False"></Button>
+                <Button Content="unfollowPlace" x:Name="btnUnfollowPlace" Tap="btnUnfollowPlace_Tap" IsEnabled="False"></Button>
+              </StackPanel>
+            </Grid>
+
           </ScrollViewer>
 
+        </Grid>
+      </phone:PivotItem>
+
+      <phone:PivotItem Header="TI APIs Part 2">
+        <Grid>
+          <StackPanel>
+            <Button Content="createEvent" x:Name="btnCreateEvent" Tap="btnCreateEvent_Tap"></Button>
+            <Button Content="updateEvent" x:Name="btnUpdateEvent" Tap="btnUpdateEvent_Tap" IsEnabled="False"></Button>
+            <Button Content="deleteEvent" x:Name="btnDeleteEvent" Tap="btnDeleteEvent_Tap" IsEnabled="False"></Button>
+          </StackPanel>
         </Grid>
       </phone:PivotItem>
 

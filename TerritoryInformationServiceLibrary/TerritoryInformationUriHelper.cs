@@ -109,7 +109,7 @@ namespace TerritoryInformationServiceLibrary
 
     public static Uri GetUnFollowObjectUri(string objectId)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/unFollow", baseUrl, objectUrl, objectId));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/unfollow", baseUrl, objectUrl, objectId));
       return ub.Uri;
     }
 

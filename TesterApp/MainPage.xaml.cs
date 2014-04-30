@@ -32,7 +32,7 @@ namespace TesterApp
     ProfileLibrary proLib;
     TerritoryInformationLibrary til;
     Token toMo;
-    EventObject eventObj;
+    EventObject eventObj, userDefinedEo;
     POIObject poiObj;
     StoryObject storyObj;
 
@@ -56,6 +56,8 @@ namespace TesterApp
         ptl = new PublicTransportLibrary(toMo.AccessToken);
         til = new TerritoryInformationLibrary(toMo.AccessToken);
       }
+      btnUpdateEvent.IsEnabled = true;
+      btnDeleteEvent.IsEnabled = true;
     }
 
     private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -163,14 +165,19 @@ namespace TesterApp
     private async void btnReadEvents_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       var resp = await til.ReadEvents();
-      
+
       MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
       if (resp.Count > 0)
       {
-        eventObj = resp.Count > 1 ? resp.Find(x => x.Id == "134808885118048636529365400384921579313930057380949600640755079184396898141722430144645782472404440250412733094054572552042642823880677429621015167729836101489995968707132452629768876840219577255621559343517892101654577696837951680920349582117477636054071779878341980208") : resp[0];
+        EventObject eventToRate = resp.Find(x => x.Id == "134808885118048636529365400384921579313930057380949600640755079184396898141722430144645782472404440250412733094054572552042642823880677429621015167729836101489995968707132452629768876840219577255621559343517892101654577696837951680920349582117477636054071779878341980208");
+        if (eventToRate != null)
+          eventObj = eventToRate;
+        else
+          eventToRate = resp[0];
         btnReadSingleEvent.IsEnabled = true;
         btnRateObject.IsEnabled = true;
         btnAddToMyEvents.IsEnabled = true;
+        btnFollowEvent.IsEnabled = true;
       }
     }
 
@@ -188,6 +195,8 @@ namespace TesterApp
       {
         poiObj = resp.Count > 1 ? resp[1] : resp[0];
         btnReadSinglePlace.IsEnabled = true;
+        btnFollowPlace.IsEnabled = true;
+
       }
     }
 
@@ -256,8 +265,89 @@ namespace TesterApp
       MessageBox.Show(resp.ToString());
       btnRemoveFromMyEvents.IsEnabled = false;
     }
-   #endregion
 
+    private async void btnFollowEvent_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.FollowEvent(eventObj.Id);
+      MessageBox.Show(resp.ToString());
+      btnUnfollowEvent.IsEnabled = true;
+    }
 
+    private async void btnUnfollowEvent_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.UnFollowEvent(eventObj.Id);
+      MessageBox.Show(resp.ToString());
+    }
+    private async void btnFollowPlace_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.FollowPlace(poiObj.Id);
+      MessageBox.Show(resp.ToString());
+      btnUnfollowPlace.IsEnabled = true;
+    }
+
+    private async void btnUnfollowPlace_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.UnFollowPlace(poiObj.Id);
+      MessageBox.Show(resp.ToString());
+    }
+    private async void btnFollowStory_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.FollowStory(storyObj.Id);
+      MessageBox.Show(resp.ToString());
+      btnUnfollowStory.IsEnabled = true;
+    }
+
+    private async void btnUnfollowStory_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await til.UnFollowStory(storyObj.Id);
+      MessageBox.Show(resp.ToString());
+    }
+
+    #endregion
+
+    #region TerritoryInformationService.UserDefinedObjects
+    private async void btnCreateEvent_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+
+      var respPlaces = await til.ReadPlaces();
+      poiObj = respPlaces.Count > 0 ? respPlaces[0] : null;
+
+      TimeSpan ts = new TimeSpan(1, 0, 0, 0);
+      userDefinedEo = new EventObject();
+      userDefinedEo.Description = "Some test description";
+      userDefinedEo.Title = "test title";
+      userDefinedEo.Type = "Party";
+      userDefinedEo.POIId = poiObj.Poi.Id;
+      userDefinedEo.Location = new double[] { poiObj.Poi.Latitude, poiObj.Poi.Longitude };
+      userDefinedEo.FromTime = Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmssffff"));
+      userDefinedEo.ToTime = Int64.Parse((DateTime.Now + ts).ToString("yyyyMMddHHmmssffff"));
+      userDefinedEo.Timing = "All day all night";
+
+      var resp = await til.CreateUserDefinedEvent(userDefinedEo);
+      MessageBox.Show(resp.ToString());
+      btnUpdateEvent.IsEnabled = true;
+      btnDeleteEvent.IsEnabled = true;
+    }
+
+    private async void btnUpdateEvent_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      userDefinedEo.Title = userDefinedEo.Title + " UPDATED";
+      var resp = await til.UpdateUserDefinedEvent(userDefinedEo);
+      MessageBox.Show(resp.ToString());
+    }
+
+    private void btnDeleteEvent_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      try
+      {
+        til.DeleteUserDefinedEvent(userDefinedEo.Id);
+        MessageBox.Show("deleted");
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show(ex.Message);
+      }
+    }
+    #endregion
   }
 }

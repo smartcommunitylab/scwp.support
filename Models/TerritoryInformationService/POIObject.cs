@@ -33,7 +33,7 @@ namespace Models.TerritoryInformationService
     public double Latitude { get; set; }
 
     [JsonProperty("poiId")]
-    public string PoiId { get; set; }
+    public string Id { get; set; }
 
     [JsonProperty("datasetId")]
     public string DatasetId { get; set; }

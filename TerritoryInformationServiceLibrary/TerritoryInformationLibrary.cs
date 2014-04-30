@@ -146,17 +146,17 @@ namespace TerritoryInformationServiceLibrary
 
     public async Task<EventObject> FollowEvent(string eventId)
     {
-      return await AddToMyObjects<EventObject>(eventId);
+      return await FollowObject<EventObject>(eventId);
     }
 
     public async Task<POIObject> FollowPlace(string placeId)
     {
-      return await AddToMyObjects<POIObject>(placeId);
+      return await FollowObject<POIObject>(placeId);
     }
 
     public async Task<StoryObject> FollowStory(string storyId)
     {
-      return await AddToMyObjects<StoryObject>(storyId);
+      return await FollowObject<StoryObject>(storyId);
     }
 
     private async Task<T> UnFollowObject<T>(string objectId)
@@ -165,7 +165,7 @@ namespace TerritoryInformationServiceLibrary
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
-      var JSONResult = await httpCli.PutAsync(TerritoryInformationUriHelper.GetFollowObjectUri(objectId), null);
+      var JSONResult = await httpCli.PutAsync(TerritoryInformationUriHelper.GetUnFollowObjectUri(objectId), null);
 
       return JsonConvert.DeserializeObject<T>(await JSONResult.Content.ReadAsStringAsync());
     }
@@ -193,7 +193,7 @@ namespace TerritoryInformationServiceLibrary
 
     private async Task<GenObject> CreateUserDefinedObject<GenObject>(GenObject go, Uri url)
     {
-      StringContent sc = new StringContent(JsonConvert.SerializeObject(go));
+      StringContent sc = new StringContent(JsonConvert.SerializeObject(go), Encoding.UTF8, "application/json");
 
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -205,7 +205,7 @@ namespace TerritoryInformationServiceLibrary
 
     private async Task<GenObject> UpdateUserDefinedObject<GenObject>(GenObject go, Uri url)
     {
-      StringContent sc = new StringContent(JsonConvert.SerializeObject(go));
+      StringContent sc = new StringContent(JsonConvert.SerializeObject(go), Encoding.UTF8, "application/json");
 
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
