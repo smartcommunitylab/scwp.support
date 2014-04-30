@@ -22,12 +22,12 @@ namespace TerritoryInformationServiceLibrary
 
     #region Reading functions
 
-    public async Task<List<EventObject>> ReadEvents(string filterData = "")
+    public async Task<List<EventObject>> ReadEvents(FilterObject filterData = null)
     {
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
-      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadEventsUri(filterData));
+      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadEventsUri(JsonConvert.SerializeObject(filterData)));
 
       return JsonConvert.DeserializeObject<List<EventObject>>(JSONResult);      
     }
@@ -42,12 +42,12 @@ namespace TerritoryInformationServiceLibrary
       return JsonConvert.DeserializeObject<EventObject>(JSONResult);
     }
 
-    public async Task<List<POIObject>> ReadPlaces(string filterData = "")
+    public async Task<List<POIObject>> ReadPlaces(FilterObject filterData = null)
     {
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
-      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadPlacesUri(filterData));
+      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadPlacesUri(JsonConvert.SerializeObject(filterData)));
 
       return JsonConvert.DeserializeObject<List<POIObject>>(JSONResult);
     }
@@ -62,12 +62,12 @@ namespace TerritoryInformationServiceLibrary
       return JsonConvert.DeserializeObject<POIObject>(JSONResult);
     }
 
-    public async Task<List<StoryObject>> ReadStories(string filterData = "")
+    public async Task<List<StoryObject>> ReadStories(FilterObject filterData = null)
     {
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
-      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadStoriesUri(filterData));
+      var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadStoriesUri(JsonConvert.SerializeObject(filterData)));
 
       return JsonConvert.DeserializeObject<List<StoryObject>>(JSONResult);
     }
