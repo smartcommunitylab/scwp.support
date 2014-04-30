@@ -79,5 +79,68 @@ namespace TerritoryInformationServiceLibrary
 
       return JsonConvert.DeserializeObject<StoryObject>(JSONResult);
     }
+
+    public async Task<SyncObject> Sync(Dictionary<string, string> include = null ,Dictionary<string, string> exclude = null, long version = 0, long since = 0)
+    {
+      PostSyncObject pso = new PostSyncObject() { Exclude = exclude, Include = include, Version = version };
+      string toPost = JsonConvert.SerializeObject(pso, new JsonSerializerSettings()
+      {
+        NullValueHandling = NullValueHandling.Ignore,
+        DefaultValueHandling = DefaultValueHandling.Ignore
+      });
+      StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+
+      var JSONResult = await httpCli.PostAsync(TerritoryInformationUriHelper.GetSyncUri(since), sc);
+
+      return JsonConvert.DeserializeObject<SyncObject>(await JSONResult.Content.ReadAsStringAsync());
+    }
+
+    public async Task<double> RateObject(string objectId, int rating )
+    {
+      httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+
+      var JSONResult = await httpCli.PutAsync(TerritoryInformationUriHelper.GetRateObjUri(objectId, rating), null);
+
+      return Convert.ToDouble(await JSONResult.Content.ReadAsStringAsync());
+    }
+
+    private async Task<T> AddToMyObjects<T>(string objectId)
+    {
+      httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+
+      var JSONResult = await httpCli.PutAsync(TerritoryInformationUriHelper.GetAddToMyObjectsUri(objectId), null);
+
+      return JsonConvert.DeserializeObject<T>(await JSONResult.Content.ReadAsStringAsync());
+    }
+
+    public async Task<StoryObject> AddToMyStories(string storyId)
+    {
+      return await AddToMyObjects<StoryObject>(storyId);
+    }
+
+    public async Task<EventObject> AddToMyEvents(string eventId)
+    {
+      return await AddToMyObjects<EventObject>(eventId);
+    }
+
+    //public async 
+  }
+
+  private class PostSyncObject
+  {
+    [JsonProperty("excluded")]
+    public Dictionary<string, string> Exclude { get; set; }
+
+    [JsonProperty("included")]
+    public Dictionary<string, string> Include { get; set; }
+
+    [JsonProperty("version")]
+    public long Version { get; set; }
   }
 }

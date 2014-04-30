@@ -196,7 +196,7 @@ namespace TerritoryInformationServiceLibrary
 
     #region Others
 
-    public static Uri GetSyncUri(int since = 0)
+    public static Uri GetSyncUri(long since = 0)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}?{2}", baseUrl, syncUrl, since));
       return ub.Uri;

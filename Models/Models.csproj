@@ -122,6 +122,7 @@
     <Compile Include="TerritoryInformationService\POIObject.cs" />
     <Compile Include="TerritoryInformationService\StoryObject.cs" />
     <Compile Include="TerritoryInformationService\Tag.cs" />
+    <Compile Include="TerritoryInformationService\SyncObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
