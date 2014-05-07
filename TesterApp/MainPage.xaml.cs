@@ -50,8 +50,8 @@ namespace TesterApp
         toMo = iss["token"] as Token;
         pivotGrande.Items.RemoveAt(0);
         pivotGrande.Items.RemoveAt(0);
-        pivotGrande.Items.RemoveAt(0);
-        pivotGrande.Items.RemoveAt(0);
+        //pivotGrande.Items.RemoveAt(0);
+        //pivotGrande.Items.RemoveAt(0);
         proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken);
         ptl = new PublicTransportLibrary(toMo.AccessToken);
         til = new TerritoryInformationLibrary(toMo.AccessToken);
@@ -77,6 +77,7 @@ namespace TesterApp
     {
       toMo = await authLib.GetAccessToken(code);
       proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken);
+      ptl = new PublicTransportLibrary(toMo.AccessToken);
       til = new TerritoryInformationLibrary(toMo.AccessToken);
       iss["token"] = toMo;
       iss.Save();
