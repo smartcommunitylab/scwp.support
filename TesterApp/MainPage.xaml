@@ -28,8 +28,7 @@
         </Grid>
       </phone:PivotItem>
 
-
-      <!--Pivot item two-->
+        <!--Pivot item two-->
       <phone:PivotItem Header="gettoken" x:Name="tokenPivo">
         <Grid>
           <StackPanel>
