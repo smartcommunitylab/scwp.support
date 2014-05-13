@@ -15,6 +15,7 @@ using AuthenticationLibrary;
 using MobilityServiceLibrary;
 using TerritoryInformationServiceLibrary;
 using System.Collections;
+using Models.MobilityService.Journeys;
 
 
 
@@ -29,12 +30,17 @@ namespace TesterApp
     string code;
     AuthLibrary authLib;
     PublicTransportLibrary ptl;
+    RoutePlanningLibrary rpl;
     ProfileLibrary proLib;
     TerritoryInformationLibrary til;
+    UserRouteLibrary url;
     Token toMo;
     EventObject eventObj, userDefinedEo;
     POIObject poiObj;
     StoryObject storyObj;
+    SingleJourney sj;
+    Position fromPos, toPos;
+    Itinerary iti;
 
     public MainPage()
     {
@@ -52,10 +58,19 @@ namespace TesterApp
         pivotGrande.Items.RemoveAt(0);
         //pivotGrande.Items.RemoveAt(0);
         //pivotGrande.Items.RemoveAt(0);
-        proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken);
-        ptl = new PublicTransportLibrary(toMo.AccessToken);
-        til = new TerritoryInformationLibrary(toMo.AccessToken);
+        InitializeLibs();
       }
+      fromPos = new Position(){ Latitude = "46.066799", Longitude = "11.151796"};
+      toPos = new Position() { Latitude = "46.066695", Longitude = "11.11889" };
+    }
+
+    private void InitializeLibs()
+    {
+      proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken);
+      ptl = new PublicTransportLibrary(toMo.AccessToken);
+      url = new UserRouteLibrary(toMo.AccessToken);
+      til = new TerritoryInformationLibrary(toMo.AccessToken);
+      rpl = new RoutePlanningLibrary(toMo.AccessToken);
     }
 
     private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -76,9 +91,8 @@ namespace TesterApp
     private async void btnGetToken_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       toMo = await authLib.GetAccessToken(code);
-      proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken);
-      ptl = new PublicTransportLibrary(toMo.AccessToken);
-      til = new TerritoryInformationLibrary(toMo.AccessToken);
+      InitializeLibs();
+      
       iss["token"] = toMo;
       iss.Save();
       MessageBox.Show("Ho un token: " + toMo.AccessToken);
@@ -108,6 +122,7 @@ namespace TesterApp
     #region MobilityService.PublicTransport
     private async void bteGetRoutesUrl_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
+      
       var resp = await ptl.GetRoutes(AgencyType.TrentoCityBus);
       MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
     }
@@ -347,5 +362,90 @@ namespace TesterApp
       }
     }
     #endregion
+
+    #region MobilityService.RoutePlanning
+
+    
+
+    private async void getSaveSingleJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      
+
+      if (iti != null)
+      {
+        BasicItinerary basIti = new BasicItinerary();
+        basIti.Data = iti;
+        basIti.Monitor = true;
+        basIti.Name = "io sono un test";
+        basIti.OriginalFrom = fromPos;
+        basIti.OriginalTo = toPos;
+
+        var resp = await url.SaveSingleJourney(basIti);
+        MessageBox.Show(resp != null? resp.ToString() : "no results!");
+      }
+    }
+
+    private async void btngetAllPlannedJourneys_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.ReadAllSingleJourneys();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+    }           
+
+    private async void getSingleJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.ReadAllSingleJourneys();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+    }
+
+    private async void getDeleteSingleJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.ReadAllSingleJourneys();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+    }
+
+    private async void getSaveRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.ReadAllSingleJourneys();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+    }
+
+    private async void getAllRecurrentJourneys_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.ReadAllSingleJourneys();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+    }
+
+    private async void getRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.ReadAllSingleJourneys();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+    }
+
+    private async void getDeleteRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.ReadAllSingleJourneys();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+    }
+
+    #endregion
+
+    private async void getPlanJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      sj = new SingleJourney();
+      sj.Date = DateTime.Now.ToString("MM/dd/yyyy");
+      sj.DepartureTime = DateTime.Now.ToString("HH:mm");
+      sj.From = fromPos;
+      sj.To = toPos;
+      sj.ResultsNumber = 3;
+      sj.RouteType = RouteType.Fastest;
+      sj.TransportTypes = new TransportType[] { TransportType.Transit, TransportType.Bicycle };
+      List<Itinerary> resp = await rpl.PlanSingleJourney(sj);
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+      iti = resp.Count > 0 ? resp[0] : null;
+
+    }
+
+
+
   }
 }

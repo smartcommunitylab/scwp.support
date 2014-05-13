@@ -14,10 +14,10 @@ namespace Models.MobilityService.Journeys
     [JsonProperty("legId")]
     public string LegId { get; set; }
 
-    [JsonProperty("startTime")]
+    [JsonProperty("startime")]
     public long StartTime { get; set; }
 
-    [JsonProperty("endTime")]
+    [JsonProperty("endtime")]
     public long EndTime { get; set; }
 
     [JsonProperty("duration")]
@@ -26,7 +26,7 @@ namespace Models.MobilityService.Journeys
     [JsonProperty("from")]
     public Position From { get; set; }
 
-    [JsonProperty("to")]
+    [JsonProperty("to", Order=0)]
     public Position To { get; set; }
 
     [JsonProperty("transport")]

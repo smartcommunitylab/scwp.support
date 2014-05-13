@@ -9,6 +9,10 @@ namespace Models.MobilityService
 {
   public enum AgencyType
   {
+    [EnumMember(Value="")]
+    Null,
+    [EnumMember(Value = "null")]
+    FakeNull,
     [EnumMember(Value = "12")]
     TrentoCityBus,
     [EnumMember(Value = "10")]

@@ -24,13 +24,20 @@ namespace MobilityServiceLibrary
     public async Task<List<Itinerary>> PlanSingleJourney(SingleJourney sj)
     {
       string toPost = JsonConvert.SerializeObject(sj);
-      StringContent sc = new StringContent(toPost);
+      StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+      try
+      {
+        var res = await httpCli.PostAsync(RoutePlanningUriHelper.GetSingleJourneyUri(), sc);
 
-      var res = await httpCli.PostAsync(RoutePlanningUriHelper.GetSingleJourneyUri(), sc);
-
-      return JsonConvert.DeserializeObject<List<Itinerary>>(await res.Content.ReadAsStringAsync());
+        return JsonConvert.DeserializeObject<List<Itinerary>>(await res.Content.ReadAsStringAsync());
+      }
+      catch (Exception e)
+      {
+      }
+      return null;
     }
 
     public async Task<RecurrentJourney> PlanRecurrentJourney(RecurrentJourneyParameters rjp)
@@ -38,6 +45,7 @@ namespace MobilityServiceLibrary
       string toPost = JsonConvert.SerializeObject(rjp);
 
       StringContent sc = new StringContent(toPost);
+      httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -45,5 +53,7 @@ namespace MobilityServiceLibrary
 
       return JsonConvert.DeserializeObject<RecurrentJourney>(await res.Content.ReadAsStringAsync());
     }
+
+
   }
 }

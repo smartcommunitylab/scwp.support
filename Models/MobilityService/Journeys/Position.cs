@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,10 +20,10 @@ namespace Models.MobilityService.Journeys
     public string StopCode { get; set; }
 
     [JsonProperty("lat")]
-    public double Latitude { get; set; }
+    public string Latitude { get; set; }
 
     [JsonProperty("lon")]
-    public double Longitude { get; set; }
+    public string Longitude { get; set; }
 
     public override string ToString()
     {
@@ -41,8 +42,20 @@ namespace Models.MobilityService.Journeys
     [JsonProperty("id")]
     public string Id { get; set; }
 
+    private AgencyType AgencyID;
+
     [JsonProperty("agencyId")]
-    public AgencyType Agency { get; set; }
+    [JsonConverter(typeof(StringEnumConverter))]
+    public AgencyType? Agency 
+    { get { return AgencyID; } 
+      set
+      {
+        if(value == null)
+          AgencyID = AgencyType.Null;
+        else
+          AgencyID = (AgencyType)value;
+      } 
+    }
 
     public override string ToString()
     {

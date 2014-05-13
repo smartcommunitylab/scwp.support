@@ -59,10 +59,33 @@
             <Button Content="getTransitDelaysUrl" x:Name="btnGetTransitDelaysUrl" Tap="btnGetTransitDelaysUrl_Tap"></Button>
             <Button Content="getParkingsByAgencyUrl" x:Name="btnGetParkingsByAgencyUrl" Tap="btnGetParkingsByAgencyUrl_Tap"></Button>
             <Button Content="getRoadInfoByAgencyUrl" x:Name="btnGetRoadInfoByAgencyUrl" Tap="btnGetRoadInfoByAgencyUrl_Tap"></Button>
+
           </StackPanel>
         </Grid>
       </phone:PivotItem>
 
+      <phone:PivotItem Header="MS APIs Part 2">
+        <StackPanel>
+          <Button Content="getPlanJourney" x:Name="getPlanJourney" Tap="getPlanJourney_Tap"></Button>
+        </StackPanel>        
+      </phone:PivotItem>
+      
+      <phone:PivotItem Header="MS APIs Part 3">
+        <StackPanel>
+          <Button Content="getSaveSingleJourney" x:Name="getSaveSingleJourney" Tap="getSaveSingleJourney_Tap"></Button>
+          <Button Content="getAllPlannedJourneys" x:Name="btngetAllPlannedJourneys" Tap="btngetAllPlannedJourneys_Tap"></Button>
+          <Button Content="getSingleJourney" x:Name="getSingleJourney" Tap="getSingleJourney_Tap"></Button>
+          <Button Content="getDeleteSingleJourney" x:Name="getDeleteSingleJourney" Tap="getDeleteSingleJourney_Tap"></Button>
+
+          <Button Content="getSaveRecurrentJourney" x:Name="getSaveRecurrentJourney" Tap="getSaveRecurrentJourney_Tap"></Button>
+          <Button Content="getAllRecurrentJourneys" x:Name="getAllRecurrentJourneys" Tap="getAllRecurrentJourneys_Tap"></Button>
+          <Button Content="getRecurrentJourney" x:Name="getRecurrentJourney" Tap="getRecurrentJourney_Tap"></Button>
+          <Button Content="getDeleteRecurrentJourney" x:Name="getDeleteRecurrentJourney" Tap="getDeleteRecurrentJourney_Tap"></Button>
+
+
+        </StackPanel>
+      </phone:PivotItem>
+      
       <phone:PivotItem Header="TerritoryInfo APIs">
         <Grid>
           <ScrollViewer>

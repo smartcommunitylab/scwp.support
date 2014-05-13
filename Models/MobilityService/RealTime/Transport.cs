@@ -11,11 +11,12 @@ namespace Models.MobilityService.RealTime
   public class Transport
   {
     [JsonProperty("type")]
-    public string Type { get; set; }
+    [JsonConverter(typeof(StringEnumConverter))]
+    public TransportType Type { get; set; }
 
     [JsonProperty("agencyId")]
     [JsonConverter(typeof(StringEnumConverter))]
-    public AgencyType AgencyId { get; set; }
+    public AgencyType? AgencyId { get; set; }
 
     [JsonProperty("routeId")]
     public string RouteId { get; set; }

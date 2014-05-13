@@ -11,25 +11,25 @@ namespace Models.MobilityService.Journeys
 {
   public class Itinerary
   {
-    [JsonProperty("from")]
+    [JsonProperty("from", Order=6)]
     public Position From { get; set; }
 
-    [JsonProperty("to")]
+    [JsonProperty("to", Order=0)]
     public Position To { get; set; }
 
-    [JsonProperty("startTime")]
-    public int StartTime { get; set; }
+    [JsonProperty("startime", Order=4)]
+    public long StartTime { get; set; }
 
-    [JsonProperty("endTime")]
-    public int EndTime { get; set; }
+    [JsonProperty("endtime", Order=1)]
+    public long EndTime { get; set; }
 
-    [JsonProperty("duration")]
+    [JsonProperty("duration", Order=3)]
     public int Duration { get; set; }
 
-    [JsonProperty("walkingDuration")]
+    [JsonProperty("walkingDuration", Order=5)]
     public int WalkingDuration { get; set; }
 
-    [JsonProperty("leg")]
+    [JsonProperty("leg", Order=2)]
     public List<Leg> Legs { get; set; }
 
     public override string ToString()
