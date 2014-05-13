@@ -10,21 +10,21 @@ namespace Models.MobilityService.RealTime
 {
   public class Transport
   {
-    [JsonProperty("type")]
+    [JsonProperty("type", Order=3)]
     [JsonConverter(typeof(StringEnumConverter))]
     public TransportType Type { get; set; }
 
-    [JsonProperty("agencyId")]
+    [JsonProperty("agencyId", Order=4)]
     [JsonConverter(typeof(StringEnumConverter))]
     public AgencyType? AgencyId { get; set; }
 
-    [JsonProperty("routeId")]
+    [JsonProperty("routeId", Order=2)]
     public string RouteId { get; set; }
 
-    [JsonProperty("routeShortName")]
+    [JsonProperty("routeShortName", Order=1)]
     public string RouteShortName { get; set; }
 
-    [JsonProperty("tripId")]
+    [JsonProperty("tripId", Order=0)]
     public string TripId { get; set; }
 
     public override string ToString()

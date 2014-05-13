@@ -11,44 +11,44 @@ namespace Models.MobilityService.Journeys
 {
   public class Leg
   {
-    [JsonProperty("legId")]
+    [JsonProperty("legId", Order=10)]
     public string LegId { get; set; }
 
-    [JsonProperty("startime")]
+    [JsonProperty("startime", Order=4)]
     public long StartTime { get; set; }
 
-    [JsonProperty("endtime")]
+    [JsonProperty("endtime", Order=1)]
     public long EndTime { get; set; }
 
-    [JsonProperty("duration")]
+    [JsonProperty("duration", Order=3)]
     public int Duration { get; set; }
 
-    [JsonProperty("from")]
+    [JsonProperty("from", Order=8)]
     public Position From { get; set; }
 
     [JsonProperty("to", Order=0)]
     public Position To { get; set; }
 
-    [JsonProperty("transport")]
+    [JsonProperty("transport", Order=5)]
     public Transport TransportInfo { get; set; }
 
-    [JsonProperty("legGeometry")]
+    [JsonProperty("legGeometry", Order=9, NullValueHandling=NullValueHandling.Ignore)]
     public LegGeometry LegGeometryInfo { get; set; }
 
-    [JsonProperty("alertStrikeList")]
+    [JsonProperty("alertStrikeList", Order=7)]
     public List<AlertStrike> AlertStrikeList { get; set; }
 
-    [JsonProperty("alertDelayList")]
+    [JsonProperty("alertDelayList", Order=6)]
     public List<AlertDelay> AlertDelays { get; set; }
 
-    [JsonProperty("alertParkingList")]
+    [JsonProperty("alertParkingList", Order=2)]
     public List<AlertParking> AlertParkings { get; set; }
 
-    [JsonProperty("alertRoadList")]
-    public List<AlertRoad> AlertRoads { get; set; }
+    //[JsonProperty("alertRoadList")]
+    //public List<AlertRoad> AlertRoads { get; set; }
 
-    [JsonProperty("alertAccidentList")]
-    public List<AlertAccident> AlertAccidents { get; set; }
+    //[JsonProperty("alertAccidentList")]
+    //public List<AlertAccident> AlertAccidents { get; set; }
 
     public override string ToString()
     {
