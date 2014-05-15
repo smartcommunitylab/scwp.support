@@ -46,7 +46,7 @@ namespace TesterApp
     {
       InitializeComponent();
       iss = IsolatedStorageSettings.ApplicationSettings;
-      authLib = new AuthLibrary(clientid, secret, redirectUrl);
+      authLib = new AuthLibrary(clientid, secret, redirectUrl, "https://vas-dev.smartcampuslab.it/");
     }
 
     private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
