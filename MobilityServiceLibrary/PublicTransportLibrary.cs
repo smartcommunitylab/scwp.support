@@ -223,7 +223,19 @@ namespace MobilityServiceLibrary
 
       var JSONResult = await httpCli.PostAsync(PublicTransportUriHelper.GetReadTimetableCacheUpdatesUri(), sc);
 
-      return Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, TimetableCacheUpdate>>(await JSONResult.Content.ReadAsStringAsync());
+      var res =  Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, TimetableCacheUpdate>>(await JSONResult.Content.ReadAsStringAsync());
+
+      foreach (var item in res)
+      {
+        foreach (var item2 in item.Value.Calendars)
+        {
+          foreach (var item3 in item2.Value.Entries)
+          {
+            res[item.Key].Calendars[item2.Key].Entries[item3.Key] = item2.Value.Mapping[item3.Key];
+          }
+        }
+      }
+      return res;
     }
 
     /// <summary>
