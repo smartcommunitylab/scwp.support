@@ -15,8 +15,9 @@ namespace MobilityServiceLibrary
     HttpClient httpCli;
     string accessToken;
 
-    public RealTimeUpdateLibrary(string accessToken)
+    public RealTimeUpdateLibrary(string accessToken, string serverUrl)
     {
+      RealTimeUpdateUriHelper.SetBaseUrl(serverUrl);
       this.accessToken = accessToken;
       httpCli = new HttpClient();
     }

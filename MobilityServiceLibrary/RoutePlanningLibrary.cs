@@ -15,8 +15,9 @@ namespace MobilityServiceLibrary
     HttpClient httpCli;
     string accessToken;
 
-    public RoutePlanningLibrary(string accessToken)
+    public RoutePlanningLibrary(string accessToken, string serverUrl)
     {
+      RoutePlanningUriHelper.SetBaseUrl(serverUrl);
       this.accessToken = accessToken;
       httpCli = new HttpClient();
     }

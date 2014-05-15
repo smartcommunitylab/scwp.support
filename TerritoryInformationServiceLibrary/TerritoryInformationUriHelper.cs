@@ -18,7 +18,11 @@ namespace TerritoryInformationServiceLibrary
   /// </summary>
   public static class TerritoryInformationUriHelper
   {
-    static string baseUrl = "https://vas-dev.smartcampuslab.it/core.territory";
+    public static void SetBaseUrl(string serverUrl)
+    {
+      baseUrl = serverUrl + "core.territory";
+    }
+    static string baseUrl;
     static string eventUrl = "events";
     static string placeUrl = "pois";
     static string storyUrl = "stories";

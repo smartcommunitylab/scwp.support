@@ -22,8 +22,10 @@ namespace MobilityServiceLibrary
     /// Main constructor, to use always
     /// </summary>
     /// <param name="accessToken">The SmartCampus-issued access token</param>
-    public UserRouteLibrary(string accessToken)
+    /// <param name="accessToken">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
+    public UserRouteLibrary(string accessToken, string serverUrl)
     {
+      UserRouteUriHelper.SetBaseUrl(serverUrl);
       this.accessToken = accessToken;
       httpCli = new HttpClient();
     }

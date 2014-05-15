@@ -66,11 +66,11 @@ namespace TesterApp
 
     private void InitializeLibs()
     {
-      proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken);
-      ptl = new PublicTransportLibrary(toMo.AccessToken);
-      url = new UserRouteLibrary(toMo.AccessToken);
-      til = new TerritoryInformationLibrary(toMo.AccessToken);
-      rpl = new RoutePlanningLibrary(toMo.AccessToken);
+      proLib = new ProfileServiceLibrary.ProfileLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
+      ptl = new PublicTransportLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
+      url = new UserRouteLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
+      til = new TerritoryInformationLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
+      rpl = new RoutePlanningLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
     }
 
     private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)

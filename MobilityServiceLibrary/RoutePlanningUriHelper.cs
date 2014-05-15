@@ -12,7 +12,13 @@ namespace MobilityServiceLibrary
   /// </summary>
   public static class RoutePlanningUriHelper
   {
-    static string baseUrl = "https://vas-dev.smartcampuslab.it/core.mobility";
+
+    public static void SetBaseUrl(string serverUrl)
+    {
+      baseUrl = serverUrl + "core.mobility";
+    }
+    static string baseUrl;
+    
     static string singleJourneryUrl = "plansinglejourney";
     static string recurrentJourneyUrl = "planrecurrent";
 

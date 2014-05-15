@@ -20,7 +20,11 @@ namespace ProfileServiceLibrary
   /// </summary>
   public static class ProfileUriHelper
   {
-    static string baseUrl = "https://vas-dev.smartcampuslab.it";
+    public static void SetBaseUrl(string serverUrl)
+    {
+      baseUrl = serverUrl;
+    }
+    static string baseUrl;
     static string basicProfileUrl = "aac/basicprofile";
     static string basicAccountProfileUrl = "aac/accountprofile";
     static string extendedProfilesUrl = "core.profile/extprofile";

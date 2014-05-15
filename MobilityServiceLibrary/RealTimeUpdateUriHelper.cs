@@ -8,7 +8,12 @@ namespace MobilityServiceLibrary
 {
   public static class RealTimeUpdateUriHelper
   {
-    static string baseUrl = "https://vas-dev.smartcampuslab.it/core.mobility";
+    public static void SetBaseUrl(string serverUrl)
+    {
+      baseUrl = serverUrl + "core.mobility";
+    }
+    static string baseUrl;
+
     static string userAlert = "alert/user";
     
     public static Uri GetSignalUri()

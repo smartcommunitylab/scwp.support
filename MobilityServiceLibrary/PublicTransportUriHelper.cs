@@ -22,7 +22,11 @@ namespace MobilityServiceLibrary
   /// </summary>
   public static class PublicTransportUriHelper
   {
-    static string BaseUrl = "https://vas-dev.smartcampuslab.it/core.mobility";
+    public static void SetBaseUrl(string serverUrl)
+    {
+      baseUrl = serverUrl + "core.mobility";
+    }
+    static string baseUrl;
     static string getRoutesUrl = "getroutes";
     static string getStopsUrl = "getstops";
     static string getTimetableUrl = "gettimetable";
@@ -40,7 +44,7 @@ namespace MobilityServiceLibrary
     /// <returns>A ready to use URI for retrieving available routes for the given transport service provider</returns>
     public static Uri GetRoutesUri(AgencyType agencyId)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", BaseUrl, getRoutesUrl, EnumConverter.ToEnumString<AgencyType>(agencyId)));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, getRoutesUrl, EnumConverter.ToEnumString<AgencyType>(agencyId)));
       return ub.Uri;
     }
 
@@ -52,7 +56,7 @@ namespace MobilityServiceLibrary
     /// <returns>A ready to use URI for retrieving available stops for the given transport service provider and route</returns>
     public static Uri GetStopsUri(AgencyType agencyId, string routeId)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}", BaseUrl, getStopsUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), routeId));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}", baseUrl, getStopsUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), routeId));
       return ub.Uri;
     }
 
@@ -66,7 +70,7 @@ namespace MobilityServiceLibrary
     /// <returns>A ready to use URI for retrieving the timetable for the given transport service provider, route ID and stop ID</returns>
     public static Uri GetTimetableUri(AgencyType agencyId, string routeId, string stopId)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", BaseUrl, getTimetableUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), routeId, stopId));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", baseUrl, getTimetableUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), routeId, stopId));
       return ub.Uri;
     }
 
@@ -79,7 +83,7 @@ namespace MobilityServiceLibrary
     /// <returns>A ready to use URI for retrieving a timetable for the given transport service provider and stop ID with the specified maximum number of result</returns>
     public static Uri GetLimitedTimetableUri(AgencyType agencyId, string stopId, int numberOfResult)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", BaseUrl, getLimitedTimetableUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), stopId, numberOfResult));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", baseUrl, getLimitedTimetableUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), stopId, numberOfResult));
       return ub.Uri;
     }
 
@@ -92,7 +96,7 @@ namespace MobilityServiceLibrary
     /// <returns>A ready to use URI for retrieving available transit times for the given route ID between a starting time and ending time</returns>
     public static Uri GetTransitTimesUri(string routeId, long timeFrom, long timeTo)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", BaseUrl, getTransitTimesUrl, routeId, timeFrom, timeTo));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", baseUrl, getTransitTimesUrl, routeId, timeFrom, timeTo));
       return ub.Uri;
     }
 
@@ -105,7 +109,7 @@ namespace MobilityServiceLibrary
     /// <returns>A ready to use URI for retrieving available transit delays for the given route ID between a starting time and ending time</returns>
     public static Uri GetTransitDelaysUri(string routeId, long timeFrom, long timeTo)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", BaseUrl, getTransitDelaysUrl, routeId, timeFrom, timeTo));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", baseUrl, getTransitDelaysUrl, routeId, timeFrom, timeTo));
       return ub.Uri;
     }
 
@@ -116,7 +120,7 @@ namespace MobilityServiceLibrary
     /// <returns>A ready to use URI for retrieving available parking info for the given transport service provider</returns>
     public static Uri GetParkingsByAgencyUri(AgencyType agencyId)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", BaseUrl, getParkingsByAgencyUrl, EnumConverter.ToEnumString<AgencyType>(agencyId)));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}", baseUrl, getParkingsByAgencyUrl, EnumConverter.ToEnumString<AgencyType>(agencyId)));
       return ub.Uri;
     }
 
@@ -129,7 +133,7 @@ namespace MobilityServiceLibrary
     /// <returns>A ready to use URI for retrieving available road info for the given route ID between a starting time and ending time</returns>
     public static Uri GetRoadInfoByAgencyUri(AgencyType agencyId, long timeFrom, long timeTo)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", BaseUrl, getRoadInfoByAgencyUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), timeFrom, timeTo));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", baseUrl, getRoadInfoByAgencyUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), timeFrom, timeTo));
       return ub.Uri;
     }
 

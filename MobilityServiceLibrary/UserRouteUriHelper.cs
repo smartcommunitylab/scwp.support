@@ -12,7 +12,12 @@ namespace MobilityServiceLibrary
   /// </summary>
   public static class UserRouteUriHelper
   {
-    static string baseUrl = "https://vas-dev.smartcampuslab.it/core.mobility";
+    public static void SetBaseUrl(string serverUrl)
+    {
+      baseUrl = serverUrl + "core.mobility";
+    }
+    static string baseUrl;
+
     static string itineraryUrl = "itinerary";
     static string recurrentUrl = "recurrent";
 
