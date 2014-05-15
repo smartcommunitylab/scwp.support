@@ -20,7 +20,11 @@ namespace AuthenticationLibrary
   /// </summary>
   public static class AuthUriHelper
   {
-    static string baseUrl = "https://vas-dev.smartcampuslab.it/";
+    public static void SetBaseUrl(string serverUrl)
+    {
+      baseUrl = serverUrl;
+    }
+    static string baseUrl;
     static string getCodeUrl = "aac/eauth/authorize";
     static string getTokenUrl = "aac/oauth/token";
     static string revokeTokenUrl = "aac/eauth/revoke";

@@ -29,8 +29,9 @@ namespace AuthenticationLibrary
     /// <param name="clientId">The application client ID</param>
     /// <param name="clientSecret">The application client secret</param>
     /// <param name="redirectUrl">The address at which the user's browser will be redirected after the required permissions are accepted by the user</param>
-    public AuthLibrary(string clientId, string clientSecret, string redirectUrl)
+    public AuthLibrary(string clientId, string clientSecret, string redirectUrl, string serverUrl)
     {
+      AuthUriHelper.SetBaseUrl(serverUrl);
       this.clientId = clientId;
       this.clientSecret = clientSecret;
       this.redirectUrl = redirectUrl;
@@ -45,8 +46,8 @@ namespace AuthenticationLibrary
     /// <param name="redirectUrl">The address at which the user's browser will be redirected after the required permissions are accepted by the user</param>
     /// <param name="accessToken">The SmartCampus-issued access token</param>
     /// <param name="refreshToken">The SmartCampus-issued refresh token</param>
-    public AuthLibrary(string clientId, string clientSecret, string redirectUrl, string accessToken, string refreshToken)
-      : this(clientId, clientSecret, redirectUrl)
+    public AuthLibrary(string clientId, string clientSecret, string redirectUrl, string accessToken, string refreshToken, string serverUrl)
+      : this(clientId, clientSecret, redirectUrl, serverUrl)
     {
       this.accessToken = accessToken;
       this.refreshToken = refreshToken;
