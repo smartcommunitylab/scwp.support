@@ -10,19 +10,19 @@ namespace Models.MobilityService.Journeys
 {
   public class Position
   {
-    [JsonProperty("name", Order=2)]
+    [JsonProperty("name")]
     public string Name { get; set; }
 
-    [JsonProperty("stopId", Order=1)]
+    [JsonProperty("stopId")]
     public StopId Stop { get; set; }
 
-    [JsonProperty("stopCode", Order=3)]
+    [JsonProperty("stopCode")]
     public string StopCode { get; set; }
 
-    [JsonProperty("lat", Order=4)]
+    [JsonProperty("lat")]
     public string Latitude { get; set; }
 
-    [JsonProperty("lon", Order=0)]
+    [JsonProperty("lon")]
     public string Longitude { get; set; }
 
     public override string ToString()
@@ -39,12 +39,12 @@ namespace Models.MobilityService.Journeys
 
   public class StopId
   {
-    [JsonProperty("id", Order=0)]
+    [JsonProperty("id")]
     public string Id { get; set; }
 
     private AgencyType AgencyID;
 
-    [JsonProperty("agencyId", Order=1)]
+    [JsonProperty("agencyId")]
     [JsonConverter(typeof(StringEnumConverter))]
     public AgencyType? Agency 
     { get { return AgencyID; } 
