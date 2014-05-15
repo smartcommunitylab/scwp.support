@@ -1,5 +1,6 @@
 ﻿using CommonHelpers;
 using Models.MobilityService;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -35,6 +36,9 @@ namespace MobilityServiceLibrary
     static string getTransitDelaysUrl = "gettransitdelays";
     static string getParkingsByAgencyUrl = "getparkingsbyagency";
     static string getRoadInfoByAgencyUrl = "getroadinfobyagency";
+    static string getReadTimetableCacheUpdatesUrl = "cachestatus";
+    static string getReadCacheTimetableUrl = "getcacheupdate";
+
 
 
     /// <summary>
@@ -134,6 +138,28 @@ namespace MobilityServiceLibrary
     public static Uri GetRoadInfoByAgencyUri(AgencyType agencyId, long timeFrom, long timeTo)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", baseUrl, getRoadInfoByAgencyUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), timeFrom, timeTo));
+      return ub.Uri;
+    }
+
+    /// <summary>
+    /// Creates a formatted URI to use for timetable cache updates retrieval
+    /// </summary>
+    /// <returns>A ready to use URI for retrieving timetable cache updates</returns>
+    public static Uri GetReadTimetableCacheUpdatesUri()
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, getReadTimetableCacheUpdatesUrl));
+      return ub.Uri;
+    }
+
+    /// <summary>
+    /// Creates a formatted URI to use for single timetable cache retrieval
+    /// </summary>
+    /// <param name="agencyId">An AgencyType corresponding to the transport service provider</param>
+    /// <param name="fileId">A string corresponding to the file id</param>
+    /// <returns>A ready to use URI for retrieving timetable cache</returns>
+    public static Uri GetReadSingleTimetableCacheUpdatesUri(AgencyType agencyId, string fileId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}", baseUrl, getReadCacheTimetableUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), fileId));
       return ub.Uri;
     }
 

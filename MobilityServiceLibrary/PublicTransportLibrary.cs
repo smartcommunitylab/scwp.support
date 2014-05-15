@@ -14,6 +14,10 @@ using Models.MobilityService;
 using System.Collections.Generic;
 using Models.MobilityService.RealTime;
 using System.Net.Http;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using CommonHelpers;
+using System.Text;
 
 namespace MobilityServiceLibrary
 {
@@ -195,9 +199,49 @@ namespace MobilityServiceLibrary
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
       string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetRoadInfoByAgencyUri(agency, timeFrom, timeTo));
-      //string JSONResult = "[{\"agencyId\":\"COMUNE_DI_ROVERETO\",\"road\":{\"note\":\"\",\"lat\":\"45.894037\",\"lon\":\"11.043587\",\"streetCode\":\"290\",\"street\":\"CORSOBETTINIA.\",\"fromNumber\":\"\",\"toNumber\":\"\",\"fromIntersection\":\"\",\"toIntersection\":\"\"},\"changeTypes\":[\"PARKING_BLOCK\",\"ROAD_BLOCK\"],\"id\":\"612005_290\",\"type\":null,\"entity\":null,\"description\":\"UFFICIOATTIVITA\'PRODUTTIVE:DIVIETODITRANSITOEDISOSTACONRIMOZIONECOATTAINCORSOBETTINI,INVIALETRENTOENELLESTRADELIMITROFEAROVERETOPERLOSVOLGIMENTODELMERCATOSETTIMANALEDELMARTEDI\'.\",\"from\":1372543200000,\"to\":1378764000000,\"creatorId\":\"default\",\"creatorType\":\"SERVICE\",\"effect\":\"Temporanea\",\"note\":null},]";
 
       return Newtonsoft.Json.JsonConvert.DeserializeObject<List<AlertRoad>>(JSONResult);
     }
+
+    /// <summary>
+    /// Asyncronous method that requests all the timetable updates for the given agencies to the SmartCampus server
+    /// </summary>
+    /// <param name="agencies">A dictionary where the keys correspond to an AgencyType while the values correspond to the version</param>
+    /// <returns></returns>
+    public async Task<Dictionary<string, TimetableCacheUpdate>> GetReadTimetableCacheUpdates(Dictionary<AgencyType, string> agencies)
+    {
+      Dictionary<string, string> toPostDict = new Dictionary<string, string>();
+      foreach (var item in agencies)
+        toPostDict.Add(EnumConverter.ToEnumString<AgencyType>(item.Key), item.Value);
+
+      string toPost = JsonConvert.SerializeObject(toPostDict);
+      StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
+
+      httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+
+      var JSONResult = await httpCli.PostAsync(PublicTransportUriHelper.GetReadTimetableCacheUpdatesUri(), sc);
+
+      return Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, TimetableCacheUpdate>>(await JSONResult.Content.ReadAsStringAsync());
+    }
+
+    /// <summary>
+    /// Asyncronous method that requests a single timetable updates for the given file to the SmartCampus server
+    /// </summary>
+    /// <param name="agency">An AgencyType corresponding to the transport service provider</param>
+    /// <param name="fileId">A string corresponding to the fileId</param>
+    /// <returns></returns>
+    public async Task<CompressedTimetable> GetReadSingleTimetableCacheUpdates(AgencyType agency, string fileId)
+    {
+      httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+
+      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetReadSingleTimetableCacheUpdatesUri(agency, fileId));
+
+      return Newtonsoft.Json.JsonConvert.DeserializeObject<CompressedTimetable>(JSONResult);
+    }
+
   }
 }

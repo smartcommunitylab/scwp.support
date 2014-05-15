@@ -95,6 +95,8 @@
     <Compile Include="MobilityService\Journeys\SimpleLeg.cs" />
     <Compile Include="MobilityService\Journeys\SingleJourney.cs" />
     <Compile Include="MobilityService\MobilityEnumerators.cs" />
+    <Compile Include="MobilityService\PublicTransport\CompressedTimetable.cs" />
+    <Compile Include="MobilityService\PublicTransport\TimetableCacheUpdate.cs" />
     <Compile Include="MobilityService\PublicTransport\LimitedTimeTable.cs" />
     <Compile Include="MobilityService\PublicTransport\Delay.cs" />
     <Compile Include="MobilityService\PublicTransport\Parking.cs" />

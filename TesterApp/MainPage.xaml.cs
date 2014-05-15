@@ -16,6 +16,8 @@ using MobilityServiceLibrary;
 using TerritoryInformationServiceLibrary;
 using System.Collections;
 using Models.MobilityService.Journeys;
+using Newtonsoft.Json;
+using Models.MobilityService.PublicTransport;
 
 
 
@@ -62,6 +64,7 @@ namespace TesterApp
       }
       fromPos = new Position(){ Latitude = "46.066799", Longitude = "11.151796"};
       toPos = new Position() { Latitude = "46.066695", Longitude = "11.11889" };
+      
     }
 
     private void InitializeLibs()
@@ -442,10 +445,6 @@ namespace TesterApp
       List<Itinerary> resp = await rpl.PlanSingleJourney(sj);
       MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
       iti = resp.Count > 0 ? resp[0] : null;
-
     }
-
-
-
   }
 }
