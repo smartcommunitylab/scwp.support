@@ -10,7 +10,7 @@ namespace Models.MobilityService.RealTime
   public class AlertDelay : BaseAlert
   {
     [JsonProperty("position")]
-    public Position PositionInfo { get; set; }
+    public Journeys.Position PositionInfo { get; set; }
 
     [JsonProperty("transport")]
     public Transport TransportInfo { get; set; }
