@@ -32,7 +32,7 @@ namespace Models.MobilityService.Journeys
     [JsonProperty("transport")]
     public Transport TransportInfo { get; set; }
 
-    [JsonProperty("legGeometry", NullValueHandling=NullValueHandling.Ignore)]
+    [JsonProperty("legGeometery", NullValueHandling=NullValueHandling.Ignore)]
     public LegGeometry LegGeometryInfo { get; set; }
 
     [JsonProperty("alertStrikeList")]
