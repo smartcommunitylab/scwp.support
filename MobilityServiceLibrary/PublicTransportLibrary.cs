@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Windows;
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Ink;
@@ -229,9 +230,9 @@ namespace MobilityServiceLibrary
       {
         foreach (var item2 in item.Value.Calendars)
         {
-          foreach (var item3 in item2.Value.Entries)
+          foreach (var item3 in new List<string>(item2.Value.Entries.Keys))
           {
-            res[item.Key].Calendars[item2.Key].Entries[item3.Key] = item2.Value.Mapping[item3.Key];
+            res[item.Key].Calendars[item2.Key].Entries[item3] = item2.Value.Mapping[item2.Value.Entries[item3]];
           }
         }
       }
