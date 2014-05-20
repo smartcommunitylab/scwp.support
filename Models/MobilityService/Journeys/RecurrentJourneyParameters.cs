@@ -20,19 +20,19 @@ namespace Models.MobilityService.Journeys
     public Position To { get; set; }
 
     [JsonProperty("fromDate")]
-    public int fromDate { get; set; }
+    public long fromDate { get; set; }
 
     [JsonProperty("toDate")]
-    public int toDate { get; set; }
+    public long toDate { get; set; }
 
     [JsonProperty("interval")]
-    public int Interval { get; set; }
+    public long Interval { get; set; }
 
     [JsonProperty("transportTypes", ItemConverterType = typeof(StringEnumConverter))]
     public TransportType[] TransportTypes { get; set; }
 
     [JsonProperty("routeType", ItemConverterType = typeof(StringEnumConverter))]
-    public RouteType[] RouteTypes { get; set; }
+    public RouteType RouteType { get; set; }
 
     [JsonProperty("resultsNumber")]
     public int ResultsNumber { get; set; }

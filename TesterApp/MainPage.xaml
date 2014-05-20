@@ -67,19 +67,22 @@
       <phone:PivotItem Header="MS APIs Part 2">
         <StackPanel>
           <Button Content="getPlanJourney" x:Name="getPlanJourney" Tap="getPlanJourney_Tap"></Button>
+          <Button Content="getSaveSingleJourney" x:Name="getSaveSingleJourney" Tap="getSaveSingleJourney_Tap"></Button>
+          <Button Content="getAllPlannedJourneys" x:Name="btngetAllPlannedJourneys" Tap="btngetAllPlannedJourneys_Tap"></Button>
+          <Button Content="getSingleJourney" x:Name="getSingleJourney" Tap="getSingleJourney_Tap"></Button>
+          <Button Content="getDeleteSingleJourney" x:Name="getDeleteSingleJourney" Tap="getDeleteSingleJourney_Tap"></Button>
         </StackPanel>        
       </phone:PivotItem>
       
       <phone:PivotItem Header="MS APIs Part 3">
         <StackPanel>
-          <Button Content="getSaveSingleJourney" x:Name="getSaveSingleJourney" Tap="getSaveSingleJourney_Tap"></Button>
-          <Button Content="getAllPlannedJourneys" x:Name="btngetAllPlannedJourneys" Tap="btngetAllPlannedJourneys_Tap"></Button>
-          <Button Content="getSingleJourney" x:Name="getSingleJourney" Tap="getSingleJourney_Tap"></Button>
-          <Button Content="getDeleteSingleJourney" x:Name="getDeleteSingleJourney" Tap="getDeleteSingleJourney_Tap"></Button>
 
+          <Button Content="getPlanRecurrentJourney" x:Name="getPlanRecurrentJourney" Tap="getPlanRecurrentJourney_Tap"></Button>
           <Button Content="getSaveRecurrentJourney" x:Name="getSaveRecurrentJourney" Tap="getSaveRecurrentJourney_Tap"></Button>
           <Button Content="getAllRecurrentJourneys" x:Name="getAllRecurrentJourneys" Tap="getAllRecurrentJourneys_Tap"></Button>
           <Button Content="getRecurrentJourney" x:Name="getRecurrentJourney" Tap="getRecurrentJourney_Tap"></Button>
+          <Button Content="getUpdateRecurrentJourney" x:Name="getUpdateRecurrentJourney" Tap="getUpdateRecurrentJourney_Tap"></Button>
+
           <Button Content="getDeleteRecurrentJourney" x:Name="getDeleteRecurrentJourney" Tap="getDeleteRecurrentJourney_Tap"></Button>
 
 
@@ -134,20 +137,7 @@
             <Button Content="deleteEvent" x:Name="btnDeleteEvent" Tap="btnDeleteEvent_Tap" IsEnabled="False"></Button>
           </StackPanel>
         </Grid>
-      </phone:PivotItem>
-
-      <phone:PivotItem Header="DBMS">
-        <Grid>
-          <StackPanel>
-            <Button Content="createDB" x:Name="btnCreateDB" Tap="btnCreateDB_Tap"></Button>
-            <Button Content="createTable" x:Name="btnCreateTable" Tap="btnCreateTable_Tap" ></Button>
-            <Button Content="insertInTable" x:Name="btnInsertInTable" Tap="btnInsertInTable_Tap" ></Button>
-            <Button Content="readFromTable" x:Name="btnReadFromTable" Tap="btnReadFromTable_Tap" ></Button>
-            <Button Content="deleteFromTable" x:Name="btnDeleteFromTable" Tap="btnDeleteFromTable_Tap" ></Button>
-
-          </StackPanel>
-        </Grid>
-      </phone:PivotItem>
+      </phone:PivotItem>     
 
     </phone:Pivot>
   </Grid>

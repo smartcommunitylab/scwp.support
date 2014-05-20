@@ -45,13 +45,14 @@ namespace MobilityServiceLibrary
     {
       string toPost = JsonConvert.SerializeObject(rjp);
 
-      StringContent sc = new StringContent(toPost);
+      StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
       var res = await httpCli.PostAsync(RoutePlanningUriHelper.GetRecurrentJourneyUri(), sc);
 
+      
       return JsonConvert.DeserializeObject<RecurrentJourney>(await res.Content.ReadAsStringAsync());
     }
 

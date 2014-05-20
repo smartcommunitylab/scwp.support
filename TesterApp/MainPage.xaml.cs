@@ -20,7 +20,6 @@ using Newtonsoft.Json;
 using Models.MobilityService.PublicTransport;
 using System.IO;
 using Windows.Storage;
-using SQLite;
 
 
 
@@ -46,9 +45,12 @@ namespace TesterApp
     POIObject poiObj;
     StoryObject storyObj;
     SingleJourney sj;
+    RecurrentJourneyParameters rjp;
     Position fromPos, toPos;
     Itinerary iti;
-    SQLiteConnection dbConn;
+    RecurrentJourney rIti;
+    BasicItinerary globalBasiIti;
+    BasicRecurrentJourney globalRITI;
 
     public MainPage()
     {
@@ -63,14 +65,11 @@ namespace TesterApp
       {
         toMo = iss["token"] as Token;
         pivotGrande.Items.RemoveAt(0);
-        pivotGrande.Items.RemoveAt(0);
-        //pivotGrande.Items.RemoveAt(0);
-        //pivotGrande.Items.RemoveAt(0);
+        pivotGrande.Items.RemoveAt(0);       
         InitializeLibs();
       }
       fromPos = new Position(){ Latitude = "46.066799", Longitude = "11.151796"};
       toPos = new Position() { Latitude = "46.066695", Longitude = "11.11889" };
-      InitializeDataBase();
     }
 
     private void InitializeLibs()
@@ -82,16 +81,6 @@ namespace TesterApp
       rpl = new RoutePlanningLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
     }
 
-    private void InitializeDataBase()
-    {
-      try
-      {
-        dbConn = new SQLiteConnection(DB_PATH);
-      }
-      catch(Exception e)
-      {
-      }
-    }
 
     private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
@@ -385,69 +374,7 @@ namespace TesterApp
 
     #region MobilityService.RoutePlanning
 
-    
-
-    private async void getSaveSingleJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      
-
-      if (iti != null)
-      {
-        BasicItinerary basIti = new BasicItinerary();
-        basIti.Data = iti;
-        basIti.Monitor = true;
-        basIti.Name = "io sono un test";
-        basIti.OriginalFrom = fromPos;
-        basIti.OriginalTo = toPos;
-
-        var resp = await url.SaveSingleJourney(basIti);
-        MessageBox.Show(resp != null? resp.ToString() : "no results!");
-      }
-    }
-
-    private async void btngetAllPlannedJourneys_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      var resp = await url.ReadAllSingleJourneys();
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
-    }           
-
-    private async void getSingleJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      var resp = await url.ReadAllSingleJourneys();
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
-    }
-
-    private async void getDeleteSingleJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      var resp = await url.ReadAllSingleJourneys();
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
-    }
-
-    private async void getSaveRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      var resp = await url.ReadAllSingleJourneys();
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
-    }
-
-    private async void getAllRecurrentJourneys_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      var resp = await url.ReadAllSingleJourneys();
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
-    }
-
-    private async void getRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      var resp = await url.ReadAllSingleJourneys();
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
-    }
-
-    private async void getDeleteRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      var resp = await url.ReadAllSingleJourneys();
-      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
-    }
-
-    #endregion
+    #region Single journey
 
     private async void getPlanJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
@@ -464,43 +391,117 @@ namespace TesterApp
       iti = resp.Count > 0 ? resp[0] : null;
     }
 
-
-    #region SQLite library
-
-    private void btnCreateDB_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-       //dbConn.CreateTable
-    }
-
-    private void btnCreateTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-      try
+    private async void getSaveSingleJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {      
+      if (iti != null)
       {
-        dbConn.CreateTable<Dictionary<string, string>>();
+        BasicItinerary basIti = new BasicItinerary();
+        basIti.Data = iti;
+        basIti.Monitor = true;
+        basIti.Name = "io sono un test";
+        basIti.OriginalFrom = fromPos;
+        basIti.OriginalTo = toPos;
+
+        var resp = await url.SaveSingleJourney(basIti);
+        MessageBox.Show(resp != null? resp.ToString() : "no results!");
+        globalBasiIti = basIti;
       }
-      catch (Exception ebib)
-      { }
     }
 
-    private async void btnInsertInTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    private async void btngetAllPlannedJourneys_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      Dictionary<AgencyType,string> dict = new Dictionary<AgencyType,string>();
-      dict.Add(AgencyType.TrentoCityBus, "0");
-      Dictionary<string, TimetableCacheUpdate> dttcu = await ptl.GetReadTimetableCacheUpdates(dict);
-      dbConn.Insert(dttcu.First().Value.Calendars.First().Value);
+      var resp = await url.ReadAllSingleJourneys();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+    }           
+
+    private async void getSingleJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.ReadSingleJourney(globalBasiIti.ClientId);
+      MessageBox.Show(resp != null ? resp.ToString() : "no results!");
     }
 
-    private void btnReadFromTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    private async void getDeleteSingleJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      List<TimeTableCacheUpdateCalendar> lttcuc =  dbConn.Table<TimeTableCacheUpdateCalendar>().ToList<TimeTableCacheUpdateCalendar>();
-      MessageBox.Show(lttcuc.First().ToString());
-    }
-
-    private void btnDeleteFromTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-    {
-
+      var resp = await url.DeleteSingleJourney(globalBasiIti.ClientId);
+      MessageBox.Show(resp.ToString());
     }
 
     #endregion
+
+    #region Recurrent journey
+
+    private async void getPlanRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+
+      rjp = new RecurrentJourneyParameters();
+      rjp.fromDate = Convert.ToInt64(DateTimeToEpoch(DateTime.Now));
+      rjp.toDate = Convert.ToInt64(DateTimeToEpoch((DateTime.Now + new TimeSpan(14, 0, 0, 0)).ToUniversalTime() ));
+      rjp.Interval = Convert.ToInt64(1.5 * 60 * 60 * 1000);
+      rjp.From = fromPos;
+      rjp.To = toPos;
+      rjp.Recurrences = new int[] { 1, 2, 3, 4 };
+      rjp.ResultsNumber = 3;
+      rjp.RouteType = RouteType.Fastest;
+      rjp.TransportTypes = new TransportType[] { TransportType.Transit, TransportType.Bicycle };
+      RecurrentJourney rec = await rpl.PlanRecurrentJourney(rjp);
+      MessageBox.Show(rec != null ? rec.ToString() : "no results!");
+      rIti =rec != null? rec : null;
+    }
+
+    private async void getSaveRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      BasicRecurrentJourney biEreJay = new BasicRecurrentJourney()
+      {
+        Data = rIti,
+        Monitor = true,
+        Name = "Tamavvo"
+      };
+      var resp = await url.SaveRecurrentJourney(biEreJay);
+      MessageBox.Show(resp!= null ? resp.ToString() : "no results!");
+      globalRITI = resp;
+    }
+
+    private async void getAllRecurrentJourneys_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.ReadAllRecurrentJourneys();
+      MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
+      globalRITI = resp[0];
+    }
+
+    private async void getRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.ReadRecurrentJourney(globalRITI.ClientId);
+      MessageBox.Show(resp != null ? resp.ToString() : "no results!");
+    }
+
+    private async void getUpdateRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      globalRITI.Name = "uauauau";
+      var resp = await url.UpdateRecurrentJourney(globalRITI.ClientId, globalRITI);
+      MessageBox.Show(resp.ToString());
+
+    }
+
+    private async void getDeleteRecurrentJourney_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var resp = await url.DeleteRecurrentJourney(globalRITI.ClientId);
+      MessageBox.Show(resp.ToString());
+    }
+
+    #endregion
+
+    private double DateTimeToEpoch(DateTime dt)
+    {
+      TimeSpan span = (dt.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc));
+      return span.TotalSeconds;
+    }
+
+
+    #endregion
+
+   
+
+
+
   }
 }
