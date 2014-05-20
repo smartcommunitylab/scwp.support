@@ -18,6 +18,10 @@ using System.Collections;
 using Models.MobilityService.Journeys;
 using Newtonsoft.Json;
 using Models.MobilityService.PublicTransport;
+using System.IO;
+using Windows.Storage;
+using SQLite;
+
 
 
 
@@ -26,6 +30,7 @@ namespace TesterApp
   public partial class MainPage : PhoneApplicationPage
   {
     IsolatedStorageSettings iss;
+    string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "sample.sqlite"));
     string secret = "f3ea5378-43ba-42c3-b2bf-5f7cd10b6e6e";
     string clientid = "52482826-891e-4ee0-9f79-9153a638d6e4";
     string redirectUrl = "http://localhost";
@@ -43,6 +48,7 @@ namespace TesterApp
     SingleJourney sj;
     Position fromPos, toPos;
     Itinerary iti;
+    SQLiteConnection dbConn;
 
     public MainPage()
     {
@@ -64,7 +70,7 @@ namespace TesterApp
       }
       fromPos = new Position(){ Latitude = "46.066799", Longitude = "11.151796"};
       toPos = new Position() { Latitude = "46.066695", Longitude = "11.11889" };
-      
+      InitializeDataBase();
     }
 
     private void InitializeLibs()
@@ -74,6 +80,17 @@ namespace TesterApp
       url = new UserRouteLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
       til = new TerritoryInformationLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
       rpl = new RoutePlanningLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
+    }
+
+    private void InitializeDataBase()
+    {
+      try
+      {
+        dbConn = new SQLiteConnection(DB_PATH);
+      }
+      catch(Exception e)
+      {
+      }
     }
 
     private void Button_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -446,5 +463,44 @@ namespace TesterApp
       MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
       iti = resp.Count > 0 ? resp[0] : null;
     }
+
+
+    #region SQLite library
+
+    private void btnCreateDB_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+       //dbConn.CreateTable
+    }
+
+    private void btnCreateTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      try
+      {
+        dbConn.CreateTable<Dictionary<string, string>>();
+      }
+      catch (Exception ebib)
+      { }
+    }
+
+    private async void btnInsertInTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      Dictionary<AgencyType,string> dict = new Dictionary<AgencyType,string>();
+      dict.Add(AgencyType.TrentoCityBus, "0");
+      Dictionary<string, TimetableCacheUpdate> dttcu = await ptl.GetReadTimetableCacheUpdates(dict);
+      dbConn.Insert(dttcu.First().Value.Calendars.First().Value);
+    }
+
+    private void btnReadFromTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      List<TimeTableCacheUpdateCalendar> lttcuc =  dbConn.Table<TimeTableCacheUpdateCalendar>().ToList<TimeTableCacheUpdateCalendar>();
+      MessageBox.Show(lttcuc.First().ToString());
+    }
+
+    private void btnDeleteFromTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+
+    }
+
+    #endregion
   }
 }

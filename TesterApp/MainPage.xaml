@@ -136,7 +136,18 @@
         </Grid>
       </phone:PivotItem>
 
+      <phone:PivotItem Header="DBMS">
+        <Grid>
+          <StackPanel>
+            <Button Content="createDB" x:Name="btnCreateDB" Tap="btnCreateDB_Tap"></Button>
+            <Button Content="createTable" x:Name="btnCreateTable" Tap="btnCreateTable_Tap" ></Button>
+            <Button Content="insertInTable" x:Name="btnInsertInTable" Tap="btnInsertInTable_Tap" ></Button>
+            <Button Content="readFromTable" x:Name="btnReadFromTable" Tap="btnReadFromTable_Tap" ></Button>
+            <Button Content="deleteFromTable" x:Name="btnDeleteFromTable" Tap="btnDeleteFromTable_Tap" ></Button>
 
+          </StackPanel>
+        </Grid>
+      </phone:PivotItem>
 
     </phone:Pivot>
   </Grid>
