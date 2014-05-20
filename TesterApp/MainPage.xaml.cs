@@ -18,6 +18,10 @@ using System.Collections;
 using Models.MobilityService.Journeys;
 using Newtonsoft.Json;
 using Models.MobilityService.PublicTransport;
+using System.IO;
+using Windows.Storage;
+using SQLite;
+
 
 
 
@@ -26,6 +30,7 @@ namespace TesterApp
   public partial class MainPage : PhoneApplicationPage
   {
     IsolatedStorageSettings iss;
+    string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "sample.sqlite"));
     string secret = "f3ea5378-43ba-42c3-b2bf-5f7cd10b6e6e";
     string clientid = "52482826-891e-4ee0-9f79-9153a638d6e4";
     string redirectUrl = "http://localhost";
@@ -43,6 +48,7 @@ namespace TesterApp
     SingleJourney sj;
     Position fromPos, toPos;
     Itinerary iti;
+    SQLiteConnection dbConn;
 
     public MainPage()
     {
@@ -446,5 +452,35 @@ namespace TesterApp
       MessageBox.Show(resp.Count > 0 ? resp[0].ToString() : "no results!");
       iti = resp.Count > 0 ? resp[0] : null;
     }
+
+
+    #region SQLite library
+
+    private void btnCreateDB_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      
+    }
+
+    private void btnCreateTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+
+    }
+
+    private void btnInsertInTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+
+    }
+
+    private void btnReadFromTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+
+    }
+
+    private void btnDeleteFromTable_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+
+    }
+
+    #endregion
   }
 }
