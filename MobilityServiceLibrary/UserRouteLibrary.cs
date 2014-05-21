@@ -44,9 +44,10 @@ namespace MobilityServiceLibrary
         //string toPost = JsonConvert.SerializeObject(basIti, Formatting.Indented);
         string toPost = JsonConvert.SerializeObject(basIti);
         httpCli.DefaultRequestHeaders.Clear();
+
         StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
         httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
-
+        httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r")); 
         httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
         var res = await httpCli.PostAsync(UserRouteUriHelper.GetSaveSingleJourneyUri(), sc);
@@ -66,6 +67,7 @@ namespace MobilityServiceLibrary
     public async Task<BasicItinerary> ReadSingleJourney(string journeyId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r")); 
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetReadSingleJourneyUri(journeyId));
@@ -80,6 +82,7 @@ namespace MobilityServiceLibrary
     public async Task<List<BasicItinerary>> ReadAllSingleJourneys()
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r")); 
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetReadAllSingleJourneysUri());
@@ -96,6 +99,7 @@ namespace MobilityServiceLibrary
     public async Task<bool> SetMonitorSingleJourney(string journeyId, bool monitor)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetMonitorSingleJourneyUri(journeyId, monitor));
@@ -111,6 +115,7 @@ namespace MobilityServiceLibrary
     public async Task<bool> DeleteSingleJourney(string journeyId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.DeleteAsync(UserRouteUriHelper.GetDeleteSingleJourneyUri(journeyId));
@@ -134,6 +139,7 @@ namespace MobilityServiceLibrary
 
       StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -150,6 +156,7 @@ namespace MobilityServiceLibrary
     public async Task<BasicRecurrentJourney> ReadRecurrentJourney(string journeyId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetReadRecurrentJourneyUri(journeyId));
@@ -164,6 +171,7 @@ namespace MobilityServiceLibrary
     public async Task<List<BasicRecurrentJourney>> ReadAllRecurrentJourneys()
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetReadAllRecurrentJourneysUri());
@@ -180,6 +188,7 @@ namespace MobilityServiceLibrary
     public async Task<bool> SetMonitorRecurrentJourney(string journeyId, bool monitor)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetMonitorReccurrentJourneyUri(journeyId, monitor));
@@ -198,6 +207,7 @@ namespace MobilityServiceLibrary
       string toPost = JsonConvert.SerializeObject(basIti);
       StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.PutAsync(UserRouteUriHelper.GetUpdateRecurrentJourneyUri(journeyId), sc);
@@ -213,6 +223,7 @@ namespace MobilityServiceLibrary
     public async Task<bool> DeleteRecurrentJourney(string journeyId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.DeleteAsync(UserRouteUriHelper.GetDeleteRecurrentJourneyUri(journeyId));

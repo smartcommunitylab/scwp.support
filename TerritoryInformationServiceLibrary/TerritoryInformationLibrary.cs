@@ -45,6 +45,7 @@ namespace TerritoryInformationServiceLibrary
     public async Task<List<EventObject>> ReadEvents(FilterObject filterData = null)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadEventsUri(JsonConvert.SerializeObject(filterData)));
@@ -60,6 +61,7 @@ namespace TerritoryInformationServiceLibrary
     public async Task<EventObject> ReadSingleEvent(string eventId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -87,6 +89,7 @@ namespace TerritoryInformationServiceLibrary
     public async Task<List<POIObject>> ReadPlaces(FilterObject filterData = null)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadPlacesUri(JsonConvert.SerializeObject(filterData)));
@@ -102,6 +105,7 @@ namespace TerritoryInformationServiceLibrary
     public async Task<POIObject> ReadSinglePlace(string placeId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -128,6 +132,7 @@ namespace TerritoryInformationServiceLibrary
     public async Task<List<StoryObject>> ReadStories(FilterObject filterData = null)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var JSONResult = await httpCli.GetStringAsync(TerritoryInformationUriHelper.GetReadStoriesUri(JsonConvert.SerializeObject(filterData)));
@@ -143,6 +148,7 @@ namespace TerritoryInformationServiceLibrary
     public async Task<StoryObject> ReadSingleStory(string storyId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -178,6 +184,7 @@ namespace TerritoryInformationServiceLibrary
     private async Task<T> AddToMyObjects<T>(string objectId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -217,6 +224,7 @@ namespace TerritoryInformationServiceLibrary
     private async Task<T> RemoveFromMyObjects<T>(string objectId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -264,6 +272,7 @@ namespace TerritoryInformationServiceLibrary
     private async Task<T> FollowObject<T>(string objectId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -314,6 +323,7 @@ namespace TerritoryInformationServiceLibrary
     private async Task<T> UnFollowObject<T>(string objectId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -377,6 +387,7 @@ namespace TerritoryInformationServiceLibrary
       StringContent sc = new StringContent(JsonConvert.SerializeObject(go), Encoding.UTF8, "application/json");
 
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -396,6 +407,7 @@ namespace TerritoryInformationServiceLibrary
       StringContent sc = new StringContent(JsonConvert.SerializeObject(go), Encoding.UTF8, "application/json");
 
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -410,6 +422,7 @@ namespace TerritoryInformationServiceLibrary
     private void DeleteUserDefinedObject(Uri url)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -539,6 +552,8 @@ namespace TerritoryInformationServiceLibrary
         NullValueHandling = NullValueHandling.Ignore,
       });
       StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
+      httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -556,6 +571,7 @@ namespace TerritoryInformationServiceLibrary
     public async Task<double> RateObject(string objectId, int rating)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r")); 
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 

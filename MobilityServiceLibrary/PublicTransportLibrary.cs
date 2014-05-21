@@ -51,6 +51,7 @@ namespace MobilityServiceLibrary
     public async Task<List<Route>> GetRoutes(AgencyType agency)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r")); 
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -68,6 +69,7 @@ namespace MobilityServiceLibrary
     public async Task<List<Stop>> GetStops(AgencyType agency, string routeId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -86,6 +88,7 @@ namespace MobilityServiceLibrary
     public async Task<List<StopTime>> GetTimetable(AgencyType agency, string routeId, string stopId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -105,6 +108,7 @@ namespace MobilityServiceLibrary
     public async Task<List<TripData>> GetLimitedTimetable(AgencyType agency, string stopId, int numberOfResult)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -144,6 +148,7 @@ namespace MobilityServiceLibrary
     public async Task<TimeTable> GetTransitTimes(string routeId, long timeFrom, long timeTo)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -162,6 +167,7 @@ namespace MobilityServiceLibrary
     public async Task<TimeTable> GetTransitDelays(string routeId, long timeFrom, long timeTo)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -178,6 +184,7 @@ namespace MobilityServiceLibrary
     public async Task<List<Parking>> GetParkingsByAgency(AgencyType agency)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -196,6 +203,7 @@ namespace MobilityServiceLibrary
     public async Task<List<AlertRoad>> GetRoadInfoByAgency(AgencyType agency, long timeFrom, long timeTo)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -219,6 +227,7 @@ namespace MobilityServiceLibrary
       StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
 
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
@@ -248,6 +257,7 @@ namespace MobilityServiceLibrary
     public async Task<CompressedTimetable> GetReadSingleTimetableCacheUpdates(AgencyType agency, string fileId)
     {
       httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 

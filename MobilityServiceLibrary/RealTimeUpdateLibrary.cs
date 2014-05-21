@@ -27,6 +27,8 @@ namespace MobilityServiceLibrary
       string toPost = JsonConvert.SerializeObject(baAlert);
       
       StringContent sc = new StringContent(toPost);
+      httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r")); 
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
