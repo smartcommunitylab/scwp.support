@@ -10,7 +10,7 @@ namespace Models.MobilityService.PublicTransport
   public class StopTime
   {
     [JsonProperty("time")]
-    public int Time { get; set; }
+    public long Time { get; set; }
 
     [JsonProperty("trip")]
     public Trip Trip { get; set; }
