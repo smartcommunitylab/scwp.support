@@ -53,9 +53,9 @@ namespace MobilityServiceLibrary
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
       var res = await httpCli.PostAsync(RoutePlanningUriHelper.GetRecurrentJourneyUri(), sc);
-
+      var utile = await res.Content.ReadAsStringAsync();
       
-      return JsonConvert.DeserializeObject<RecurrentJourney>(await res.Content.ReadAsStringAsync());
+      return JsonConvert.DeserializeObject<RecurrentJourney>(utile);
     }
 
 

@@ -19,11 +19,14 @@ namespace Models.MobilityService.Journeys
     [JsonProperty("to")]
     public Position To { get; set; }
 
+    [JsonProperty("time")]
+    public string Time { get; set; }
+
     [JsonProperty("fromDate")]
-    public long fromDate { get; set; }
+    public long FromDate { get; set; }
 
     [JsonProperty("toDate")]
-    public long toDate { get; set; }
+    public long ToDate { get; set; }
 
     [JsonProperty("interval")]
     public long Interval { get; set; }

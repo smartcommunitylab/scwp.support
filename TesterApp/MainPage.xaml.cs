@@ -68,7 +68,7 @@ namespace TesterApp
         pivotGrande.Items.RemoveAt(0);       
         InitializeLibs();
       }
-      fromPos = new Position(){ Latitude = "46.066799", Longitude = "11.151796"};
+      fromPos = new Position() { Latitude = "46.3686", Longitude = "11.0306" };
       toPos = new Position() { Latitude = "46.066695", Longitude = "11.11889" };
     }
 
@@ -434,15 +434,16 @@ namespace TesterApp
     {
 
       rjp = new RecurrentJourneyParameters();
-      rjp.fromDate = Convert.ToInt64(DateTimeToEpoch(DateTime.Now));
-      rjp.toDate = Convert.ToInt64(DateTimeToEpoch((DateTime.Now + new TimeSpan(14, 0, 0, 0)).ToUniversalTime() ));
+      rjp.Time = "16:30";
+      rjp.FromDate = Convert.ToInt64(DateTimeToEpoch(DateTime.Now));
+      rjp.ToDate = Convert.ToInt64(DateTimeToEpoch((DateTime.Now + new TimeSpan(14, 0, 0, 0)).ToUniversalTime() ));
       rjp.Interval = Convert.ToInt64(1.5 * 60 * 60 * 1000);
       rjp.From = fromPos;
       rjp.To = toPos;
       rjp.Recurrences = new int[] { 1, 2, 3, 4 };
       rjp.ResultsNumber = 3;
       rjp.RouteType = RouteType.Fastest;
-      rjp.TransportTypes = new TransportType[] { TransportType.Transit, TransportType.Bicycle };
+      rjp.TransportTypes = new TransportType[] { TransportType.Transit, TransportType.Bicycle, TransportType.Car, TransportType.Walk };
       RecurrentJourney rec = await rpl.PlanRecurrentJourney(rjp);
       MessageBox.Show(rec != null ? rec.ToString() : "no results!");
       rIti =rec != null? rec : null;
@@ -493,7 +494,7 @@ namespace TesterApp
     private double DateTimeToEpoch(DateTime dt)
     {
       TimeSpan span = (dt.ToUniversalTime() - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc));
-      return span.TotalSeconds;
+      return span.TotalMilliseconds;
     }
 
 

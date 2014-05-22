@@ -16,7 +16,7 @@ namespace Models.MobilityService.Journeys
     public List<SimpleLeg> Legs { get; set; }
 
     [JsonProperty("monitorLegs")]
-    public Dictionary<int, bool> MonitorLegs { get; set; }
+    public Dictionary<string, bool> MonitorLegs { get; set; }
 
     public override string ToString()
     {

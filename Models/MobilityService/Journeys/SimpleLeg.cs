@@ -11,10 +11,10 @@ namespace Models.MobilityService.Journeys
   public class SimpleLeg
   {
     [JsonProperty("from")]
-    public Position From { get; set; }
+    public string From { get; set; }
 
     [JsonProperty("to")]
-    public Position To { get; set; }
+    public string To { get; set; }
 
     [JsonProperty("transport")]
     public Transport TransportInfo { get; set; }
