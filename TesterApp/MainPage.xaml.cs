@@ -20,6 +20,8 @@ using Newtonsoft.Json;
 using Models.MobilityService.PublicTransport;
 using System.IO;
 using Windows.Storage;
+using System.Threading;
+using System.Windows.Controls;
 
 
 
@@ -501,7 +503,21 @@ namespace TesterApp
     #endregion
 
    
+    private void btnThread_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      Thread t = new Thread(Tama);
+      t.Start();
+    }
 
+    public void Tama()
+    {
+      Button btEn = new Button();
+      btEn.Content = "Banana";
+      Dispatcher.BeginInvoke(delegate
+      {
+        //threadStack.Children.Add(btEn);
+      });
+    }
 
 
   }

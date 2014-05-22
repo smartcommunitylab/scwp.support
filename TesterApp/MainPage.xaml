@@ -131,10 +131,12 @@
 
       <phone:PivotItem Header="TI APIs Part 2">
         <Grid>
-          <StackPanel>
+          <StackPanel x:Name="threadStack">
             <Button Content="createEvent" x:Name="btnCreateEvent" Tap="btnCreateEvent_Tap"></Button>
             <Button Content="updateEvent" x:Name="btnUpdateEvent" Tap="btnUpdateEvent_Tap" IsEnabled="False"></Button>
             <Button Content="deleteEvent" x:Name="btnDeleteEvent" Tap="btnDeleteEvent_Tap" IsEnabled="False"></Button>
+            <Button Content="createThread" x:Name="btnThread" Tap="btnThread_Tap"></Button>
+
           </StackPanel>
         </Grid>
       </phone:PivotItem>     
