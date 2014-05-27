@@ -74,6 +74,7 @@ namespace TesterApp
         pivotGrande.Items.RemoveAt(0);
         pivotGrande.Items.RemoveAt(0);       
         InitializeLibs();
+
       }
       fromPos = new Position() { Latitude = "46.3686", Longitude = "11.0306" };
       toPos = new Position() { Latitude = "46.066695", Longitude = "11.11889" };
@@ -539,6 +540,11 @@ namespace TesterApp
       gq.QueryCompleted += gq_QueryCompleted;
       gq.QueryAsync();
       
+    }
+
+    bool SearchCheat(string search, string word)
+    {
+      return true;
     }
 
     private string MapAddressToString(MapAddress mapa)

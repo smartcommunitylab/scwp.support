@@ -85,6 +85,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GoogleMapsAPI\AddressComponent.cs" />
+    <Compile Include="GoogleMapsAPI\GoogleGeometry.cs" />
+    <Compile Include="GoogleMapsAPI\GoogleJSONObj.cs" />
+    <Compile Include="GoogleMapsAPI\GooglePos.cs" />
+    <Compile Include="GoogleMapsAPI\GoogleResult.cs" />
     <Compile Include="MobilityService\Journeys\BasicItinerary.cs" />
     <Compile Include="MobilityService\Journeys\BasicRecurrentJourney.cs" />
     <Compile Include="MobilityService\Journeys\Itinerary.cs" />
