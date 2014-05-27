@@ -22,6 +22,8 @@ using System.IO;
 using Windows.Storage;
 using System.Threading;
 using System.Windows.Controls;
+using Microsoft.Phone.Maps.Services;
+using System.Device.Location;
 
 
 
@@ -30,12 +32,15 @@ namespace TesterApp
 {
   public partial class MainPage : PhoneApplicationPage
   {
+    #region Initialization
+
     IsolatedStorageSettings iss;
     string DB_PATH = Path.Combine(Path.Combine(ApplicationData.Current.LocalFolder.Path, "sample.sqlite"));
     string secret = "f3ea5378-43ba-42c3-b2bf-5f7cd10b6e6e";
     string clientid = "52482826-891e-4ee0-9f79-9153a638d6e4";
     string redirectUrl = "http://localhost";
     string code;
+    GeoCoordinate GPSPos;
     AuthLibrary authLib;
     PublicTransportLibrary ptl;
     RoutePlanningLibrary rpl;
@@ -72,6 +77,7 @@ namespace TesterApp
       }
       fromPos = new Position() { Latitude = "46.3686", Longitude = "11.0306" };
       toPos = new Position() { Latitude = "46.066695", Longitude = "11.11889" };
+      LaunchGPS();
     }
 
     private void InitializeLibs()
@@ -108,6 +114,8 @@ namespace TesterApp
       iss.Save();
       MessageBox.Show("Ho un token: " + toMo.AccessToken);
     }
+
+    #endregion
 
     #region ProfileService
     private async void GetBasicProfile_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -519,6 +527,54 @@ namespace TesterApp
       });
     }
 
+    private async void btnPlaceStr_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
 
+      GeocodeQuery gq = new GeocodeQuery();
+      
+      gq.SearchTerm = txtsearch.Text;
+      gq.GeoCoordinate = GPSPos;
+      //gq.GeoCoordinate = new GeoCoordinate(0, 0);
+      gq.MaxResultCount = 10;
+      gq.QueryCompleted += gq_QueryCompleted;
+      gq.QueryAsync();
+      
+    }
+
+    private string MapAddressToString(MapAddress mapa)
+    {
+      string result = string.Format("{0}, {1}, {2}, {4}, {5}", mapa.BuildingName, mapa.Street, mapa.HouseNumber, mapa.City, mapa.PostalCode, mapa.Country);
+      return result.StartsWith(",") ? result.Substring(2) : result;
+    }
+
+    void gq_QueryCompleted(object sender, QueryCompletedEventArgs<IList<MapLocation>> e)
+    {
+
+      foreach (var item in e.Result)
+      {
+        MessageBox.Show(MapAddressToString(item.Information.Address), item.Information.Name + " " + item.Information.Description, MessageBoxButton.OK);
+      }
+    }
+
+    #region GPS
+
+    private void LaunchGPS()
+    {
+      GeoCoordinateWatcher geolocator = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+      geolocator.StatusChanged += geolocator_StatusChanged;
+      geolocator.Start();
+    }
+
+    void geolocator_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
+    {
+      if (e.Status == GeoPositionStatus.Ready)
+      {
+        GPSPos = (sender as GeoCoordinateWatcher).Position.Location;
+        (sender as GeoCoordinateWatcher).Stop();
+        geoCose.IsEnabled = true;
+      }
+    }
+
+    #endregion
   }
 }

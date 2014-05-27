@@ -140,6 +140,13 @@
           </StackPanel>
         </Grid>
       </phone:PivotItem>     
+      
+      <phone:PivotItem Header="GeoCose" x:Name="geoCose" IsEnabled="False">
+        <StackPanel x:Name="panelGeocoder" >
+          <TextBox x:Name="txtsearch" Text="Mezzocorona, Trento"></TextBox>
+          <Button Content="GetPlacesByString" x:Name="btnPlaceStr" Tap="btnPlaceStr_Tap"></Button>
+        </StackPanel>
+      </phone:PivotItem>
 
     </phone:Pivot>
   </Grid>
