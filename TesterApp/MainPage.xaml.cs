@@ -582,5 +582,10 @@ namespace TesterApp
     }
 
     #endregion
+
+    private void btnTellSelected_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      MessageBox.Show(gacb.Tag.ToString());
+    }
   }
 }

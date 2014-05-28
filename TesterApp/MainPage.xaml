@@ -6,6 +6,8 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:cControl="clr-namespace:TesterApp"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -145,7 +147,14 @@
         <StackPanel x:Name="panelGeocoder" >
           <TextBox x:Name="txtsearch" Text="Mezzocorona, Trento"></TextBox>
           <Button Content="GetPlacesByString" x:Name="btnPlaceStr" Tap="btnPlaceStr_Tap"></Button>
-          
+          <cControl:GoogleAutoCompleteBox x:Name="gacb" FilterMode="None" Text="{Binding Path=Name}">
+            <cControl:GoogleAutoCompleteBox.ItemTemplate >
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}"></TextBlock>
+              </DataTemplate>
+            </cControl:GoogleAutoCompleteBox.ItemTemplate>            
+          </cControl:GoogleAutoCompleteBox>
+          <Button x:Name="btnTellSelected" Tap="btnTellSelected_Tap" Content="TellSelection"></Button>
         </StackPanel>
       </phone:PivotItem>
 
