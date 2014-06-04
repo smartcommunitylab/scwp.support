@@ -34,7 +34,8 @@ namespace Models.MobilityService.Journeys
     [JsonProperty("transportTypes", ItemConverterType = typeof(StringEnumConverter))]
     public TransportType[] TransportTypes { get; set; }
 
-    [JsonProperty("routeType", ItemConverterType = typeof(StringEnumConverter))]
+    [JsonProperty("routeType")]
+    [JsonConverter(typeof(StringEnumConverter))]
     public RouteType RouteType { get; set; }
 
     [JsonProperty("resultsNumber")]

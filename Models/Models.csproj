@@ -85,6 +85,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Geocoder\SCGeoAddress.cs" />
+    <Compile Include="Geocoder\SCGeoJSONObj.cs" />
+    <Compile Include="Geocoder\SCGeoParameters.cs" />
+    <Compile Include="Geocoder\SCGeoResponse.cs" />
+    <Compile Include="Geocoder\SCGeoResponseHeader.cs" />
     <Compile Include="GoogleMapsAPI\AddressComponent.cs" />
     <Compile Include="GoogleMapsAPI\GoogleGeometry.cs" />
     <Compile Include="GoogleMapsAPI\GoogleJSONObj.cs" />
@@ -150,6 +155,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
