@@ -10,11 +10,19 @@ using System.Threading.Tasks;
 
 namespace MobilityServiceLibrary
 {
+  /// <summary>
+  /// Class that wraps the Route Planning APIs in an easy to use way
+  /// </summary>
   public class RoutePlanningLibrary
   {
     HttpClient httpCli;
     string accessToken;
 
+    /// <summary>
+    /// Constructor for the RoutePlanningUriHelper class, to use only after an access token is available
+    /// </summary>
+    /// <param name="accessToken">The SmartCampus-issued access token</param>  
+    /// <param name="accessToken">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
     public RoutePlanningLibrary(string accessToken, string serverUrl)
     {
       RoutePlanningUriHelper.SetBaseUrl(serverUrl);
@@ -22,6 +30,11 @@ namespace MobilityServiceLibrary
       httpCli = new HttpClient();
     }
 
+    /// <summary>
+    /// Asyncronous method that allows the user to query the SmartCampus server for a list of possible trips (one time)
+    /// </summary>
+    /// <param name="sj">An instance of a SingleJourney object, containing the parameters for the requested trip</param>
+    /// <returns>An array of possible itineraries that match the provided parameters</returns>
     public async Task<List<Itinerary>> PlanSingleJourney(SingleJourney sj)
     {
       string toPost = JsonConvert.SerializeObject(sj);
@@ -42,6 +55,11 @@ namespace MobilityServiceLibrary
       return null;
     }
 
+    /// <summary>
+    /// Asyncronous method that allows the user to query the SmartCampus server for a list of possible trips (recurrent)
+    /// </summary>
+    /// <param name="rjp">An instance of a RecurrentJourneyParameters object, containing the parameters for the requested trip</param>
+    /// <returns>An object containing a list of all available transports for the provided parameters </returns>
     public async Task<RecurrentJourney> PlanRecurrentJourney(RecurrentJourneyParameters rjp)
     {
       string toPost = JsonConvert.SerializeObject(rjp);

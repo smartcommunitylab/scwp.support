@@ -19,9 +19,9 @@ namespace MobilityServiceLibrary
     string accessToken;
 
     /// <summary>
-    /// Main constructor, to use always
+    /// Constructor for the UserRouteLibrary class, to use only after an access token is available
     /// </summary>
-    /// <param name="accessToken">The SmartCampus-issued access token</param>
+    /// <param name="accessToken">The SmartCampus-issued access token</param>  
     /// <param name="accessToken">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
     public UserRouteLibrary(string accessToken, string serverUrl)
     {
