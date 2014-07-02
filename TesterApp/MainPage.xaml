@@ -87,6 +87,8 @@
 
           <Button Content="getDeleteRecurrentJourney" x:Name="getDeleteRecurrentJourney" Tap="getDeleteRecurrentJourney_Tap"></Button>
 
+          <Button Content="getStopsByLocation" x:Name="getStopsByLocation" Tap="getStopsByLocation_Tap"></Button>
+
 
         </StackPanel>
       </phone:PivotItem>

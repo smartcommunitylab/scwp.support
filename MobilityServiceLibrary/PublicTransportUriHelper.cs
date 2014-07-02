@@ -40,7 +40,6 @@ namespace MobilityServiceLibrary
     static string getReadCacheTimetableUrl = "getcacheupdate";
 
 
-
     /// <summary>
     /// Creates a formatted URI to use for routes retrieval
     /// </summary>
@@ -61,6 +60,21 @@ namespace MobilityServiceLibrary
     public static Uri GetStopsUri(AgencyType agencyId, string routeId)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}", baseUrl, getStopsUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), routeId));
+      return ub.Uri;
+    }
+
+    /// <summary>
+    /// Creates a formatted URI to use for retrieve all the stops, filtered by agency and route, which fall in a certain radius
+    /// </summary>
+    /// <param name="agencyId">An AgencyType corresponding to the transport service provider</param>
+    /// <param name="routeId">A string corresponding to the route ID</param>
+    /// <param name="latitude">A double corresponding to the latitude</param>
+    /// <param name="longitude">A string corresponding to the longitude</param>
+    /// <param name="radius">A double corresponding to the area to evaualte (radius of 1 ~ 100km)</param>
+    /// <returns>A ready to use URI for retrieving available stops for the given transport service provider and route</returns>
+    public static Uri GetStopsUriByLocation(AgencyType agencyId, string routeId, double latitude, double longitude, double radius)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", baseUrl, getStopsUrl,  EnumConverter.ToEnumString<AgencyType>(agencyId), routeId, latitude, longitude, radius));
       return ub.Uri;
     }
 

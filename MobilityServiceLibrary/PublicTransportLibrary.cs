@@ -79,6 +79,27 @@ namespace MobilityServiceLibrary
     }
 
     /// <summary>
+    /// Asyncronous method that requests the available stops that fall in a certain range for the given route ID and public transport provider to the SmartCampus server
+    /// </summary>
+    /// <param name="agency">An AgencyType corresponding to the transport service provider</param>
+    /// <param name="routeId">A string corresponding to the route ID</param>
+    /// <param name="latitude">A double corresponding to the latitude</param>
+    /// <param name="longitude">A string corresponding to the longitude</param>
+    /// <param name="radius">A double corresponding to the area to evaualte (radius of 1 ~ 100km)</param>
+    /// /// <returns></returns>
+    public async Task<List<Stop>> GetStopsByLocation(AgencyType agency, string route, double latitude, double longitude, double radius)
+    {
+      httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+
+      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetStopsUriByLocation(agency, route, latitude, longitude, radius));
+
+      return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Stop>>(JSONResult);
+    }
+
+    /// <summary>
     /// Asyncronous method that requests the specific timetable for the given stop ID, route ID and public transport provider to the SmartCampus server
     /// </summary>
     /// <param name="agency">An AgencyType corresponding to the transport service provider</param>
