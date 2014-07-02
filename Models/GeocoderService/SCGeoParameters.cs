@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.Geocoder
+namespace Models.GeocoderService
 {
   public class SCGeoParameters
   {
