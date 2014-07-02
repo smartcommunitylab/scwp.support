@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
-namespace TerritoryInformationServiceLibrary
+namespace CommunicatorServiceLibrary
 {
   /// <summary>
   /// Helper class for the territory information library, contains static functions that 
@@ -28,9 +28,13 @@ namespace TerritoryInformationServiceLibrary
     static string baseUrl;
     static string byUser = "user";
     static string byApp = "app";
+    static string byPublic = "public";
     static string notification = "notification";
     static string sync = "sync";
     static string register = "register";
+    static string unregister = "unregister";
+    static string send = "send";
+    static string configuration = "configuration";
     //static string REGISTRATIONID_HEADER = "REGISTRATIONID";
     //static string GCM_SENDER_API_KEY = "GCM_SENDER_API_KEY";
     //static string GCM_SENDER_ID = "GCM_SENDER_ID";
@@ -56,9 +60,9 @@ namespace TerritoryInformationServiceLibrary
       return ub.Uri;
     }
 
-    public static Uri GetSyncNotificationsByAppUri(SyncData syncData, string appId)
+    public static Uri GetSyncNotificationsByAppUri(long version, string appId)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}?since={5}", baseUrl, byApp, appId, notification, sync, syncData.Version));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}?since={5}", baseUrl, byApp, appId, notification, sync, version));
       return ub.Uri;
     }
 
@@ -94,10 +98,10 @@ namespace TerritoryInformationServiceLibrary
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}", baseUrl, byUser, notification, id));
       return ub.Uri;
     }
-    
-    public static Uri GetSyncNotificationsByUserUri(SyncData syncData)
+
+    public static Uri GetSyncNotificationsByUserUri(long version)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}?since={4}", baseUrl, byUser, notification, sync, syncData.Version));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}?since={4}", baseUrl, byUser, notification, sync, version));
       return ub.Uri;
     }
 
@@ -115,12 +119,68 @@ namespace TerritoryInformationServiceLibrary
     #endregion
 
     #region Other
-    public static Uri GetRegisterAppUri(string appId)
+    private static Uri GetRegisterUri(string byWho, string appId)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}", baseUrl, register, byApp, appId));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}", baseUrl, register, byWho, appId));
       return ub.Uri;
     }
 
+    public static Uri GetRegisterAppToPushUri(string appId)
+    {
+      return GetRegisterUri(byApp, appId);
+    }
+
+    public static Uri GetRegisterUserToPushUri(string appId)
+    {
+      return GetRegisterUri(byUser, appId);
+    }
+
+
+    private static Uri GetUnregisterUri(string byWho, string appId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}", baseUrl, unregister, byWho, appId));
+      return ub.Uri;
+    }
+
+    public static Uri GetUnregisterAppToPushUri(string appId)
+    {
+      return GetUnregisterUri(byApp, appId);
+    }
+
+    public static Uri GetUnregisterUserToPushUri(string appId)
+    {
+      return GetUnregisterUri(byUser, appId);
+    }
+
+
+    public static Uri GetSendAppNotificationUri(List<string> users, string appId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}", baseUrl, send, byApp, appId, String.Join(",", users)));
+      return ub.Uri;
+    }
+
+
+
+    private static Uri GetRequestConfigurationToPushUri(string byWho, string appId)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}", baseUrl, configuration, byWho, appId));
+      return ub.Uri;
+    }
+
+    public static Uri GetRequestAppConfigurationToPushUri(string byWho, string appId)
+    {
+      return GetRequestConfigurationToPushUri(byApp, appId);
+    }
+
+    public static Uri GetRequestUserConfigurationToPushUri(string byWho, string appId)
+    {
+      return GetRequestConfigurationToPushUri(byUser, appId);
+    }
+
+    public static Uri GetRequestPublicConfigurationToPushUri(string byWho, string appId)
+    {
+      return GetRequestConfigurationToPushUri(byPublic, appId);
+    }
     #endregion
 
   }
