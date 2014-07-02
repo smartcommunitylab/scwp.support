@@ -86,7 +86,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AuthLibrary.cs" />
-    <Compile Include="QueryHelper.cs" />
     <Compile Include="AuthUriHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -117,6 +116,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CommonHelpers\CommonHelpers.csproj">
+      <Project>{3CD575FD-C736-403F-AA88-502E8DB78A7E}</Project>
+      <Name>CommonHelpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{2C0466C0-89E0-4184-B528-8A8280C11F10}</Project>
       <Name>Models</Name>

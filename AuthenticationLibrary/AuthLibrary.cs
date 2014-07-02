@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Models.AuthorizationService;
 using Newtonsoft.Json;
-using System.Net;
 using System.Net.Http;
+using CommonHelpers;
 
 namespace AuthenticationLibrary
 {

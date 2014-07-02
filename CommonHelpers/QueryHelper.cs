@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthenticationLibrary
+namespace CommonHelpers
 {
   /// <summary>
   /// Helper class that allows to convert data from a dictionary to a querystring and vice-versa
