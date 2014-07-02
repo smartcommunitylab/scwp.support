@@ -22,7 +22,7 @@ namespace MobilityServiceLibrary
     /// Constructor for the UserRouteLibrary class, to use only after an access token is available
     /// </summary>
     /// <param name="accessToken">The SmartCampus-issued access token</param>  
-    /// <param name="accessToken">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
+    /// <param name="serverUrl">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
     public UserRouteLibrary(string accessToken, string serverUrl)
     {
       UserRouteUriHelper.SetBaseUrl(serverUrl);
@@ -39,24 +39,19 @@ namespace MobilityServiceLibrary
     /// <returns>An instance of the stored journey, as stored on the server</returns>
     public async Task<BasicItinerary> SaveSingleJourney(BasicItinerary basIti)
     {
-      try
-      {
-        //string toPost = JsonConvert.SerializeObject(basIti, Formatting.Indented);
-        string toPost = JsonConvert.SerializeObject(basIti);
-        httpCli.DefaultRequestHeaders.Clear();
 
-        StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
-        httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
-        httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r")); 
-        httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+      //string toPost = JsonConvert.SerializeObject(basIti, Formatting.Indented);
+      string toPost = JsonConvert.SerializeObject(basIti);
+      httpCli.DefaultRequestHeaders.Clear();
 
-        var res = await httpCli.PostAsync(UserRouteUriHelper.GetSaveSingleJourneyUri(), sc);
-        return JsonConvert.DeserializeObject<BasicItinerary>(await res.Content.ReadAsStringAsync());
-      }
-      catch (Exception e)
-      {
-      }
-      return null;
+      StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+
+      var res = await httpCli.PostAsync(UserRouteUriHelper.GetSaveSingleJourneyUri(), sc);
+      return JsonConvert.DeserializeObject<BasicItinerary>(await res.Content.ReadAsStringAsync());
+
     }
 
     /// <summary>
@@ -67,7 +62,7 @@ namespace MobilityServiceLibrary
     public async Task<BasicItinerary> ReadSingleJourney(string journeyId)
     {
       httpCli.DefaultRequestHeaders.Clear();
-      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r")); 
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetReadSingleJourneyUri(journeyId));
@@ -82,7 +77,7 @@ namespace MobilityServiceLibrary
     public async Task<List<BasicItinerary>> ReadAllSingleJourneys()
     {
       httpCli.DefaultRequestHeaders.Clear();
-      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r")); 
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
       var res = await httpCli.GetStringAsync(UserRouteUriHelper.GetReadAllSingleJourneysUri());

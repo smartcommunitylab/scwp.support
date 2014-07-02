@@ -35,7 +35,7 @@ namespace MobilityServiceLibrary
     /// Constructor for the PublicTransportLibrary class, to use only after an access token is available
     /// </summary>
     /// <param name="accessToken">The SmartCampus-issued access token</param>  
-    /// <param name="accessToken">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
+    /// <param name="serverUrl">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
     public PublicTransportLibrary(string accessToken, string serverUrl)
     {
       PublicTransportUriHelper.SetBaseUrl(serverUrl);

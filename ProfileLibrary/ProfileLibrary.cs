@@ -28,7 +28,7 @@ namespace ProfileServiceLibrary
     /// Main constructor, to use always
     /// </summary>
     /// <param name="accessToken">The SmartCampus-issued access token</param>
-    /// <param name="accessToken">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
+    /// <param name="serverUrl">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
     public ProfileLibrary(string accessToken, string serverUrl)
     {
       ProfileUriHelper.SetBaseUrl(serverUrl);

@@ -13,15 +13,15 @@ namespace Models.CommunicatorService
     public long Version { get; set; }
 
     [JsonProperty("deleted")]
-    public HashSet<string> Deleted { get; set; }
+    public Dictionary<string,HashSet<string>> Deleted { get; set; }
 
     [JsonProperty("updated")]
-    public HashSet<Notification> Updated { get; set; }
+    public Dictionary<string, HashSet<string>> Updated { get; set; }
 
-    [JsonProperty("exclude")]
-    public Dictionary<string,object> Exclude { get; set; }
+    //[JsonProperty("exclude")]
+    //public Dictionary<string,object> Exclude { get; set; }
 
-    [JsonProperty("include")]
-    public Dictionary<string, object> Include { get; set; }
+    //[JsonProperty("include")]
+    //public Dictionary<string, object> Include { get; set; }
   }
 }

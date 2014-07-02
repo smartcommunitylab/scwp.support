@@ -22,7 +22,7 @@ namespace MobilityServiceLibrary
     /// Constructor for the RoutePlanningUriHelper class, to use only after an access token is available
     /// </summary>
     /// <param name="accessToken">The SmartCampus-issued access token</param>  
-    /// <param name="accessToken">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
+    /// <param name="serverUrl">The SmartCampus server address where all requests will be executed (must include trailing /) </param>
     public RoutePlanningLibrary(string accessToken, string serverUrl)
     {
       RoutePlanningUriHelper.SetBaseUrl(serverUrl);
@@ -40,19 +40,13 @@ namespace MobilityServiceLibrary
       string toPost = JsonConvert.SerializeObject(sj);
       StringContent sc = new StringContent(toPost, Encoding.UTF8, "application/json");
       httpCli.DefaultRequestHeaders.Clear();
-      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r")); 
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
-      try
-      {
-        var res = await httpCli.PostAsync(RoutePlanningUriHelper.GetSingleJourneyUri(), sc);
 
-        return JsonConvert.DeserializeObject<List<Itinerary>>(await res.Content.ReadAsStringAsync());
-      }
-      catch (Exception e)
-      {
-      }
-      return null;
+      var res = await httpCli.PostAsync(RoutePlanningUriHelper.GetSingleJourneyUri(), sc);
+
+      return JsonConvert.DeserializeObject<List<Itinerary>>(await res.Content.ReadAsStringAsync());
     }
 
     /// <summary>
@@ -72,7 +66,7 @@ namespace MobilityServiceLibrary
 
       var res = await httpCli.PostAsync(RoutePlanningUriHelper.GetRecurrentJourneyUri(), sc);
       var utile = await res.Content.ReadAsStringAsync();
-      
+
       return JsonConvert.DeserializeObject<RecurrentJourney>(utile);
     }
 
