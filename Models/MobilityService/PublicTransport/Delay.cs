@@ -10,10 +10,10 @@ namespace Models.MobilityService.PublicTransport
   public class Delay
   {
     [JsonProperty("user")]
-    public int delayFromUser { get; set; }
+    public string delayFromUser { get; set; }
 
     [JsonProperty("service")]
-    public int delayFromService { get; set; }
+    public string delayFromService { get; set; }
 
     public override string ToString()
     {
