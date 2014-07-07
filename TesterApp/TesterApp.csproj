@@ -158,6 +158,10 @@
       <Project>{F71F686C-909C-4EF8-BBA1-A7D7CB392E93}</Project>
       <Name>AuthenticationLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CommunicatorServiceLibrary\CommunicatorServiceLibrary.csproj">
+      <Project>{21053796-72BF-44E2-B695-2338084D7FAA}</Project>
+      <Name>CommunicatorServiceLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MobilityServiceLibrary\MobilityServiceLibrary.csproj">
       <Project>{8EA98188-3825-4034-B3CC-FF6C37F3A677}</Project>
       <Name>MobilityServiceLibrary</Name>
