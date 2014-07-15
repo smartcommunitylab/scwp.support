@@ -588,9 +588,15 @@ namespace TesterApp
       MessageBox.Show(gacb.Tag.ToString());
     }
 
+    private async void getStopsForRouteByLocation_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      var res = await ptl.GetStopsForRouteByLocation(AgencyType.TrentoCityBus, "05A", 46.0697, 11.1211, 0.01);
+      MessageBox.Show(res.Count.ToString());
+    }
+
     private async void getStopsByLocation_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
-      var res = await ptl.GetStopsByLocation(AgencyType.TrentoCityBus, "05A", 46.0697, 11.1211, 0.01);
+      var res = await ptl.GetStopsByLocation(AgencyType.TrentoCityBus, 46.0697, 11.1211, 0.01, 0, 100);
       MessageBox.Show(res.Count.ToString());
     }
   }

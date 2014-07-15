@@ -30,6 +30,7 @@ namespace MobilityServiceLibrary
     static string baseUrl;
     static string getRoutesUrl = "getroutes";
     static string getStopsUrl = "getstops";
+    static string geoStopsUrl = "geostops";
     static string getTimetableUrl = "gettimetable";
     static string getLimitedTimetableUrl = "getlimitedtimetable";
     static string getTransitTimesUrl = "gettransittimes";
@@ -72,9 +73,25 @@ namespace MobilityServiceLibrary
     /// <param name="longitude">A string corresponding to the longitude</param>
     /// <param name="radius">A double corresponding to the area to evaualte (radius of 1 ~ 100km)</param>
     /// <returns>A ready to use URI for retrieving available stops for the given transport service provider and route</returns>
-    public static Uri GetStopsUriByLocation(AgencyType agencyId, string routeId, double latitude, double longitude, double radius)
+    public static Uri GetStopsUriForRouteByLocation(AgencyType agencyId, string routeId, double latitude, double longitude, double radius)
     {
-      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", baseUrl, getStopsUrl,  EnumConverter.ToEnumString<AgencyType>(agencyId), routeId, latitude, longitude, radius));
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}/{3}/{4}/{5}/{6}", baseUrl, getStopsUrl, EnumConverter.ToEnumString<AgencyType>(agencyId), routeId,
+        latitude.ToString().Replace(',', '.'), longitude.ToString().Replace(',', '.'), radius.ToString().Replace(',', '.')));
+      return ub.Uri;
+    }
+
+    /// <summary>
+    /// Creates a formatted URI to use for retrieve all the stops, filtered by agency, which fall in a certain radius
+    /// </summary>
+    /// <param name="agencyId">An AgencyType corresponding to the transport service provider</param>
+    /// <param name="latitude">A double corresponding to the latitude</param>
+    /// <param name="longitude">A string corresponding to the longitude</param>
+    /// <param name="radius">A double corresponding to the area to evaualte (radius of 1 ~ 100km)</param>
+    /// <returns>A ready to use URI for retrieving available stops for the given transport service provider and route</returns>
+    public static Uri GetStopsUriByLocation(AgencyType agencyId, double latitude, double longitude, double radius, int page, int count)
+    {
+      UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}?lat={3}&lng={4}&radius={5}&page={6}&count={7}", baseUrl, geoStopsUrl, EnumConverter.ToEnumString<AgencyType>(agencyId),
+        latitude.ToString().Replace(',', '.'), longitude.ToString().Replace(',', '.'), radius.ToString().Replace(',', '.'), page, count));
       return ub.Uri;
     }
 

@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using CommonHelpers;
 using System.Text;
+using System.Globalization;
 
 namespace MobilityServiceLibrary
 {
@@ -87,14 +88,34 @@ namespace MobilityServiceLibrary
     /// <param name="longitude">A string corresponding to the longitude</param>
     /// <param name="radius">A double corresponding to the area to evaualte (radius of 1 ~ 100km)</param>
     /// /// <returns></returns>
-    public async Task<List<Stop>> GetStopsByLocation(AgencyType agency, string route, double latitude, double longitude, double radius)
+    public async Task<List<Stop>> GetStopsForRouteByLocation(AgencyType agency, string route, double latitude, double longitude, double radius)
     {
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
-      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetStopsUriByLocation(agency, route, latitude, longitude, radius));
+      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetStopsUriForRouteByLocation(agency, route, latitude, longitude, radius));
+
+      return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Stop>>(JSONResult);
+    }
+
+    /// <summary>
+    /// Asyncronous method that requests the available stops that fall in a certain range for the given public transport provider to the SmartCampus server
+    /// </summary>
+    /// <param name="agency">An AgencyType corresponding to the transport service provider</param>
+    /// <param name="latitude">A double corresponding to the latitude</param>
+    /// <param name="longitude">A string corresponding to the longitude</param>
+    /// <param name="radius">A double corresponding to the area to evaualte (radius of 1 ~ 100km)</param>
+    /// /// <returns></returns>
+    public async Task<List<Stop>> GetStopsByLocation(AgencyType agency, double latitude, double longitude, double radius, int page, int count)
+    {
+      httpCli.DefaultRequestHeaders.Clear();
+      httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
+      httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
+      httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
+
+      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetStopsUriByLocation(agency, latitude, longitude, radius, page, count));
 
       return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Stop>>(JSONResult);
     }
