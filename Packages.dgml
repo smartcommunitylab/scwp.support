@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="ServiceLibraries\CommunicatorServiceLibrary" Label="CommunicatorServiceLibrary" Category="Project" />
+    <Node Id="Microsoft.Bcl 1.1.9" Label="Microsoft.Bcl 1.1.9" Category="Package" />
+    <Node Id="Microsoft.Bcl.Async 1.0.168" Label="Microsoft.Bcl.Async 1.0.168" Category="Package" />
+    <Node Id="Microsoft.Bcl.Build 1.0.14" Label="Microsoft.Bcl.Build 1.0.14" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.2.22" Label="Microsoft.Net.Http 2.2.22" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.3" Label="Newtonsoft.Json 6.0.3" Category="Package" />
+    <Node Id="ServiceLibraries\TerritoryInformationServiceLibrary" Label="TerritoryInformationServiceLibrary" Category="Project" />
+    <Node Id="Microsoft.Bcl 1.1.8" Label="Microsoft.Bcl 1.1.8" Category="Package" />
+    <Node Id="Microsoft.Bcl.Build 1.0.14" Label="Microsoft.Bcl.Build 1.0.14" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.2.20" Label="Microsoft.Net.Http 2.2.20" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.2" Label="Newtonsoft.Json 6.0.2" Category="Package" />
+    <Node Id="ServiceLibraries\AuthenticationLibrary" Label="AuthenticationLibrary" Category="Project" />
+    <Node Id="Microsoft.Bcl 1.1.8" Label="Microsoft.Bcl 1.1.8" Category="Package" />
+    <Node Id="Microsoft.Bcl.Async 1.0.168" Label="Microsoft.Bcl.Async 1.0.168" Category="Package" />
+    <Node Id="Microsoft.Bcl.Build 1.0.14" Label="Microsoft.Bcl.Build 1.0.14" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.2.20" Label="Microsoft.Net.Http 2.2.20" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.2" Label="Newtonsoft.Json 6.0.2" Category="Package" />
+    <Node Id="ServiceLibraries\MobilityServiceLibrary" Label="MobilityServiceLibrary" Category="Project" />
+    <Node Id="Microsoft.Bcl 1.1.8" Label="Microsoft.Bcl 1.1.8" Category="Package" />
+    <Node Id="Microsoft.Bcl.Async 1.0.168" Label="Microsoft.Bcl.Async 1.0.168" Category="Package" />
+    <Node Id="Microsoft.Bcl.Build 1.0.14" Label="Microsoft.Bcl.Build 1.0.14" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.2.20" Label="Microsoft.Net.Http 2.2.20" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.2" Label="Newtonsoft.Json 6.0.2" Category="Package" />
+    <Node Id="ServiceLibraries\ProfileServiceLibrary" Label="ProfileServiceLibrary" Category="Project" />
+    <Node Id="Microsoft.Bcl 1.1.8" Label="Microsoft.Bcl 1.1.8" Category="Package" />
+    <Node Id="Microsoft.Bcl.Async 1.0.168" Label="Microsoft.Bcl.Async 1.0.168" Category="Package" />
+    <Node Id="Microsoft.Bcl.Build 1.0.14" Label="Microsoft.Bcl.Build 1.0.14" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.2.20" Label="Microsoft.Net.Http 2.2.20" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.2" Label="Newtonsoft.Json 6.0.2" Category="Package" />
+    <Node Id="TesterApp" Label="TesterApp" Category="Project" />
+    <Node Id="Microsoft.Bcl 1.1.8" Label="Microsoft.Bcl 1.1.8" Category="Package" />
+    <Node Id="Microsoft.Bcl.Async 1.0.168" Label="Microsoft.Bcl.Async 1.0.168" Category="Package" />
+    <Node Id="Microsoft.Bcl.Build 1.0.14" Label="Microsoft.Bcl.Build 1.0.14" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.2.20" Label="Microsoft.Net.Http 2.2.20" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.2" Label="Newtonsoft.Json 6.0.2" Category="Package" />
+    <Node Id="WPtoolkit 4.2013.08.16" Label="WPtoolkit 4.2013.08.16" Category="Package" />
+    <Node Id="Models" Label="Models" Category="Project" />
+    <Node Id="Microsoft.Bcl 1.1.8" Label="Microsoft.Bcl 1.1.8" Category="Package" />
+    <Node Id="Microsoft.Bcl.Build 1.0.14" Label="Microsoft.Bcl.Build 1.0.14" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.2.20" Label="Microsoft.Net.Http 2.2.20" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.2" Label="Newtonsoft.Json 6.0.2" Category="Package" />
+  </Nodes>
+  <Links>
+    <Link Source="Microsoft.Bcl 1.1.9" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="Microsoft.Bcl.Async 1.0.168" Target="Microsoft.Bcl 1.1.9" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.22" Target="Microsoft.Bcl 1.1.9" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.22" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="ServiceLibraries\CommunicatorServiceLibrary" Target="Microsoft.Bcl.Async 1.0.168" Category="Installed Package" />
+    <Link Source="ServiceLibraries\CommunicatorServiceLibrary" Target="Microsoft.Net.Http 2.2.22" Category="Installed Package" />
+    <Link Source="ServiceLibraries\CommunicatorServiceLibrary" Target="Newtonsoft.Json 6.0.3" Category="Installed Package" />
+    <Link Source="Microsoft.Bcl 1.1.8" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl 1.1.8" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="ServiceLibraries\TerritoryInformationServiceLibrary" Target="Microsoft.Net.Http 2.2.20" Category="Installed Package" />
+    <Link Source="ServiceLibraries\TerritoryInformationServiceLibrary" Target="Newtonsoft.Json 6.0.2" Category="Installed Package" />
+    <Link Source="Microsoft.Bcl 1.1.8" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="Microsoft.Bcl.Async 1.0.168" Target="Microsoft.Bcl 1.1.8" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl 1.1.8" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="ServiceLibraries\AuthenticationLibrary" Target="Microsoft.Bcl.Async 1.0.168" Category="Installed Package" />
+    <Link Source="ServiceLibraries\AuthenticationLibrary" Target="Microsoft.Net.Http 2.2.20" Category="Installed Package" />
+    <Link Source="ServiceLibraries\AuthenticationLibrary" Target="Newtonsoft.Json 6.0.2" Category="Installed Package" />
+    <Link Source="Microsoft.Bcl 1.1.8" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="Microsoft.Bcl.Async 1.0.168" Target="Microsoft.Bcl 1.1.8" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl 1.1.8" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="ServiceLibraries\MobilityServiceLibrary" Target="Microsoft.Bcl.Async 1.0.168" Category="Installed Package" />
+    <Link Source="ServiceLibraries\MobilityServiceLibrary" Target="Microsoft.Net.Http 2.2.20" Category="Installed Package" />
+    <Link Source="ServiceLibraries\MobilityServiceLibrary" Target="Newtonsoft.Json 6.0.2" Category="Installed Package" />
+    <Link Source="Microsoft.Bcl 1.1.8" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="Microsoft.Bcl.Async 1.0.168" Target="Microsoft.Bcl 1.1.8" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl 1.1.8" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="ServiceLibraries\ProfileServiceLibrary" Target="Microsoft.Bcl.Async 1.0.168" Category="Installed Package" />
+    <Link Source="ServiceLibraries\ProfileServiceLibrary" Target="Microsoft.Net.Http 2.2.20" Category="Installed Package" />
+    <Link Source="ServiceLibraries\ProfileServiceLibrary" Target="Newtonsoft.Json 6.0.2" Category="Installed Package" />
+    <Link Source="Microsoft.Bcl 1.1.8" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="Microsoft.Bcl.Async 1.0.168" Target="Microsoft.Bcl 1.1.8" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl 1.1.8" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="TesterApp" Target="Microsoft.Bcl.Async 1.0.168" Category="Installed Package" />
+    <Link Source="TesterApp" Target="Microsoft.Net.Http 2.2.20" Category="Installed Package" />
+    <Link Source="TesterApp" Target="Newtonsoft.Json 6.0.2" Category="Installed Package" />
+    <Link Source="TesterApp" Target="WPtoolkit 4.2013.08.16" Category="Installed Package" />
+    <Link Source="Microsoft.Bcl 1.1.8" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl 1.1.8" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.20" Target="Microsoft.Bcl.Build 1.0.14" Category="Package Dependency" />
+    <Link Source="Models" Target="Microsoft.Net.Http 2.2.20" Category="Installed Package" />
+    <Link Source="Models" Target="Newtonsoft.Json 6.0.2" Category="Installed Package" />
+  </Links>
+  <Categories>
+    <Category Id="Project" />
+    <Category Id="Package" />
+  </Categories>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Package Dependency" ValueLabel="True">
+      <Condition Expression="HasCategory('Package Dependency')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>

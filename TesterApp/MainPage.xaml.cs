@@ -24,6 +24,7 @@ using System.Threading;
 using System.Windows.Controls;
 using Microsoft.Phone.Maps.Services;
 using System.Device.Location;
+using CommunicatorServiceLibrary;
 
 
 
@@ -47,6 +48,7 @@ namespace TesterApp
     ProfileLibrary proLib;
     TerritoryInformationLibrary til;
     UserRouteLibrary url;
+    CommunicatorLibrary comml;
     Token toMo;
     EventObject eventObj, userDefinedEo;
     POIObject poiObj;
@@ -88,6 +90,7 @@ namespace TesterApp
       url = new UserRouteLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
       til = new TerritoryInformationLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
       rpl = new RoutePlanningLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/");
+      comml = new CommunicatorLibrary(toMo.AccessToken, "https://vas-dev.smartcampuslab.it/", "core.mobility");
     }
 
 
@@ -511,7 +514,8 @@ namespace TesterApp
 
     #endregion
 
-   
+    #region  Geocoding & Location-aware stuff
+
     private void btnThread_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       Thread t = new Thread(Tama);
@@ -599,5 +603,22 @@ namespace TesterApp
       var res = await ptl.GetStopsByLocation(AgencyType.TrentoCityBus, 46.0697, 11.1211, 0.01, 0, 100);
       MessageBox.Show(res.Count.ToString());
     }
+
+    #endregion
+
+    #region CommunicatorServiceLibrary
+
+    private async void btnPubConf_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      //Dictionary<string, object> config = await comml.RequestPublicConfigurationToPush();
+     
+    }
+
+    private void btnsubNot_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      
+    }
+
+    #endregion
   }
 }

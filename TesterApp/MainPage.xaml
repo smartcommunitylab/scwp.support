@@ -162,6 +162,18 @@
         </StackPanel>
       </phone:PivotItem>
 
+      <phone:PivotItem Header="Communication service" x:Name="commServ">
+        <StackPanel x:Name="panelComm" >
+
+          <Button Content="GetPublicConfig" x:Name="btnPubConf" Tap="btnPubConf_Tap"></Button>
+          <Button Content="GetSubmitNotification" x:Name="btnsubNot" Tap="btnsubNot_Tap"></Button>
+          <!--<Button Content="GetPublicConfig" x:Name="btnPubConf" Tap="btnPubConf_Tap"></Button>
+          <Button Content="GetPublicConfig" x:Name="btnPubConf" Tap="btnPubConf_Tap"></Button>-->
+
+        </StackPanel>
+      </phone:PivotItem>
+
+
     </phone:Pivot>
   </Grid>
 
