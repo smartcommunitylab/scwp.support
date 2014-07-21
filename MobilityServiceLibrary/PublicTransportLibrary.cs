@@ -117,7 +117,13 @@ namespace MobilityServiceLibrary
 
       string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetStopsUriByLocation(agency, latitude, longitude, radius, page, count));
 
-      return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Stop>>(JSONResult);
+
+
+      var geoStops = Newtonsoft.Json.JsonConvert.DeserializeObject<List<GeoStop>>(JSONResult);
+
+      return (from stop in geoStops
+             select new Stop() {Latitude= stop.Coordinates[0], Longitude=stop.Coordinates[1],Name = stop.Name, StopId=stop.StopId }).ToList();
+
     }
 
     /// <summary>
