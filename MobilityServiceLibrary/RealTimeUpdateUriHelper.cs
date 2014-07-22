@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace MobilityServiceLibrary
 {
+  /// <summary>
+  /// Helper class for the Real Time Update library, contains static functions that 
+  /// generate already-formatted URIs for using within the Real Time Update library
+  /// </summary>
   public static class RealTimeUpdateUriHelper
   {
     /// <summary>
@@ -17,9 +21,12 @@ namespace MobilityServiceLibrary
       baseUrl = serverUrl + "core.mobility";
     }
     static string baseUrl;
-
     static string userAlert = "alert/user";
     
+    /// <summary>
+    /// Creates a formatted URI to submit an alert
+    /// </summary>
+    /// <returns>A ready to use Uri to use in order to submit an alert for one of the available transit systems</returns>
     public static Uri GetSignalUri()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, userAlert));

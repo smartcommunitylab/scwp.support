@@ -208,7 +208,7 @@ namespace TerritoryInformationServiceLibrary
     /// Asyncronous method that allows to add a specific event to the ones
     /// one wants to add as favourite
     /// </summary>
-    /// <param name="storyId">the unique identifier for the required event</param>
+    /// <param name="eventId">the unique identifier for the required event</param>
     /// <returns>an instance of the requested event</returns>
     public async Task<EventObject> AddToMyEvents(string eventId)
     {
@@ -248,7 +248,7 @@ namespace TerritoryInformationServiceLibrary
     /// Asyncronous method that allows to remove a specific event to the ones
     /// one has as favourites
     /// </summary>
-    /// <param name="storyId">the unique identifier for the required event</param>
+    /// <param name="eventId">the unique identifier for the required event</param>
     /// <returns>an instance of the removed event</returns>
     public async Task<EventObject> RemoveFromMyEvents(string eventId)
     {
@@ -285,7 +285,7 @@ namespace TerritoryInformationServiceLibrary
     /// Asyncronous method that allows to start following a specific event, 
     /// and thus enables notifications for said event
     /// </summary>
-    /// <param name="storyId">the unique identifier for the required event</param>
+    /// <param name="eventId">the unique identifier for the required event</param>
     /// <returns>an instance of the requested event</returns>
     public async Task<EventObject> FollowEvent(string eventId)
     {
@@ -296,7 +296,7 @@ namespace TerritoryInformationServiceLibrary
     /// Asyncronous method that allows to start following a specific POI, 
     /// and thus enables notifications for said POI
     /// </summary>
-    /// <param name="storyId">the unique identifier for the required POI</param>
+    /// <param name="placeId">the unique identifier for the required POI</param>
     /// <returns>an instance of the requested POI</returns>
     public async Task<POIObject> FollowPlace(string placeId)
     {
@@ -336,7 +336,7 @@ namespace TerritoryInformationServiceLibrary
     /// Asyncronous method that allows to stop following a specific event, 
     /// and thus disables notifications for said event
     /// </summary>
-    /// <param name="storyId">the unique identifier for the required event</param>
+    /// <param name="eventId">the unique identifier for the required event</param>
     /// <returns>an instance of the requested event</returns>
     public async Task<EventObject> UnFollowEvent(string eventId)
     {
@@ -347,7 +347,7 @@ namespace TerritoryInformationServiceLibrary
     /// Asyncronous method that allows to stop following a specific POI, 
     /// and thus disables notifications for said POI
     /// </summary>
-    /// <param name="storyId">the unique identifier for the required POI</param>
+    /// <param name="placeId">the unique identifier for the required POI</param>
     /// <returns>an instance of the requested POI</returns>
     public async Task<POIObject> UnFollowPlace(string placeId)
     {
@@ -471,7 +471,7 @@ namespace TerritoryInformationServiceLibrary
     /// <summary>
     /// Asyncronous method that creates an user defined place
     /// </summary>
-    /// <param name="eo">The instance of the place to create</param>
+    /// <param name="poiO">The instance of the place to create</param>
     /// <returns>an instance of the created place</returns>
     public async Task<POIObject> CreateUserDefinedPlace(POIObject poiO)
     {
@@ -481,7 +481,7 @@ namespace TerritoryInformationServiceLibrary
     /// <summary>
     /// Asyncronous method that updates an user defined place
     /// </summary>
-    /// <param name="eo">The instance of the place to update</param>
+    /// <param name="poiO">The instance of the place to update</param>
     /// <returns>an instance of the updated place</returns>
     public async Task<POIObject> UpdateUserDefinedPlace(POIObject poiO)
     {
@@ -491,7 +491,7 @@ namespace TerritoryInformationServiceLibrary
     /// <summary>
     /// Asyncronous method that deletes an user defined place
     /// </summary>
-    /// <param name="eventId">The unique identidier for the place to remove</param>
+    /// <param name="placeId">The unique identidier for the place to remove</param>
     public void DeleteUserDefinedPlace(string placeId)
     {
       DeleteUserDefinedObject(TerritoryInformationUriHelper.GetDeleteUserDefinedPlaceUri(placeId));
@@ -504,7 +504,7 @@ namespace TerritoryInformationServiceLibrary
     /// <summary>
     /// Asyncronous method that creates an user defined story
     /// </summary>
-    /// <param name="eo">The instance of the story to create</param>
+    /// <param name="so">The instance of the story to create</param>
     /// <returns>an instance of the created place</returns>
     public async Task<StoryObject> CreateUserDefinedStory(StoryObject so)
     {
@@ -514,7 +514,7 @@ namespace TerritoryInformationServiceLibrary
     /// <summary>
     /// Asyncronous method that updates an user defined story
     /// </summary>
-    /// <param name="eo">The instance of the story to update</param>
+    /// <param name="so">The instance of the story to update</param>
     /// <returns>an instance of the updated story</returns>
     public async Task<StoryObject> UpdateUserDefinedStory(StoryObject so)
     {
@@ -524,7 +524,7 @@ namespace TerritoryInformationServiceLibrary
     /// <summary>
     /// Asyncronous method that deletes an user defined story
     /// </summary>
-    /// <param name="eventId">The unique identidier for the story to remove</param>
+    /// <param name="storyId">The unique identidier for the story to remove</param>
     public void DeleteUserDefinedStory(string storyId)
     {
       DeleteUserDefinedObject(TerritoryInformationUriHelper.GetDeleteUserDefinedStoryUri(storyId));

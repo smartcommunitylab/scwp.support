@@ -20,15 +20,15 @@ namespace MobilityServiceLibrary
     {
       baseUrl = serverUrl + "core.mobility";
     }
-    static string baseUrl;
-    
+
+    static string baseUrl;    
     static string singleJourneryUrl = "plansinglejourney";
     static string recurrentJourneyUrl = "planrecurrent";
 
     /// <summary>
-    /// gets the uri to 
+    /// Creates a formatted URI to retrieve a list of single journeys
     /// </summary>
-    /// <returns></returns>
+    /// <returns>A ready to use URI to use in order to retrieve a list of single journeys from the server</returns>
     public static Uri GetSingleJourneyUri()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, singleJourneryUrl));
@@ -36,9 +36,9 @@ namespace MobilityServiceLibrary
     }
 
     /// <summary>
-    /// 
+    /// Creates a formatted URI to retrieve a recurrent journey
     /// </summary>
-    /// <returns></returns>
+    /// <returns>A ready to use URI to use in order to retrieve a recurrent journeys from the server</returns>
     public static Uri GetRecurrentJourneyUri()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, recurrentJourneyUrl));
