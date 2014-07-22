@@ -34,6 +34,8 @@ namespace TerritoryInformationServiceLibrary
     static string rateUrl = "rate";
     static string objectUrl = "objects";
 
+#pragma warning disable 1591
+
     /* 
      * Methods that provide URIs for reading all objects from a specific category
      * (i.e. Events, Places)
@@ -222,5 +224,6 @@ namespace TerritoryInformationServiceLibrary
 
     #endregion
 
+#pragma warning restore 1591
   }
 }
