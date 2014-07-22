@@ -173,6 +173,15 @@
         </StackPanel>
       </phone:PivotItem>
 
+      <phone:PivotItem Header="ApplicationLauncher" x:Name="appLaunch">
+        <StackPanel x:Name="panelLaunch" >
+
+          <Button Content="StartNavigation" x:Name="btnStartNavigate" Tap="btnStartNavigate_Tap"></Button>
+          <!--<Button Content="GetPublicConfig" x:Name="btnPubConf" Tap="btnPubConf_Tap"></Button>
+          <Button Content="GetPublicConfig" x:Name="btnPubConf" Tap="btnPubConf_Tap"></Button>-->
+
+        </StackPanel>
+      </phone:PivotItem>
 
     </phone:Pivot>
   </Grid>

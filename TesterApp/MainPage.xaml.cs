@@ -620,5 +620,11 @@ namespace TesterApp
     }
 
     #endregion
+
+    private void btnStartNavigate_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    {
+      // Coordinates foar Piazza S. Gottardo, Mezzocorona
+      Windows.System.Launcher.LaunchUriAsync(new System.Uri("smartcampuslab:NavigateTowards?lat=46.2153444&lng=11.1199183"));
+    }
   }
 }
