@@ -12,7 +12,10 @@ namespace MobilityServiceLibrary
   /// </summary>
   public static class RoutePlanningUriHelper
   {
-
+    /// <summary>
+    /// Sets the base url, used to build all the others
+    /// </summary>
+    /// <param name="serverUrl">the server address, in the http://yourserverhere/ form, including trailing slash</param>
     public static void SetBaseUrl(string serverUrl)
     {
       baseUrl = serverUrl + "core.mobility";
@@ -23,7 +26,7 @@ namespace MobilityServiceLibrary
     static string recurrentJourneyUrl = "planrecurrent";
 
     /// <summary>
-    /// 
+    /// gets the uri to 
     /// </summary>
     /// <returns></returns>
     public static Uri GetSingleJourneyUri()
@@ -32,6 +35,10 @@ namespace MobilityServiceLibrary
       return ub.Uri;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
     public static Uri GetRecurrentJourneyUri()
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}", baseUrl, recurrentJourneyUrl));

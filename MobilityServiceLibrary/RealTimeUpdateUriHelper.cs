@@ -8,6 +8,10 @@ namespace MobilityServiceLibrary
 {
   public static class RealTimeUpdateUriHelper
   {
+    /// <summary>
+    /// Sets the base url, used to build all the others
+    /// </summary>
+    /// <param name="serverUrl">the server address, in the http://yourserverhere/ form, including trailing slash</param>
     public static void SetBaseUrl(string serverUrl)
     {
       baseUrl = serverUrl + "core.mobility";

@@ -23,6 +23,10 @@ namespace MobilityServiceLibrary
   /// </summary>
   public static class PublicTransportUriHelper
   {
+    /// <summary>
+    /// Sets the base url, used to build all the others
+    /// </summary>
+    /// <param name="serverUrl">the server address, in the http://yourserverhere/ form, including trailing slash</param>
     public static void SetBaseUrl(string serverUrl)
     {
       baseUrl = serverUrl + "core.mobility";
@@ -87,11 +91,13 @@ namespace MobilityServiceLibrary
     /// <param name="latitude">A double corresponding to the latitude</param>
     /// <param name="longitude">A string corresponding to the longitude</param>
     /// <param name="radius">A double corresponding to the area to evaualte (radius of 1 ~ 100km)</param>
+    /// <param name="pageNumber">An integer representing the page to show (starts from 0)</param>
+    /// <param name="itemsPerPage">An integer specifiying how many results per page are desired</param>
     /// <returns>A ready to use URI for retrieving available stops for the given transport service provider and route</returns>
-    public static Uri GetStopsUriByLocation(AgencyType agencyId, double latitude, double longitude, double radius, int page, int count)
+    public static Uri GetStopsUriByLocation(AgencyType agencyId, double latitude, double longitude, double radius, int pageNumber, int itemsPerPage)
     {
       UriBuilder ub = new UriBuilder(string.Format("{0}/{1}/{2}?lat={3}&lng={4}&radius={5}&page={6}&count={7}", baseUrl, geoStopsUrl, EnumConverter.ToEnumString<AgencyType>(agencyId),
-        latitude.ToString().Replace(',', '.'), longitude.ToString().Replace(',', '.'), radius.ToString().Replace(',', '.'), page, count));
+        latitude.ToString().Replace(',', '.'), longitude.ToString().Replace(',', '.'), radius.ToString().Replace(',', '.'), pageNumber, itemsPerPage));
       return ub.Uri;
     }
 

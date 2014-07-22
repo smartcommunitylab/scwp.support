@@ -88,14 +88,14 @@ namespace MobilityServiceLibrary
     /// <param name="longitude">A string corresponding to the longitude</param>
     /// <param name="radius">A double corresponding to the area to evaualte (radius of 1 ~ 100km)</param>
     /// /// <returns></returns>
-    public async Task<List<Stop>> GetStopsForRouteByLocation(AgencyType agency, string route, double latitude, double longitude, double radius)
+    public async Task<List<Stop>> GetStopsForRouteByLocation(AgencyType agency, string routeId, double latitude, double longitude, double radius)
     {
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
-      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetStopsUriForRouteByLocation(agency, route, latitude, longitude, radius));
+      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetStopsUriForRouteByLocation(agency, routeId, latitude, longitude, radius));
 
       return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Stop>>(JSONResult);
     }
@@ -107,15 +107,17 @@ namespace MobilityServiceLibrary
     /// <param name="latitude">A double corresponding to the latitude</param>
     /// <param name="longitude">A string corresponding to the longitude</param>
     /// <param name="radius">A double corresponding to the area to evaualte (radius of 1 ~ 100km)</param>
+    /// <param name="pageNumber">An integer representing the page to show (starts from 0)</param>
+    /// <param name="itemsPerPage">An integer specifiying how many results per page are desired</param>
     /// /// <returns></returns>
-    public async Task<List<Stop>> GetStopsByLocation(AgencyType agency, double latitude, double longitude, double radius, int page, int count)
+    public async Task<List<Stop>> GetStopsByLocation(AgencyType agency, double latitude, double longitude, double radius, int pageNumber, int itemsPerPage)
     {
       httpCli.DefaultRequestHeaders.Clear();
       httpCli.DefaultRequestHeaders.Add("If-Modified-Since", DateTime.Now.ToString("r"));
       httpCli.DefaultRequestHeaders.Add("Accept", "application/json");
       httpCli.DefaultRequestHeaders.Add("Authorization", string.Format("Bearer {0}", accessToken));
 
-      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetStopsUriByLocation(agency, latitude, longitude, radius, page, count));
+      string JSONResult = await httpCli.GetStringAsync(PublicTransportUriHelper.GetStopsUriByLocation(agency, latitude, longitude, radius, pageNumber, itemsPerPage));
 
 
 
@@ -242,9 +244,9 @@ namespace MobilityServiceLibrary
     }
 
     /// <summary>
-    /// Asyncronous method that requests all the road alert info for the given route ID between a starting time and ending time to the SmartCampus server
+    /// Asyncronous method that requests all the road alert info for the given AgencyType between a starting time and ending time to the SmartCampus server
     /// </summary>
-    /// <param name="routeId">A string corresponding to the route ID</param>
+    /// <param name="agency">The AgencyType of the road</param>
     /// <param name="timeFrom">The timestamp corresponding to the start time</param>
     /// <param name="timeTo">The timestamp corresponding to the end time</param>
     /// <returns></returns>

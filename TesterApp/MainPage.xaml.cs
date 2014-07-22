@@ -608,7 +608,7 @@ namespace TesterApp
 
     #region CommunicatorServiceLibrary
 
-    private async void btnPubConf_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+    private void btnPubConf_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       //Dictionary<string, object> config = await comml.RequestPublicConfigurationToPush();
      
@@ -624,7 +624,9 @@ namespace TesterApp
     private void btnStartNavigate_Tap(object sender, System.Windows.Input.GestureEventArgs e)
     {
       // Coordinates foar Piazza S. Gottardo, Mezzocorona
+#pragma warning disable 4014
       Windows.System.Launcher.LaunchUriAsync(new System.Uri("smartcampuslab:NavigateTowards?lat=46.2153444&lng=11.1199183"));
+#pragma warning restore 4014
     }
   }
 }
